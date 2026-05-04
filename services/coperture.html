@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coperture — NRG Energia</title>
+  <meta name="description" content="Installazione e manutenzione di coperture industriali e civili integrate con impianti fotovoltaici."/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e; --green-mid: #2d7a4a; --green-light: #4aab6d;
+      --green-pale: #e8f5ec; --yellow: #f5c842; --blue: #2563a8;
+      --off-white: #f7f6f2; --warm-gray: #ece9e3;
+      --text-dark: #1a1a18; --text-mid: #4a4a44; --text-light: #888880;
+      --white: #ffffff; --radius: 12px; --radius-sm: 8px;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,77,46,0.1); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-dots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; width: 28px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.y { background: var(--yellow); }
+    .dot.b { background: var(--blue); }
+    .dot.g { background: var(--green-light); }
+    .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-dark); letter-spacing: -0.3px; }
+    .nav-logo-text span { color: var(--green-mid); }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--green-pale); color: var(--green-dark); }
+    .nav-cta { background: var(--green-dark); color: var(--white) !important; padding: 10px 22px !important; border-radius: 50px !important; font-weight: 500 !important; }
+    .nav-cta:hover { background: var(--green-mid) !important; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 1px solid rgba(26,77,46,0.25); color: var(--text-mid); font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; }
+    .lang-toggle:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); }
+
+    /* HERO */
+    .hero { background: var(--green-dark); padding: 80px 5% 72px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(74,171,109,0.18) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+    .hero-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+    .hero-breadcrumb span { opacity: 0.4; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,200,66,0.15); border: 1px solid rgba(245,200,66,0.4); color: var(--yellow); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; margin-bottom: 24px; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .hero h1 em { color: var(--yellow); font-style: normal; }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; font-weight: 300; max-width: 580px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--yellow); color: var(--text-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: #f0b800; transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 30px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+    /* STATS BAR */
+    .stats-bar { background: var(--white); border-bottom: 1px solid var(--warm-gray); padding: 0 5%; }
+    .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
+    .stat-item { padding: 40px 24px; text-align: center; border-right: 1px solid var(--warm-gray); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2.6rem; font-weight: 800; color: var(--green-dark); letter-spacing: -2px; line-height: 1; margin-bottom: 6px; }
+    .stat-num sup { font-size: 1.1rem; vertical-align: super; }
+    .stat-label { font-size: 14px; color: var(--text-light); }
+
+    /* SECTIONS */
+    section { padding: 88px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
+    h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--text-dark); letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; }
+    .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; font-weight: 300; margin-bottom: 48px; }
+
+    /* SERVICE CARDS */
+    .bg-off { background: var(--off-white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card { background: var(--white); border-radius: var(--radius); padding: 28px 24px; border: 1px solid var(--warm-gray); transition: all 0.25s; }
+    .service-card:hover { transform: translateY(-4px); border-color: var(--green-light); box-shadow: 0 12px 32px rgba(26,77,46,0.08); }
+    .service-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--green-pale); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .service-card h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    /* PROCESS */
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .step-number { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--green-dark); opacity: 0.1; line-height: 1; margin-bottom: -12px; }
+    .process-step h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .process-step p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    /* WHY US */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .why-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .why-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--text-mid); }
+    .why-check { width: 20px; height: 20px; min-width: 20px; background: var(--green-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 2px; }
+    .why-visual { background: var(--green-dark); border-radius: 16px; padding: 40px 36px; display: flex; flex-direction: column; gap: 24px; }
+    .why-stat { border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px; }
+    .why-stat:last-child { border: none; padding: 0; }
+    .why-stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
+    .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+    /* CERTS */
+    .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .cert-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; }
+    .cert-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 8px; }
+    .cert-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .cert-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* WARNING */
+    .warning-banner { background: #fffbec; border-left: 4px solid var(--yellow); padding: 14px 5%; }
+    .warning-inner { max-width: 1100px; margin: 0 auto; font-size: 14px; color: var(--text-mid); }
+    .warning-inner strong { color: var(--text-dark); }
+
+    /* CTA */
+    .cta-banner { background: var(--green-dark); padding: 80px 5%; text-align: center; }
+    .cta-banner h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 36px; font-weight: 300; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+    /* FOOTER */
+    footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 14px; line-height: 1.7; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand .nav-logo-text { color: var(--white); }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 14px; transition: background 0.2s; }
+    .social-btn:hover { background: var(--green-mid); color: var(--white); }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-contact p { font-size: 14px; line-height: 1.9; }
+    .footer-contact a { color: var(--green-light); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); }
+      .nav-links a:not(.nav-cta):not(.lang-toggle) { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-logo-dots">
+      <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+      <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+      <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+    </div>
+    <span class="nav-logo-text">NRG <span>Energia</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html#servizi" class="active">Servizi</a>
+    <a href="../index.html#portfolio">Portfolio</a>
+    <a href="../index.html#chi-siamo">Chi siamo</a>
+    <a href="../index.html#news">News &amp; Blog</a>
+    <a href="../index.html#contatti">Contatti</a>
+    <a href="../index.html#contatti" class="nav-cta">Richiedi preventivo</a>
+    <button class="lang-toggle">🇬🇧 EN</button>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../index.html#servizi">Servizi</a><span>›</span>
+      <span style="color:rgba(255,255,255,0.8)">Coperture</span>
+    </div>
+    <div class="hero-badge">🏗️ Coperture</div>
+    <h1>Coperture industriali e civili<br/><em>integrate con fotovoltaico</em></h1>
+    <p>Installiamo e manuteniamo coperture di qualità per ogni tipo di struttura, con integrazione nativa per i pannelli fotovoltaici. Un tetto che produce energia.</p>
+    <div class="hero-actions">
+      <a href="../index.html#contatti" class="btn-primary">Richiedi preventivo gratuito →</a>
+      <a href="#dettaglio" class="btn-secondary">Scopri i dettagli</a>
+    </div>
+  </div>
+</section>
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">120<sup>+</sup></div><div class="stat-label">kWp su coperture</div></div><div class="stat-item"><div class="stat-num">20<sup>+</sup></div><div class="stat-label">Anni di esperienza</div></div><div class="stat-item"><div class="stat-num">ISO</div><div class="stat-label">Certificato qualità</div></div><div class="stat-item"><div class="stat-num">4,9★</div><div class="stat-label">Valutazione clienti</div></div>
+  </div>
+</div>
+
+<section id="dettaglio" class="bg-off">
+  <div class="section-inner">
+    <div class="section-label">Cosa offriamo</div>
+    <h2>Coperture per ogni esigenza</h2>
+    <p class="section-desc">Progettiamo coperture durevoli che si integrano perfettamente con i sistemi fotovoltaici, massimizzando resa e protezione.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🏭</div><h3>Coperture industriali</h3><p>Capannoni e strutture produttive. Lamiere coibentate, pannelli sandwich e sistemi di impermeabilizzazione ad alta durabilità.</p></div>
+      <div class="service-card"><div class="service-icon">🏠</div><h3>Coperture civili</h3><p>Tetti per abitazioni private in coppi, tegole o lamiera. Rifacimenti completi o riparazioni parziali con garanzia sull'impermeabilità.</p></div>
+      <div class="service-card"><div class="service-icon">☀️</div><h3>Integrazione fotovoltaica</h3><p>Progettazione della copertura in sinergia con l'impianto fotovoltaico. Strutture di supporto ottimizzate per inclinazione e orientamento.</p></div>
+      <div class="service-card"><div class="service-icon">💧</div><h3>Impermeabilizzazione</h3><p>Membrane bituminose, guaine liquide e sistemi EPDM per coperture piane e inclinate.</p></div>
+      <div class="service-card"><div class="service-icon">🔍</div><h3>Ispezione e manutenzione</h3><p>Sopralluoghi periodici, pulizia grondaie e verifiche strutturali per garantire la longevità della copertura.</p></div>
+      <div class="service-card"><div class="service-icon">🌡️</div><h3>Coibentazione termica</h3><p>Isolamento termoacustico per migliorare il comfort e ridurre i costi di riscaldamento e raffrescamento.</p></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="section-inner">
+    <div class="section-label">Come lavoriamo</div>
+    <h2>Dalla progettazione alla consegna</h2>
+    <p class="section-desc">Ogni copertura è un progetto su misura. Seguiamo ogni fase con attenzione per garantire risultati duraturi.</p>
+    <div class="process-grid">
+      <div class="process-step"><div class="step-number">01</div><h3>Sopralluogo tecnico</h3><p>Ispezione della struttura esistente, rilevamento misure e analisi delle esigenze specifiche.</p></div>
+      <div class="process-step"><div class="step-number">02</div><h3>Progettazione integrata</h3><p>Studio della copertura in sinergia con eventuali impianti fotovoltaici o altri sistemi impiantistici.</p></div>
+      <div class="process-step"><div class="step-number">03</div><h3>Selezione materiali</h3><p>Scelta dei materiali ottimali per durabilità, prestazioni termiche e compatibilità con il fotovoltaico.</p></div>
+      <div class="process-step"><div class="step-number">04</div><h3>Installazione</h3><p>Esecuzione con squadre specializzate, nel rispetto delle normative di sicurezza sul lavoro in quota.</p></div>
+      <div class="process-step"><div class="step-number">05</div><h3>Collaudo e garanzia</h3><p>Verifica della tenuta, test di impermeabilità e rilascio della documentazione di garanzia.</p></div>
+    </div>
+  </div>
+</section>
+<section class="bg-off">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Perché sceglierci</div>
+        <h2>Coperture che durano nel tempo</h2>
+        <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;">La nostra esperienza nelle coperture, abbinata alla competenza nel fotovoltaico, ci permette di realizzare tetti che proteggono e producono energia.</p>
+        <ul class="why-list">
+          <li><span class="why-check">✓</span>Squadre specializzate in lavori in quota (DPI III cat.)</li>
+          <li><span class="why-check">✓</span>Materiali di prima qualità con garanzia estesa</li>
+          <li><span class="why-check">✓</span>Integrazione nativa con impianti fotovoltaici</li>
+          <li><span class="why-check">✓</span>Gestione completa delle pratiche edilizie</li>
+          <li><span class="why-check">✓</span>Interventi su tutto il territorio emiliano-romagnolo</li>
+          <li><span class="why-check">✓</span>Certificazione ISO per i processi di qualità</li>
+        </ul>
+      </div>
+      <div class="why-visual">
+        <div class="why-stat"><div class="why-stat-num">120 kWp</div><div class="why-stat-label">Copertura industriale con fotovoltaico integrato a Ferrara</div></div>
+        <div class="why-stat"><div class="why-stat-num">25 anni</div><div class="why-stat-label">Garanzia media sui sistemi di impermeabilizzazione di qualità</div></div>
+        <div class="why-stat"><div class="why-stat-num">2 in 1</div><div class="why-stat-label">Copertura e fotovoltaico progettati insieme per il massimo risultato</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta-banner">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label" style="color:rgba(255,255,255,0.45); display:flex; justify-content:center;">Pronti a iniziare?</div>
+    <h2 style="color:var(--white);">Richiedi il tuo preventivo gratuito</h2>
+    <p>Nessun impegno. Risposta entro 24 ore. Il sopralluogo è sempre gratuito.</p>
+    <div class="cta-actions">
+      <a href="../index.html#contatti" class="btn-primary">Richiedi preventivo gratuito →</a>
+      <a href="tel:+390542552010" class="btn-outline-white">📞 0542 55201</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo">
+          <div class="nav-logo-dots">
+            <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+            <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+            <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+          </div>
+          <span class="nav-logo-text">NRG <span>Energia</span></span>
+        </a>
+        <p>Energie Rinnovabili e Ambiente.<br/>Via I Maggio 70/b, 40026 Imola (BO)<br/>Forma societaria S.r.l. · P.IVA 03056811205</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="energie-rinnovabili.html">Energie rinnovabili</a></li>
+          <li><a href="impianti-elettrici.html">Impianti elettrici</a></li>
+          <li><a href="coperture.html">Coperture</a></li>
+          <li><a href="bonifica-amianto.html">Bonifica amianto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Azienda</h4>
+        <ul>
+          <li><a href="../index.html#chi-siamo">Chi siamo</a></li>
+          <li><a href="../index.html#portfolio">Portfolio</a></li>
+          <li><a href="../index.html#news">News &amp; Blog</a></li>
+          <li><a href="../index.html#contatti">Contatti</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contatti</h4>
+        <p>
+          <a href="mailto:info@nrgenergia.it">info@nrgenergia.it</a><br/>
+          <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
+          <span style="color:rgba(255,255,255,0.4); font-size:13px;">Lun–Ven: 8:30–12:30<br/>Lun–Ven: 14:30–17:30</span>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NRG Energia S.r.l.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Politica per la Qualità</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
