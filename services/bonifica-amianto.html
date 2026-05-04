@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bonifica Amianto — NRG Energia</title>
+  <meta name="description" content="Iscritti all'Albo Gestori Ambientali. Piani di smaltimento, bonifica e conferimento in discariche autorizzate."/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e; --green-mid: #2d7a4a; --green-light: #4aab6d;
+      --green-pale: #e8f5ec; --yellow: #f5c842; --blue: #2563a8;
+      --off-white: #f7f6f2; --warm-gray: #ece9e3;
+      --text-dark: #1a1a18; --text-mid: #4a4a44; --text-light: #888880;
+      --white: #ffffff; --radius: 12px; --radius-sm: 8px;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,77,46,0.1); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-dots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; width: 28px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.y { background: var(--yellow); }
+    .dot.b { background: var(--blue); }
+    .dot.g { background: var(--green-light); }
+    .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-dark); letter-spacing: -0.3px; }
+    .nav-logo-text span { color: var(--green-mid); }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--green-pale); color: var(--green-dark); }
+    .nav-cta { background: var(--green-dark); color: var(--white) !important; padding: 10px 22px !important; border-radius: 50px !important; font-weight: 500 !important; }
+    .nav-cta:hover { background: var(--green-mid) !important; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 1px solid rgba(26,77,46,0.25); color: var(--text-mid); font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; }
+    .lang-toggle:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); }
+
+    /* HERO */
+    .hero { background: var(--green-dark); padding: 80px 5% 72px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(74,171,109,0.18) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+    .hero-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+    .hero-breadcrumb span { opacity: 0.4; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,200,66,0.15); border: 1px solid rgba(245,200,66,0.4); color: var(--yellow); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; margin-bottom: 24px; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .hero h1 em { color: var(--yellow); font-style: normal; }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; font-weight: 300; max-width: 580px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--yellow); color: var(--text-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: #f0b800; transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 30px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+    /* STATS BAR */
+    .stats-bar { background: var(--white); border-bottom: 1px solid var(--warm-gray); padding: 0 5%; }
+    .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
+    .stat-item { padding: 40px 24px; text-align: center; border-right: 1px solid var(--warm-gray); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2.6rem; font-weight: 800; color: var(--green-dark); letter-spacing: -2px; line-height: 1; margin-bottom: 6px; }
+    .stat-num sup { font-size: 1.1rem; vertical-align: super; }
+    .stat-label { font-size: 14px; color: var(--text-light); }
+
+    /* SECTIONS */
+    section { padding: 88px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
+    h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--text-dark); letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; }
+    .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; font-weight: 300; margin-bottom: 48px; }
+
+    /* SERVICE CARDS */
+    .bg-off { background: var(--off-white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card { background: var(--white); border-radius: var(--radius); padding: 28px 24px; border: 1px solid var(--warm-gray); transition: all 0.25s; }
+    .service-card:hover { transform: translateY(-4px); border-color: var(--green-light); box-shadow: 0 12px 32px rgba(26,77,46,0.08); }
+    .service-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--green-pale); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .service-card h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    /* PROCESS */
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .step-number { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--green-dark); opacity: 0.1; line-height: 1; margin-bottom: -12px; }
+    .process-step h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .process-step p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    /* WHY US */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .why-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .why-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--text-mid); }
+    .why-check { width: 20px; height: 20px; min-width: 20px; background: var(--green-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 2px; }
+    .why-visual { background: var(--green-dark); border-radius: 16px; padding: 40px 36px; display: flex; flex-direction: column; gap: 24px; }
+    .why-stat { border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px; }
+    .why-stat:last-child { border: none; padding: 0; }
+    .why-stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
+    .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+    /* CERTS */
+    .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .cert-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; }
+    .cert-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 8px; }
+    .cert-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .cert-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* WARNING */
+    .warning-banner { background: #fffbec; border-left: 4px solid var(--yellow); padding: 14px 5%; }
+    .warning-inner { max-width: 1100px; margin: 0 auto; font-size: 14px; color: var(--text-mid); }
+    .warning-inner strong { color: var(--text-dark); }
+
+    /* CTA */
+    .cta-banner { background: var(--green-dark); padding: 80px 5%; text-align: center; }
+    .cta-banner h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 36px; font-weight: 300; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+    /* FOOTER */
+    footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 14px; line-height: 1.7; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand .nav-logo-text { color: var(--white); }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 14px; transition: background 0.2s; }
+    .social-btn:hover { background: var(--green-mid); color: var(--white); }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-contact p { font-size: 14px; line-height: 1.9; }
+    .footer-contact a { color: var(--green-light); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); }
+      .nav-links a:not(.nav-cta):not(.lang-toggle) { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-logo-dots">
+      <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+      <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+      <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+    </div>
+    <span class="nav-logo-text">NRG <span>Energia</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html#servizi" class="active">Servizi</a>
+    <a href="../index.html#portfolio">Portfolio</a>
+    <a href="../index.html#chi-siamo">Chi siamo</a>
+    <a href="../index.html#news">News &amp; Blog</a>
+    <a href="../index.html#contatti">Contatti</a>
+    <a href="../index.html#contatti" class="nav-cta">Richiedi preventivo</a>
+    <button class="lang-toggle">🇬🇧 EN</button>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../index.html#servizi">Servizi</a><span>›</span>
+      <span style="color:rgba(255,255,255,0.8)">Bonifica Amianto</span>
+    </div>
+    <div class="hero-badge">⚠️ Bonifica Amianto</div>
+    <h1>Bonifica e smaltimento amianto<br/><em>in piena sicurezza</em></h1>
+    <p>Iscritti all'Albo Nazionale Gestori Ambientali (Cat. 10 e Cat. 5). Gestiamo l'intero processo: dalla valutazione del rischio al conferimento in discarica autorizzata.</p>
+    <div class="hero-actions">
+      <a href="../index.html#contatti" class="btn-primary">Richiedi preventivo gratuito →</a>
+      <a href="#dettaglio" class="btn-secondary">Scopri i dettagli</a>
+    </div>
+  </div>
+</section>
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">Cat. 10</div><div class="stat-label">Bonifica rifiuti speciali</div></div><div class="stat-item"><div class="stat-num">Cat. 5</div><div class="stat-label">Trasporto rifiuti</div></div><div class="stat-item"><div class="stat-num">ISO</div><div class="stat-label">Certificato qualità</div></div><div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Conformità normativa</div></div>
+  </div>
+</div>
+
+<div class="warning-banner">
+  <div class="warning-inner">
+    ⚠️ <strong>Importante:</strong> La bonifica dell'amianto è soggetta a normativa specifica. Affidarsi a operatori non iscritti all'Albo Gestori Ambientali è illegale e pericoloso. NRG Energia opera in piena conformità di legge.
+  </div>
+</div>
+<section id="dettaglio">
+  <div class="section-inner">
+    <div class="section-label">Cosa offriamo</div>
+    <h2>Servizi completi di bonifica ambientale</h2>
+    <p class="section-desc">Un servizio chiavi in mano per la gestione dell'amianto, dalla valutazione iniziale fino allo smaltimento definitivo.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🔬</div><h3>Valutazione e censimento</h3><p>Ispezione e censimento dei materiali contenenti amianto (MCA). Valutazione del rischio e stesura del piano di bonifica.</p></div>
+      <div class="service-card"><div class="service-icon">📋</div><h3>Piano di bonifica</h3><p>Redazione del piano di lavoro da presentare alle autorità (ASL, ARPA). Gestione di tutte le autorizzazioni necessarie.</p></div>
+      <div class="service-card"><div class="service-icon">🛡️</div><h3>Rimozione in sicurezza</h3><p>Rimozione con DPI di terza categoria, confinamento dell'area e decontaminazione completa del sito.</p></div>
+      <div class="service-card"><div class="service-icon">🚛</div><h3>Trasporto e smaltimento</h3><p>Trasporto autorizzato (Cat. 5) e conferimento in discariche autorizzate per rifiuti speciali pericolosi.</p></div>
+      <div class="service-card"><div class="service-icon">📄</div><h3>Documentazione completa</h3><p>Formulari di trasporto, certificati di smaltimento e attestazione di avvenuta bonifica per la tua tutela legale.</p></div>
+      <div class="service-card"><div class="service-icon">🏗️</div><h3>Bonifica tetti e coperture</h3><p>Specializzati nella rimozione di lastre di eternit da capannoni e abitazioni, con possibilità di nuova copertura.</p></div>
+    </div>
+  </div>
+</section>
+<section style="background:var(--green-dark); padding:80px 5%;">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--yellow);">Le nostre certificazioni</div>
+    <h2 style="color:var(--white); margin-bottom:10px;">Operatori autorizzati per legge</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);font-weight:300;max-width:520px;margin-bottom:40px;">Le nostre iscrizioni garantiscono che ogni intervento sia eseguito nel pieno rispetto della normativa vigente.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-num">Cat. 10</div><div class="cert-title">Albo Gestori Ambientali</div><div class="cert-desc">Bonifica di beni contenenti amianto — iscrizione obbligatoria per operare legalmente</div></div>
+      <div class="cert-card"><div class="cert-num">Cat. 5</div><div class="cert-title">Albo Gestori Ambientali</div><div class="cert-desc">Raccolta e trasporto di rifiuti pericolosi — autorizzazione ministeriale</div></div>
+      <div class="cert-card"><div class="cert-num">ISO</div><div class="cert-title">Certificazione qualità</div><div class="cert-desc">Sistema di gestione della qualità certificato per i processi di bonifica ambientale</div></div>
+      <div class="cert-card"><div class="cert-num">DPI III</div><div class="cert-title">Dispositivi protezione</div><div class="cert-desc">Tutto il personale opera con DPI di terza categoria per la massima sicurezza</div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="section-inner">
+    <div class="section-label">Come lavoriamo</div>
+    <h2>Il processo di bonifica passo per passo</h2>
+    <p class="section-desc">Un processo strutturato nel pieno rispetto della normativa italiana ed europea sull'amianto.</p>
+    <div class="process-grid">
+      <div class="process-step"><div class="step-number">01</div><h3>Sopralluogo e valutazione</h3><p>Ispezione e campionamento per identificare la presenza e lo stato di conservazione dei materiali contenenti amianto.</p></div>
+      <div class="process-step"><div class="step-number">02</div><h3>Piano di lavoro</h3><p>Redazione del piano da presentare all'ASL competente almeno 30 giorni prima dell'inizio dei lavori, come previsto dalla legge.</p></div>
+      <div class="process-step"><div class="step-number">03</div><h3>Preparazione cantiere</h3><p>Delimitazione e confinamento dell'area, installazione del sistema di decontaminazione e distribuzione DPI.</p></div>
+      <div class="process-step"><div class="step-number">04</div><h3>Rimozione</h3><p>Rimozione controllata, imballaggio in big-bag omologati per rifiuti pericolosi e decontaminazione dell'area.</p></div>
+      <div class="process-step"><div class="step-number">05</div><h3>Smaltimento</h3><p>Trasporto con veicoli autorizzati e conferimento in discarica autorizzata per rifiuti speciali pericolosi.</p></div>
+      <div class="process-step"><div class="step-number">06</div><h3>Documentazione finale</h3><p>Consegna al cliente di certificati, formulari e attestazione di avvenuta bonifica.</p></div>
+    </div>
+  </div>
+</section>
+<section class="bg-off">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Perché sceglierci</div>
+        <h2>Esperienza e legalità garantite</h2>
+        <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;">Affidarsi a soggetti non iscritti all'Albo espone a rischi sanitari, legali e a sanzioni molto pesanti. La nostra iscrizione è la tua garanzia.</p>
+        <ul class="why-list">
+          <li><span class="why-check">✓</span>Iscritti all'Albo Gestori Ambientali Cat. 10 e Cat. 5</li>
+          <li><span class="why-check">✓</span>Personale formato secondo il D.Lgs. 81/2008</li>
+          <li><span class="why-check">✓</span>Gestione completa di pratiche con ASL e ARPA</li>
+          <li><span class="why-check">✓</span>Possibilità di installare nuova copertura dopo bonifica</li>
+          <li><span class="why-check">✓</span>Accesso agli incentivi per la sostituzione dell'amianto</li>
+          <li><span class="why-check">✓</span>Documentazione completa per la tutela del committente</li>
+        </ul>
+      </div>
+      <div class="why-visual">
+        <div class="why-stat"><div class="why-stat-num">Albo</div><div class="why-stat-label">Iscrizione obbligatoria Albo Gestori Ambientali Cat. 10 e Cat. 5</div></div>
+        <div class="why-stat"><div class="why-stat-num">30 gg</div><div class="why-stat-label">Preavviso obbligatorio all'ASL prima dei lavori — lo gestiamo noi per te</div></div>
+        <div class="why-stat"><div class="why-stat-num">100%</div><div class="why-stat-label">Conformità normativa garantita su ogni intervento realizzato</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta-banner">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label" style="color:rgba(255,255,255,0.45); display:flex; justify-content:center;">Hai amianto da bonificare?</div>
+    <h2 style="color:var(--white);">Richiedi una valutazione gratuita</h2>
+    <p>Ti contatteremo entro 24 ore per un sopralluogo gratuito e senza impegno.</p>
+    <div class="cta-actions">
+      <a href="../index.html#contatti" class="btn-primary">Richiedi preventivo gratuito →</a>
+      <a href="tel:+390542552010" class="btn-outline-white">📞 0542 55201</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo">
+          <div class="nav-logo-dots">
+            <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+            <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+            <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+          </div>
+          <span class="nav-logo-text">NRG <span>Energia</span></span>
+        </a>
+        <p>Energie Rinnovabili e Ambiente.<br/>Via I Maggio 70/b, 40026 Imola (BO)<br/>Forma societaria S.r.l. · P.IVA 03056811205</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="energie-rinnovabili.html">Energie rinnovabili</a></li>
+          <li><a href="impianti-elettrici.html">Impianti elettrici</a></li>
+          <li><a href="coperture.html">Coperture</a></li>
+          <li><a href="bonifica-amianto.html">Bonifica amianto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Azienda</h4>
+        <ul>
+          <li><a href="../index.html#chi-siamo">Chi siamo</a></li>
+          <li><a href="../index.html#portfolio">Portfolio</a></li>
+          <li><a href="../index.html#news">News &amp; Blog</a></li>
+          <li><a href="../index.html#contatti">Contatti</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contatti</h4>
+        <p>
+          <a href="mailto:info@nrgenergia.it">info@nrgenergia.it</a><br/>
+          <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
+          <span style="color:rgba(255,255,255,0.4); font-size:13px;">Lun–Ven: 8:30–12:30<br/>Lun–Ven: 14:30–17:30</span>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NRG Energia S.r.l.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Politica per la Qualità</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
