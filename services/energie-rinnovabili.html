@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Energie Rinnovabili — NRG Energia</title>
-  <meta name="description" content="Impianti fotovoltaici, sistemi di accumulo e soluzioni per l'efficienza energetica residenziale e industriale."/>
+  <meta name="description" content="Impianti fotovoltaici, sistemi di accumulo e soluzioni per l'efficienza energetica."/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,7 +15,7 @@
       --text-dark: #1a1a18; --text-mid: #4a4a44; --text-light: #888880;
       --white: #ffffff; --radius: 12px; --radius-sm: 8px;
     }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 130px; }
     body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; }
 
     /* NAV */
@@ -36,8 +36,34 @@
     .lang-toggle { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 1px solid rgba(26,77,46,0.25); color: var(--text-mid); font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; }
     .lang-toggle:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); }
 
+    /* PAGE NAV */
+    .page-nav {
+      position: sticky; top: 72px; z-index: 90;
+      background: var(--green-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 0 5%;
+    }
+    .page-nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .page-nav-inner::-webkit-scrollbar { display: none; }
+    .page-nav-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6);
+      text-decoration: none; padding: 14px 18px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s; white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .page-nav-link:hover { color: var(--white); border-bottom-color: rgba(255,255,255,0.3); }
+    .page-nav-link.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+    .page-nav-link .pn-icon { font-size: 14px; opacity: 0.8; }
+    .page-nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
     /* HERO */
-    .hero { background: var(--green-dark); padding: 80px 5% 72px; position: relative; overflow: hidden; }
+    .hero { background: var(--green-dark); padding: 72px 5% 64px; position: relative; overflow: hidden; }
     .hero::after { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(74,171,109,0.18) 0%, transparent 70%); pointer-events: none; }
     .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
     .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
@@ -52,13 +78,11 @@
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary { background: var(--yellow); color: var(--text-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
     .btn-primary:hover { background: #f0b800; transform: translateY(-1px); }
-    .btn-secondary { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 30px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
     /* STATS BAR */
     .stats-bar { background: var(--white); border-bottom: 1px solid var(--warm-gray); padding: 0 5%; }
     .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
-    .stat-item { padding: 40px 24px; text-align: center; border-right: 1px solid var(--warm-gray); }
+    .stat-item { padding: 36px 24px; text-align: center; border-right: 1px solid var(--warm-gray); }
     .stat-item:last-child { border-right: none; }
     .stat-num { font-family: 'Syne', sans-serif; font-size: 2.6rem; font-weight: 800; color: var(--green-dark); letter-spacing: -2px; line-height: 1; margin-bottom: 6px; }
     .stat-num sup { font-size: 1.1rem; vertical-align: super; }
@@ -97,8 +121,8 @@
     .why-stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
     .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
-    /* CERTS */
-    .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    /* CERTS (bonifica) */
+    .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .cert-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; }
     .cert-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 8px; }
     .cert-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
@@ -139,7 +163,6 @@
     .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; }
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr 1fr; }
       .why-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -151,6 +174,7 @@
       .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); }
       .nav-links a:not(.nav-cta):not(.lang-toggle) { display: none; }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .page-nav-link { padding: 12px 12px; font-size: 12px; }
     }
 </style>
 </head>
@@ -186,17 +210,17 @@
     <p>Progettiamo e installiamo impianti su misura con i migliori pannelli sul mercato. Consulenza completa, dagli adempimenti burocratici all'installazione.</p>
     <div class="hero-actions">
       <a href="../index.html#contatti" class="btn-primary">Richiedi preventivo gratuito →</a>
-      <a href="#dettaglio" class="btn-secondary">Scopri i dettagli</a>
     </div>
   </div>
 </section>
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item"><div class="stat-num">500<sup>+</sup></div><div class="stat-label">Impianti installati</div></div><div class="stat-item"><div class="stat-num">20<sup>+</sup></div><div class="stat-label">Anni di esperienza</div></div><div class="stat-item"><div class="stat-num">MW</div><div class="stat-label">di potenza installata</div></div><div class="stat-item"><div class="stat-num">4,9★</div><div class="stat-label">Valutazione clienti</div></div>
+<div class="page-nav">
+  <div class="page-nav-inner">
+    <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo"><span class="pn-icon">⚡</span>Cosa offriamo</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo"><span class="pn-icon">🔄</span>Come lavoriamo</a><div class="page-nav-divider"></div><a href="#perche-sceglierci" class="page-nav-link" data-target="perche-sceglierci"><span class="pn-icon">★</span>Perché sceglierci</a>
   </div>
 </div>
+<div class="stats-bar"><div class="stats-inner"><div class="stat-item"><div class="stat-num">500<sup>+</sup></div><div class="stat-label">Impianti installati</div></div><div class="stat-item"><div class="stat-num">20<sup>+</sup></div><div class="stat-label">Anni di esperienza</div></div><div class="stat-item"><div class="stat-num">MW</div><div class="stat-label">di potenza installata</div></div><div class="stat-item"><div class="stat-num">4,9★</div><div class="stat-label">Valutazione clienti</div></div></div></div>
 
-<section id="dettaglio" class="bg-off">
+<section id="cosa-offriamo" class="bg-off">
   <div class="section-inner">
     <div class="section-label">Cosa offriamo</div>
     <h2>Soluzioni complete per l'energia solare</h2>
@@ -211,7 +235,8 @@
     </div>
   </div>
 </section>
-<section>
+
+<section id="come-lavoriamo">
   <div class="section-inner">
     <div class="section-label">Come lavoriamo</div>
     <h2>Il nostro processo</h2>
@@ -226,7 +251,8 @@
     </div>
   </div>
 </section>
-<section class="bg-off">
+
+<section id="perche-sceglierci" class="bg-off">
   <div class="section-inner">
     <div class="why-grid">
       <div>
@@ -243,7 +269,7 @@
         </ul>
       </div>
       <div class="why-visual">
-        <div class="why-stat"><div class="why-stat-num">14,7 MW</div><div class="why-stat-label">Potenza del nostro progetto più grande — fotovoltaico galleggiante a Imola</div></div>
+        <div class="why-stat"><div class="why-stat-num">14,7 MW</div><div class="why-stat-label">Potenza del progetto più grande — fotovoltaico galleggiante a Imola</div></div>
         <div class="why-stat"><div class="why-stat-num">€ 0</div><div class="why-stat-label">Costo del sopralluogo e preventivo — sempre gratuiti, senza impegno</div></div>
         <div class="why-stat"><div class="why-stat-num">24h</div><div class="why-stat-label">Tempo massimo di risposta alla tua richiesta di preventivo</div></div>
       </div>
@@ -252,7 +278,7 @@
 </section>
 <section class="cta-banner">
   <div class="section-inner" style="text-align:center;">
-    <div class="section-label" style="color:rgba(255,255,255,0.45); display:flex; justify-content:center;">Pronti a iniziare?</div>
+    <div class="section-label" style="color:rgba(255,255,255,0.45);display:flex;justify-content:center;">Pronti a iniziare?</div>
     <h2 style="color:var(--white);">Richiedi il tuo preventivo gratuito</h2>
     <p>Nessun impegno. Risposta entro 24 ore. Il sopralluogo è sempre gratuito.</p>
     <div class="cta-actions">
@@ -317,5 +343,21 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Highlight page-nav link based on scroll position
+  (function() {
+    const links = document.querySelectorAll('.page-nav-link[data-target]');
+    const targets = Array.from(links).map(l => document.getElementById(l.dataset.target)).filter(Boolean);
+    function onScroll() {
+      let current = targets[0];
+      targets.forEach(t => { if (window.scrollY >= t.offsetTop - 160) current = t; });
+      links.forEach(l => l.classList.toggle('active', l.dataset.target === (current && current.id)));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
 </body>
 </html>
