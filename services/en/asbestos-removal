@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Asbestos Removal — NRG Energia</title>
+  <meta name="description" content="Registered with the National Environmental Managers Register. Disposal plans, remediation and certified waste transfer."/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e; --green-mid: #2d7a4a; --green-light: #4aab6d;
+      --green-pale: #e8f5ec; --yellow: #f5c842; --blue: #2563a8;
+      --off-white: #f7f6f2; --warm-gray: #ece9e3;
+      --text-dark: #1a1a18; --text-mid: #4a4a44; --text-light: #888880;
+      --white: #ffffff; --radius: 12px; --radius-sm: 8px;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,77,46,0.1); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-dots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; width: 28px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.y { background: var(--yellow); } .dot.b { background: var(--blue); } .dot.g { background: var(--green-light); }
+    .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-dark); letter-spacing: -0.3px; }
+    .nav-logo-text span { color: var(--green-mid); }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--green-pale); color: var(--green-dark); }
+    .nav-cta { background: var(--green-dark); color: var(--white) !important; padding: 10px 22px !important; border-radius: 50px !important; font-weight: 500 !important; }
+    .nav-cta:hover { background: var(--green-mid) !important; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 1px solid rgba(26,77,46,0.25); color: var(--text-mid); font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; text-decoration: none; }
+    .lang-toggle:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); }
+    .page-nav { position: sticky; top: 72px; z-index: 90; background: var(--green-dark); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 0 5%; }
+    .page-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 0; overflow-x: auto; scrollbar-width: none; }
+    .page-nav-inner::-webkit-scrollbar { display: none; }
+    .page-nav-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6); text-decoration: none; padding: 14px 18px; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+    .page-nav-link:hover { color: var(--white); border-bottom-color: rgba(255,255,255,0.3); }
+    .page-nav-link.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+    .page-nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+    .hero { background: var(--green-dark); padding: 72px 5% 64px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(74,171,109,0.18) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+    .hero-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+    .hero-breadcrumb span { opacity: 0.4; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,200,66,0.15); border: 1px solid rgba(245,200,66,0.4); color: var(--yellow); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; margin-bottom: 24px; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .hero h1 em { color: var(--yellow); font-style: normal; }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; font-weight: 300; max-width: 580px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--yellow); color: var(--text-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: #f0b800; transform: translateY(-1px); }
+    .stats-bar { background: var(--white); border-bottom: 1px solid var(--warm-gray); padding: 0 5%; }
+    .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
+    .stat-item { padding: 36px 24px; text-align: center; border-right: 1px solid var(--warm-gray); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2.6rem; font-weight: 800; color: var(--green-dark); letter-spacing: -2px; line-height: 1; margin-bottom: 6px; }
+    .stat-num sup { font-size: 1.1rem; vertical-align: super; }
+    .stat-label { font-size: 14px; color: var(--text-light); }
+    section { padding: 88px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
+    h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--text-dark); letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; }
+    .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; font-weight: 300; margin-bottom: 48px; }
+    .bg-off { background: var(--off-white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card { background: var(--white); border-radius: var(--radius); padding: 28px 24px; border: 1px solid var(--warm-gray); transition: all 0.25s; }
+    .service-card:hover { transform: translateY(-4px); border-color: var(--green-light); box-shadow: 0 12px 32px rgba(26,77,46,0.08); }
+    .service-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--green-pale); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .service-card h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .step-number { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--green-dark); opacity: 0.1; line-height: 1; margin-bottom: -12px; }
+    .process-step h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .process-step p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .why-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .why-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--text-mid); }
+    .why-check { width: 20px; height: 20px; min-width: 20px; background: var(--green-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 2px; }
+    .why-visual { background: var(--green-dark); border-radius: 16px; padding: 40px 36px; display: flex; flex-direction: column; gap: 24px; }
+    .why-stat { border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px; }
+    .why-stat:last-child { border: none; padding: 0; }
+    .why-stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
+    .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .cert-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; }
+    .cert-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 8px; }
+    .cert-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .cert-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .warning-banner { background: #fffbec; border-left: 4px solid var(--yellow); padding: 14px 5%; }
+    .warning-inner { max-width: 1100px; margin: 0 auto; font-size: 14px; color: var(--text-mid); }
+    .warning-inner strong { color: var(--text-dark); }
+    .cta-banner { background: var(--green-dark); padding: 80px 5%; text-align: center; }
+    .cta-banner h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 36px; font-weight: 300; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.08); }
+    footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 14px; line-height: 1.7; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand .nav-logo-text { color: var(--white); }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 14px; transition: background 0.2s; }
+    .social-btn:hover { background: var(--green-mid); color: var(--white); }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-contact p { font-size: 14px; line-height: 1.9; }
+    .footer-contact a { color: var(--green-light); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+    @media (max-width: 900px) { .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr 1fr; } .why-grid { grid-template-columns: 1fr; gap: 40px; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr; } .stats-inner { grid-template-columns: 1fr 1fr; } .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); } .nav-links a:not(.nav-cta):not(.lang-toggle) { display: none; } .footer-grid { grid-template-columns: 1fr; gap: 32px; } .page-nav-link { padding: 12px 12px; font-size: 12px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../../en/index.html" class="nav-logo">
+    <div class="nav-logo-dots">
+      <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+      <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+      <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+    </div>
+    <span class="nav-logo-text">NRG <span>Energia</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../../en/index.html#services" class="active">Services</a>
+    <a href="../../en/index.html#portfolio">Portfolio</a>
+    <a href="../../en/index.html#about">About us</a>
+    <a href="../../en/index.html#news">News &amp; Blog</a>
+    <a href="../../en/index.html#contact">Contact</a>
+    <a href="../../en/index.html#contact" class="nav-cta">Get a quote</a>
+    <a href="../bonifica-amianto.html" class="lang-toggle">🇮🇹 IT</a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <a href="../../en/index.html">Home</a><span>›</span>
+      <a href="../../en/index.html#services">Services</a><span>›</span>
+      <span style="color:rgba(255,255,255,0.8)">Asbestos Removal</span>
+    </div>
+    <div class="hero-badge">⚠️ Asbestos Removal</div>
+    <h1>Safe and certified<br/><em>asbestos removal</em></h1>
+    <p>Registered with the National Environmental Managers Register (Cat. 10 &amp; 5). We manage the entire process — from risk assessment to certified disposal.</p>
+    <div class="hero-actions">
+      <a href="../../en/index.html#contact" class="btn-primary">Get a free quote →</a>
+    </div>
+  </div>
+</section>
+<div class="page-nav"><div class="page-nav-inner"><a href="#what-we-offer" class="page-nav-link" data-target="what-we-offer"><span>⚡</span>What we offer</a><div class="page-nav-divider"></div><a href="#our-certifications" class="page-nav-link" data-target="our-certifications"><span>🏅</span>Our certifications</a><div class="page-nav-divider"></div><a href="#how-we-work" class="page-nav-link" data-target="how-we-work"><span>🔄</span>How we work</a><div class="page-nav-divider"></div><a href="#why-choose-us" class="page-nav-link" data-target="why-choose-us"><span>★</span>Why choose us</a></div></div>
+<div class="stats-bar"><div class="stats-inner"><div class="stat-item"><div class="stat-num">Cat. 10</div><div class="stat-label">Hazardous waste removal</div></div><div class="stat-item"><div class="stat-num">Cat. 5</div><div class="stat-label">Waste transport</div></div><div class="stat-item"><div class="stat-num">ISO</div><div class="stat-label">Quality certified</div></div><div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Regulatory compliant</div></div></div></div>
+
+<div class="warning-banner">
+  <div class="warning-inner">
+    ⚠️ <strong>Important:</strong> Asbestos removal is subject to strict regulations. Using contractors not registered with the National Environmental Managers Register is illegal and dangerous. NRG Energia operates in full compliance with the law.
+  </div>
+</div>
+<section id="what-we-offer" class="bg-off">
+  <div class="section-inner">
+    <div class="section-label">What we offer</div>
+    <h2>Complete asbestos remediation services</h2>
+    <p class="section-desc">A turnkey service for asbestos management — from initial assessment through to final certified disposal.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🔬</div><h3>Assessment &amp; survey</h3><p>Inspection and survey of asbestos-containing materials (ACM). Risk assessment and remediation plan in line with regulations.</p></div>
+      <div class="service-card"><div class="service-icon">📋</div><h3>Remediation plan</h3><p>Preparation of the work plan to submit to the relevant authorities (ASL, ARPA). Management of all required permits.</p></div>
+      <div class="service-card"><div class="service-icon">🛡️</div><h3>Safe removal</h3><p>Removal using Cat. III PPE, full area containment and complete site decontamination.</p></div>
+      <div class="service-card"><div class="service-icon">🚛</div><h3>Transport &amp; disposal</h3><p>Authorised transport (Cat. 5) and delivery to licensed hazardous waste disposal facilities.</p></div>
+      <div class="service-card"><div class="service-icon">📄</div><h3>Full documentation</h3><p>Transport forms, disposal certificates and completion certificates for your legal protection.</p></div>
+      <div class="service-card"><div class="service-icon">🏗️</div><h3>Roof &amp; cladding removal</h3><p>Specialists in removing asbestos-cement (Eternit) sheets from warehouses and homes, with option for new roof installation.</p></div>
+    </div>
+  </div>
+</section>
+<section id="our-certifications" style="background:var(--green-dark); padding:88px 5%;">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--yellow);">Our certifications</div>
+    <h2 style="color:var(--white); margin-bottom:10px;">Licensed operators by law</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);font-weight:300;max-width:520px;margin-bottom:40px;">Our registrations guarantee that every job is carried out in full compliance with current Italian and EU legislation.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-num">Cat. 10</div><div class="cert-title">Environmental Managers Register</div><div class="cert-desc">Asbestos-containing material remediation — mandatory registration to operate legally</div></div>
+      <div class="cert-card"><div class="cert-num">Cat. 5</div><div class="cert-title">Environmental Managers Register</div><div class="cert-desc">Collection and transport of hazardous waste — ministerial authorisation</div></div>
+      <div class="cert-card"><div class="cert-num">ISO</div><div class="cert-title">Quality certification</div><div class="cert-desc">ISO-certified quality management system for all remediation processes</div></div>
+      <div class="cert-card"><div class="cert-num">PPE III</div><div class="cert-title">Personal protection</div><div class="cert-desc">All personnel operate with Category III PPE for maximum on-site safety</div></div>
+    </div>
+  </div>
+</section>
+<section id="how-we-work">
+  <div class="section-inner">
+    <div class="section-label">How we work</div>
+    <h2>The remediation process step by step</h2>
+    <p class="section-desc">A structured process in full compliance with Italian and European asbestos legislation.</p>
+    <div class="process-grid">
+      <div class="process-step"><div class="step-number">01</div><h3>Survey &amp; assessment</h3><p>Inspection and sampling to identify the presence and condition of asbestos-containing materials.</p></div>
+      <div class="process-step"><div class="step-number">02</div><h3>Work plan</h3><p>Plan submitted to the local health authority (ASL) at least 30 days before work begins, as required by law.</p></div>
+      <div class="process-step"><div class="step-number">03</div><h3>Site preparation</h3><p>Area demarcation and containment, decontamination unit installation and PPE distribution to all personnel.</p></div>
+      <div class="process-step"><div class="step-number">04</div><h3>Removal</h3><p>Controlled removal, packaging in approved hazardous-waste bags and full site decontamination.</p></div>
+      <div class="process-step"><div class="step-number">05</div><h3>Disposal</h3><p>Transport by authorised vehicles to a licensed hazardous special-waste disposal facility.</p></div>
+      <div class="process-step"><div class="step-number">06</div><h3>Final documentation</h3><p>Handover of disposal certificates, transport forms and remediation completion certificate.</p></div>
+    </div>
+  </div>
+</section>
+<section id="why-choose-us" class="bg-off">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Why choose us</div>
+        <h2>Experience and legal compliance guaranteed</h2>
+        <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;">Using unlicensed contractors exposes you to serious health risks, legal liability and heavy fines. Our registration is your protection.</p>
+        <ul class="why-list">
+          <li><span class="why-check">✓</span>Registered: National Environmental Managers Register Cat. 10 &amp; 5</li>
+          <li><span class="why-check">✓</span>Personnel trained under Legislative Decree 81/2008</li>
+          <li><span class="why-check">✓</span>Full management of ASL and ARPA paperwork</li>
+          <li><span class="why-check">✓</span>Option to install new roofing after removal</li>
+          <li><span class="why-check">✓</span>Access to available incentives for asbestos replacement</li>
+          <li><span class="why-check">✓</span>Complete documentation for your legal protection</li>
+        </ul>
+      </div>
+      <div class="why-visual">
+        <div class="why-stat"><div class="why-stat-num">Register</div><div class="why-stat-label">Mandatory registration — National Environmental Managers Register Cat. 10 &amp; 5</div></div>
+        <div class="why-stat"><div class="why-stat-num">30 days</div><div class="why-stat-label">Mandatory notice to the ASL before work starts — we handle it for you</div></div>
+        <div class="why-stat"><div class="why-stat-num">100%</div><div class="why-stat-label">Regulatory compliance guaranteed on every single job</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta-banner">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label" style="color:rgba(255,255,255,0.45);display:flex;justify-content:center;">Have asbestos to remove?</div>
+    <h2 style="color:var(--white);">Request a free assessment</h2>
+    <p>We'll contact you within 24 hours for a free, no-obligation site survey.</p>
+    <div class="cta-actions">
+      <a href="../../en/index.html#contact" class="btn-primary">Get a free quote →</a>
+      <a href="tel:+390542552010" class="btn-outline-white">📞 0542 55201</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../../en/index.html" class="nav-logo"><div class="nav-logo-dots">
+      <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+      <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+      <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+    </div><span class="nav-logo-text">NRG <span>Energia</span></span></a>
+        <p>Renewable Energy &amp; Environment.<br/>Via I Maggio 70/b, 40026 Imola (BO)<br/>S.r.l. · VAT IT03056811205</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="renewable-energy.html">Renewable energy</a></li>
+        <li><a href="electrical-systems.html">Electrical systems</a></li>
+        <li><a href="roofing.html">Roofing</a></li>
+        <li><a href="asbestos-removal.html">Asbestos removal</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="../../en/index.html#about">About us</a></li>
+        <li><a href="../../en/index.html#portfolio">Portfolio</a></li>
+        <li><a href="../../en/index.html#news">News &amp; Blog</a></li>
+        <li><a href="../../en/index.html#contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col footer-contact"><h4>Contact</h4>
+        <p><a href="mailto:info@nrgenergia.it">info@nrgenergia.it</a><br/>
+        <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
+        <span style="color:rgba(255,255,255,0.4);font-size:13px;">Mon–Fri: 8:30–12:30<br/>Mon–Fri: 14:30–17:30</span></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NRG Energia S.r.l.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Quality Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  (function() {
+    const links = document.querySelectorAll('.page-nav-link[data-target]');
+    const targets = Array.from(links).map(l => document.getElementById(l.dataset.target)).filter(Boolean);
+    function onScroll() {
+      let current = targets[0];
+      targets.forEach(t => { if (window.scrollY >= t.offsetTop - 160) current = t; });
+      links.forEach(l => l.classList.toggle('active', l.dataset.target === (current && current.id)));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>
