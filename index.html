@@ -980,6 +980,12 @@ function toggleLang() {
   }
   applyTranslations(LANG);
 }
+ // Auto-switch to EN if coming from an EN page
+(function() {
+  if (new URLSearchParams(window.location.search).get('lang') === 'en') {
+    toggleLang();
+  }
+})();
 
 </script>
 
