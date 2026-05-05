@@ -986,7 +986,10 @@ function toggleLang() {
     toggleLang();
   }
 })();
-
+// Auto-open modal if #quote in URL
+if (window.location.hash === '#quote') {
+  openModal();
+}
 </script>
 
 <!-- ── QUOTE MODAL ─────────────────────────────────────────────────────────── -->
