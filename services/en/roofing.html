@@ -121,7 +121,41 @@
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
     @media (max-width: 900px) { .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr 1fr; } .why-grid { grid-template-columns: 1fr; gap: 40px; } .footer-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 600px) { .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr; } .stats-inner { grid-template-columns: 1fr 1fr; } .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); } .nav-links a:not(.nav-cta):not(.lang-toggle) { display: none; } .footer-grid { grid-template-columns: 1fr; gap: 32px; } .page-nav-link { padding: 12px 12px; font-size: 12px; } }
-</style>
+/* MODAL */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; background: rgba(10,30,18,0.7); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex !important; }
+.modal { background: var(--white); border-radius: 16px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 64px rgba(0,0,0,0.18); animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both; }
+@keyframes modalIn { from { opacity:0; transform: translateY(20px) scale(0.97); } to { opacity:1; transform: none; } }
+.modal-header { padding: 28px 32px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+.modal-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+.modal-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px; line-height: 1.2; }
+.modal-close { background: var(--warm-gray); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--text-mid); transition: background 0.2s; flex-shrink: 0; margin-left: 16px; }
+.modal-close:hover { background: var(--green-pale); color: var(--green-dark); }
+.modal-body { padding: 24px 32px 32px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; margin-bottom: 14px; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+.req { color: var(--green-mid); margin-left: 2px; }
+.form-input, .form-select, .form-textarea { background: var(--off-white); border: 1.5px solid var(--warm-gray); border-radius: 8px; padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text-dark); transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(45,122,74,0.12); }
+.form-input.error, .form-select.error { border-color: #e05252; }
+.form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888880' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+.form-textarea { resize: vertical; min-height: 90px; }
+.form-file-label { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--off-white); border: 1.5px dashed var(--warm-gray); border-radius: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s; font-size: 13px; color: var(--text-light); }
+.form-file-label:hover { border-color: var(--green-mid); background: var(--green-pale); color: var(--green-dark); }
+.form-file-input { display: none; }
+.file-name { font-size: 12px; color: var(--green-mid); margin-top: 5px; }
+.form-error-msg { font-size: 12px; color: #e05252; margin-top: 4px; display: none; }
+.form-error-msg.show { display: block; }
+.form-divider { border: none; border-top: 1px solid var(--warm-gray); margin: 20px 0; }
+.modal-submit { width: 100%; background: var(--green-dark); color: var(--white); border: none; border-radius: 50px; padding: 15px 32px; font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; }
+.modal-submit:hover { background: var(--green-mid); transform: translateY(-1px); }
+.modal-success { display: none; text-align: center; padding: 48px 32px; }
+.modal-success.show { display: block; }
+.modal-success-icon { font-size: 48px; margin-bottom: 16px; }
+.modal-success h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+.modal-success p { font-size: 15px; color: var(--text-mid); }
+  </style>
 </head>
 <body>
 <nav>
@@ -139,7 +173,7 @@
     <a href="../../index.html?lang=en#chi-siamo">About us</a>
     <a href="../../index.html?lang=en#news">News &amp; Blog</a>
     <a href="../../index.html?lang=en#contatti">Contact</a>
-    <a href="../../index.html?lang=en#quote" class="nav-cta">Get a quote</a>
+    <a href="#" onclick="openModal(); return false;" class="nav-cta">Get a quote</a>
     <a href="../coperture.html" class="lang-toggle">🇮🇹 IT</a>
   </div>
 </nav>
@@ -154,7 +188,7 @@
     <h1>Industrial &amp; residential roofing<br/><em>integrated with solar</em></h1>
     <p>We install and maintain quality roofing for every type of structure, with native integration for solar panels. A roof that produces energy.</p>
     <div class="hero-actions">
-      <a href="../../index.html?lang=en#quote" class="btn-primary">Get a free quote →</a>
+      <a href="#" onclick="openModal(); return false;" class="btn-primary">Get a free quote →</a>
     </div>
   </div>
 </section>
@@ -220,7 +254,7 @@
     <h2 style="color:var(--white);">Get your free quote</h2>
     <p>No commitment. Response within 24 hours. Site survey always free.</p>
     <div class="cta-actions">
-      <a href="../../index.html?lang=en#quote" class="btn-primary">Get a free quote →</a>
+      <a href="#" onclick="openModal(); return false;" class="btn-primary">Get a free quote →</a>
       <a href="tel:+390542552010" class="btn-outline-white">📞 0542 55201</a>
     </div>
   </div>
@@ -269,6 +303,73 @@
     </div>
   </div>
 </footer>
+  <!-- ── QUOTE MODAL ──────────────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="quoteModal" onclick="handleOverlayClick(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-success" id="modalSuccess">
+      <div class="modal-success-icon">✅</div>
+      <h3 id="successTitle">Richiesta inviata!</h3>
+      <p id="successMsg">Ti risponderemo entro 24 ore.</p>
+    </div>
+    <div id="modalForm">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <div class="modal-eyebrow" id="modalEyebrow">Preventivo gratuito</div>
+          <h2 class="modal-title" id="modalTitle">Raccontaci il tuo progetto</h2>
+        </div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Chiudi">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="serviceSelect" id="labelService">Tipo di richiesta <span class="req">*</span></label>
+          <select class="form-select" id="serviceSelect" required>
+            <option value="" id="optPlaceholder">Seleziona un servizio…</option>
+            <option value="rinnovabili" id="opt1">Energie rinnovabili</option>
+            <option value="elettrici"  id="opt2">Impianti elettrici</option>
+            <option value="coperture"  id="opt3">Coperture</option>
+            <option value="amianto"    id="opt4">Bonifica amianto</option>
+          </select>
+          <span class="form-error-msg" id="errService">Seleziona un servizio</span>
+        </div>
+        <hr class="form-divider">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="inputName" id="labelName">Nome e cognome <span class="req">*</span></label>
+            <input class="form-input" type="text" id="inputName" placeholder="Mario Rossi" required>
+            <span class="form-error-msg" id="errName">Campo obbligatorio</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inputPhone" id="labelPhone">Telefono <span class="req">*</span></label>
+            <input class="form-input" type="tel" id="inputPhone" placeholder="+39 333 000 0000" required>
+            <span class="form-error-msg" id="errPhone">Campo obbligatorio</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputEmail" id="labelEmail">Email <span class="req">*</span></label>
+          <input class="form-input" type="email" id="inputEmail" placeholder="mario@esempio.it" required>
+          <span class="form-error-msg" id="errEmail">Inserisci un'email valida</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputMessage" id="labelMessage">Messaggio <span style="color:var(--text-light);font-weight:400;text-transform:none;letter-spacing:0" id="labelOptional">(opzionale)</span></label>
+          <textarea class="form-textarea" id="inputMessage" placeholder="Descrivi brevemente il tuo progetto…"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="labelFile">Allegato <span style="color:var(--text-light);font-weight:400;text-transform:none;letter-spacing:0" id="labelOptional2">(opzionale)</span></label>
+          <label class="form-file-label" for="inputFile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span id="fileLabel">Carica un file (PDF, JPG, PNG — max 10 MB)</span>
+          </label>
+          <input class="form-file-input" type="file" id="inputFile" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFile(this)">
+          <span class="file-name" id="fileName"></span>
+        </div>
+        <button class="modal-submit" onclick="submitForm()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          <span id="submitLabel">Invia richiesta</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   (function() {
     const links = document.querySelectorAll('.page-nav-link[data-target]');
@@ -281,6 +382,120 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   })();
+  var LANG = 'en'; // ← change to 'en' on the 4 EN pages
+
+var MODAL_T = {
+  it: {
+    eyebrow:'Preventivo gratuito', title:'Raccontaci il tuo progetto',
+    labelService:'Tipo di richiesta', optPlaceholder:'Seleziona un servizio…',
+    opt1:'Energie rinnovabili', opt2:'Impianti elettrici', opt3:'Coperture', opt4:'Bonifica amianto',
+    labelName:'Nome e cognome', labelPhone:'Telefono', labelEmail:'Email',
+    labelMessage:'Messaggio', labelOptional:'(opzionale)', labelOptional2:'(opzionale)',
+    labelFile:'Allegato', fileLabel:'Carica un file (PDF, JPG, PNG — max 10 MB)',
+    submitLabel:'Invia richiesta',
+    errService:'Seleziona un servizio', errName:'Campo obbligatorio',
+    errPhone:'Campo obbligatorio', errEmail:"Inserisci un'email valida",
+    successTitle:'Richiesta inviata!', successMsg:'Ti risponderemo entro 24 ore.',
+    namePlaceholder:'Mario Rossi', phonePlaceholder:'+39 333 000 0000',
+    emailPlaceholder:'mario@esempio.it', msgPlaceholder:'Descrivi brevemente il tuo progetto…'
+  },
+  en: {
+    eyebrow:'Free quote', title:'Tell us about your project',
+    labelService:'Type of enquiry', optPlaceholder:'Select a service…',
+    opt1:'Renewable energy', opt2:'Electrical systems', opt3:'Roofing', opt4:'Asbestos removal',
+    labelName:'Full name', labelPhone:'Phone', labelEmail:'Email',
+    labelMessage:'Message', labelOptional:'(optional)', labelOptional2:'(optional)',
+    labelFile:'Attachment', fileLabel:'Upload a file (PDF, JPG, PNG — max 10 MB)',
+    submitLabel:'Send request',
+    errService:'Please select a service', errName:'Required field',
+    errPhone:'Required field', errEmail:'Please enter a valid email',
+    successTitle:'Request sent!', successMsg:"We'll get back to you within 24 hours.",
+    namePlaceholder:'John Smith', phonePlaceholder:'+39 333 000 0000',
+    emailPlaceholder:'john@example.com', msgPlaceholder:'Briefly describe your project…'
+  }
+};
+
+function openModal() {
+  document.getElementById('quoteModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modalForm').style.display = '';
+  document.getElementById('modalSuccess').classList.remove('show');
+  clearModalErrors();
+  updateModalLang();
+}
+function closeModal() {
+  document.getElementById('quoteModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('quoteModal')) closeModal();
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+function updateModalLang() {
+  var t = MODAL_T[LANG];
+  function setT(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
+  function setP(id, val) { var el = document.getElementById(id); if (el) el.placeholder = val; }
+  setT('modalEyebrow', t.eyebrow); setT('modalTitle', t.title);
+  var lbl;
+  lbl = document.getElementById('labelService'); if(lbl){ lbl.childNodes[0].textContent = t.labelService+' '; }
+  lbl = document.getElementById('labelName');    if(lbl){ lbl.childNodes[0].textContent = t.labelName+' '; }
+  lbl = document.getElementById('labelPhone');   if(lbl){ lbl.childNodes[0].textContent = t.labelPhone+' '; }
+  lbl = document.getElementById('labelEmail');   if(lbl){ lbl.childNodes[0].textContent = t.labelEmail+' '; }
+  setT('labelMessage', t.labelMessage); setT('labelOptional', t.labelOptional); setT('labelOptional2', t.labelOptional2);
+  setT('labelFile', t.labelFile); setT('fileLabel', t.fileLabel); setT('submitLabel', t.submitLabel);
+  setT('errService', t.errService); setT('errName', t.errName); setT('errPhone', t.errPhone); setT('errEmail', t.errEmail);
+  setT('opt1', t.opt1); setT('opt2', t.opt2); setT('opt3', t.opt3); setT('opt4', t.opt4);
+  var ph = document.getElementById('optPlaceholder'); if(ph) ph.textContent = t.optPlaceholder;
+  setP('inputName', t.namePlaceholder); setP('inputPhone', t.phonePlaceholder);
+  setP('inputEmail', t.emailPlaceholder); setP('inputMessage', t.msgPlaceholder);
+}
+function handleFile(input) {
+  var name = input.files && input.files[0] ? input.files[0].name : '';
+  document.getElementById('fileName').textContent = name;
+}
+function clearModalErrors() {
+  ['serviceSelect','inputName','inputPhone','inputEmail'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('error');
+  });
+  ['errService','errName','errPhone','errEmail'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('show');
+  });
+}
+function submitForm() {
+  var t = MODAL_T[LANG];
+  clearModalErrors();
+  var valid = true;
+  var service = document.getElementById('serviceSelect');
+  var name    = document.getElementById('inputName');
+  var phone   = document.getElementById('inputPhone');
+  var email   = document.getElementById('inputEmail');
+  if (!service.value) { service.classList.add('error'); document.getElementById('errService').classList.add('show'); valid = false; }
+  if (!name.value.trim()) { name.classList.add('error'); document.getElementById('errName').classList.add('show'); valid = false; }
+  if (!phone.value.trim()) { phone.classList.add('error'); document.getElementById('errPhone').classList.add('show'); valid = false; }
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRe.test(email.value.trim())) { email.classList.add('error'); document.getElementById('errEmail').classList.add('show'); valid = false; }
+  if (!valid) return;
+  document.getElementById('modalForm').style.display = 'none';
+  var suc = document.getElementById('modalSuccess');
+  suc.classList.add('show');
+  document.getElementById('successTitle').textContent = t.successTitle;
+  document.getElementById('successMsg').textContent   = t.successMsg;
+  setTimeout(closeModal, 3000);
+}
+
+// Page nav scroll highlight
+(function() {
+  const links = document.querySelectorAll('.page-nav-link[data-target]');
+  const targets = Array.from(links).map(l => document.getElementById(l.dataset.target)).filter(Boolean);
+  function onScroll() {
+    let current = targets[0];
+    targets.forEach(t => { if (window.scrollY >= t.offsetTop - 160) current = t; });
+    links.forEach(l => l.classList.toggle('active', l.dataset.target === (current && current.id)));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
 </script>
 </body>
 </html>
