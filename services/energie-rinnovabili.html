@@ -210,7 +210,15 @@
 .modal-success-icon { font-size: 48px; margin-bottom: 16px; }
 .modal-success h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
 .modal-success p { font-size: 15px; color: var(--text-mid); }
-</style>
+/* WHATSAPP */
+.whatsapp-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; }
+.whatsapp-btn { width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: var(--white); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,0.4); transition: transform 0.2s; font-size: 26px; }
+.whatsapp-btn:hover { transform: scale(1.1); }
+.whatsapp-tooltip { position: absolute; bottom: 66px; right: 0; background: var(--white); border-radius: 12px; padding: 12px 16px; width: 200px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); font-size: 13px; color: var(--text-dark); line-height: 1.5; border: 1px solid var(--warm-gray); display: none; }
+.whatsapp-float:hover .whatsapp-tooltip { display: block; }
+.whatsapp-tooltip strong { display: block; margin-bottom: 2px; }
+.whatsapp-tooltip a { color: #25D366; font-weight: 600; text-decoration: none; }
+  </style>
 </head>
 <body>
 <nav>
@@ -377,6 +385,14 @@
     </div>
   </div>
 </footer>
+<div class="whatsapp-float">
+  <div class="whatsapp-tooltip"><strong>Ciao! Come possiamo aiutarti?</strong><a href="https://wa.me/390542552010" target="_blank">Scrivici su WhatsApp →</a></div>
+  <a href="https://wa.me/390542552010" target="_blank" class="whatsapp-btn">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.02L7.55 18.85L4.43 19.65L5.25 16.61L5.06 16.29C4.24 14.98 3.8 13.46 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67ZM8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8.01 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.37 17.04 14.27C16.97 14.17 16.81 14.1 16.56 13.98C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.48 13.06 14.31 13.31C14.15 13.56 13.67 14.1 13.53 14.27C13.38 14.44 13.24 14.46 12.99 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.47 11.14 9.61 11 9.73 10.88C9.84 10.77 9.98 10.59 10.1 10.44C10.22 10.29 10.26 10.18 10.34 10.01C10.42 9.84 10.38 9.69 10.32 9.57C10.26 9.46 9.77 8.23 9.56 7.73C9.36 7.24 9.16 7.31 9 7.3C8.86 7.29 8.69 7.29 8.53 7.29V7.33Z"/>
+    </svg>
+  </a>
+</div>
 <!-- ── QUOTE MODAL ──────────────────────────────────────────────────────────── -->
 <div class="modal-overlay" id="quoteModal" onclick="handleOverlayClick(event)">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
