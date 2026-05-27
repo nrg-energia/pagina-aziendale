@@ -72,7 +72,7 @@
     .hero-breadcrumb span { opacity: 0.4; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,200,66,0.15); border: 1px solid rgba(245,200,66,0.4); color: var(--yellow); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; margin-bottom: 24px; }
     .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
-    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; color: var(--white); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 20px; }
     .hero h1 em { color: var(--yellow); font-style: normal; }
     .hero p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; font-weight: 300; max-width: 580px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -92,7 +92,7 @@
     section { padding: 88px 5%; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
-    h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--text-dark); letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; }
+    h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-dark); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 14px; }
     .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; font-weight: 300; margin-bottom: 48px; }
 
     /* SERVICE CARDS */
@@ -109,6 +109,26 @@
     .step-number { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--green-dark); opacity: 0.1; line-height: 1; margin-bottom: -12px; }
     .process-step h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
     .process-step p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    /* PORTFOLIO CAROUSEL */
+    .carousel-wrap { position: relative; max-width: 100%; margin: 0 0 24px; }
+    .carousel-viewport { overflow: hidden; border-radius: var(--radius); }
+    .carousel-track { display: flex; gap: 20px; transition: transform 0.45s ease; }
+    .carousel-slide { flex-shrink: 0; min-height: 340px; border-radius: var(--radius); overflow: hidden; position: relative; }
+    .carousel-slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .carousel-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,25,18,0.9) 0%, rgba(10,25,18,0.15) 55%, transparent 100%); padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .carousel-tag { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 50px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; background: var(--yellow); color: var(--text-dark); }
+    .carousel-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--white); line-height: 1.3; margin-bottom: 6px; }
+    .carousel-meta { font-size: 13px; color: rgba(255,255,255,0.65); }
+    .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.92); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.18); color: var(--text-dark); }
+    .carousel-arrow:hover { background: var(--white); transform: translateY(-50%) scale(1.08); }
+    .carousel-arrow.prev { left: -22px; }
+    .carousel-arrow.next { right: -22px; }
+    .carousel-dots { display: flex; gap: 7px; justify-content: center; margin-bottom: 32px; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warm-gray); border: 1px solid rgba(0,0,0,0.08); cursor: pointer; transition: background 0.2s; padding: 0; }
+    .carousel-dot.active { background: var(--green-dark); border-color: var(--green-dark); }
+    .carousel-cta { text-align: center; }
+    @media (max-width: 600px) { .carousel-arrow.prev { left: 8px; } .carousel-arrow.next { right: 8px; } }
 
     /* WHY US */
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -134,7 +154,12 @@
     .warning-inner strong { color: var(--text-dark); }
 
     /* CTA */
-    .cta-banner { background: var(--green-dark); padding: 80px 5%; text-align: center; }
+    @keyframes gradientWave {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .cta-banner { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 8s ease infinite; padding: 80px 5%; text-align: center; }
     .cta-banner h2 { color: var(--white); margin-bottom: 12px; }
     .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 36px; font-weight: 300; }
     .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -260,7 +285,6 @@
     <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo"><span class="pn-icon">⚡</span>Cosa offriamo</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo"><span class="pn-icon">🔄</span>Come lavoriamo</a><div class="page-nav-divider"></div><a href="#perche-sceglierci" class="page-nav-link" data-target="perche-sceglierci"><span class="pn-icon">★</span>Perché sceglierci</a>
   </div>
 </div>
-<div class="stats-bar"><div class="stats-inner"><div class="stat-item"><div class="stat-num">20<sup>+</sup></div><div class="stat-label">Anni di esperienza</div></div><div class="stat-item"><div class="stat-num">MW</div><div class="stat-label">di potenza installata</div></div><div class="stat-item"><div class="stat-num">5★★★★★</div><div class="stat-label">Valutazione clienti</div></div></div></div>
 
 <section id="cosa-offriamo" class="bg-off">
   <div class="section-inner">
@@ -287,6 +311,54 @@
       <div class="process-step"><div class="step-number">04</div><h3>Installazione</h3><p>Il nostro team installa l'impianto nel rispetto delle normative e dei tempi concordati.</p></div>
       <div class="process-step"><div class="step-number">05</div><h3>Collaudo e attivazione</h3><p>Test completi, verifica delle connessioni e attivazione con supporto tecnico dedicato.</p></div>
       <div class="process-step"><div class="step-number">06</div><h3>Manutenzione</h3><p>Contratti periodici per massima efficienza nel tempo e rispetto della garanzia.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">I nostri lavori</div>
+    <h2>Progetti fotovoltaici realizzati</h2>
+    <p class="section-desc">Una selezione dei nostri impianti fotovoltaici installati in Emilia-Romagna e dintorni.</p>
+    <div class="carousel-wrap" id="solarCarousel">
+      <div class="carousel-viewport">
+      <div class="carousel-track">
+        <div class="carousel-slide active">
+          <div class="carousel-slide-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg')"></div>
+          <div class="carousel-overlay">
+            <div class="carousel-tag">Fotovoltaico</div>
+            <div class="carousel-title">Impianto domestico</div>
+            <div class="carousel-meta">Brisighella · 2025</div>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="carousel-slide-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg')"></div>
+          <div class="carousel-overlay">
+            <div class="carousel-tag">Fotovoltaico</div>
+            <div class="carousel-title">Impianto domestico</div>
+            <div class="carousel-meta">Belluno · 2024</div>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="carousel-slide-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg')"></div>
+          <div class="carousel-overlay">
+            <div class="carousel-tag">Fotovoltaico</div>
+            <div class="carousel-title">Sistema di accumulo</div>
+            <div class="carousel-meta">Ferrara · 2024</div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <button class="carousel-arrow prev" onclick="carouselPrev()" aria-label="Precedente">&#8592;</button>
+      <button class="carousel-arrow next" onclick="carouselNext()" aria-label="Successivo">&#8594;</button>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <button class="carousel-dot active" onclick="carouselGo(0)"></button>
+      <button class="carousel-dot" onclick="carouselGo(1)"></button>
+      <button class="carousel-dot" onclick="carouselGo(2)"></button>
+    </div>
+    <div class="carousel-cta">
+      <a href="../portfolio.html" class="btn-primary">Vedi tutto il portfolio →</a>
     </div>
   </div>
 </section>
@@ -583,6 +655,63 @@ function submitForm() {
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+})();
+
+// Solar portfolio carousel — multi-card
+(function() {
+  var vp      = document.querySelector('#solarCarousel .carousel-viewport');
+  var track   = document.querySelector('#solarCarousel .carousel-track');
+  var slides  = track ? track.querySelectorAll('.carousel-slide') : [];
+  var dots    = document.querySelectorAll('#carouselDots .carousel-dot');
+  var prevBtn = document.querySelector('#solarCarousel .carousel-arrow.prev');
+  var nextBtn = document.querySelector('#solarCarousel .carousel-arrow.next');
+  var cur = 0;
+  var GAP = 20;
+
+  function getCols() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  function setup() {
+    var cols = getCols();
+    var w = (vp.offsetWidth - GAP * (cols - 1)) / cols;
+    [].forEach.call(slides, function(s) { s.style.width = w + 'px'; });
+    cur = Math.min(cur, Math.max(0, slides.length - cols));
+    render();
+  }
+
+  function render() {
+    var cols   = getCols();
+    var slideW = slides[0] ? slides[0].offsetWidth + GAP : 0;
+    var max    = Math.max(0, slides.length - cols);
+    track.style.transform = 'translateX(' + (-cur * slideW) + 'px)';
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+    prevBtn.style.opacity      = cur <= 0   ? '0.35' : '1';
+    prevBtn.style.pointerEvents = cur <= 0   ? 'none' : '';
+    nextBtn.style.opacity      = cur >= max  ? '0.35' : '1';
+    nextBtn.style.pointerEvents = cur >= max  ? 'none' : '';
+  }
+
+  function goTo(n) {
+    var max = Math.max(0, slides.length - getCols());
+    cur = Math.max(0, Math.min(n, max));
+    render();
+  }
+
+  window.carouselPrev = function() { goTo(cur - 1); };
+  window.carouselNext = function() { goTo(cur + 1); };
+  window.carouselGo   = function(n) { goTo(n); };
+
+  window.addEventListener('resize', function() {
+    var saved = track.style.transition;
+    track.style.transition = 'none';
+    setup();
+    setTimeout(function() { track.style.transition = saved; }, 20);
+  });
+
+  setup();
 })();
 </script>
 

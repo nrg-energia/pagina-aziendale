@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio — NRG Energia</title>
+  <meta name="description" content="Our completed projects: solar installations, roofing and asbestos removal across Emilia-Romagna."/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e; --green-mid: #2d7a4a; --green-light: #4aab6d;
+      --green-pale: #e8f5ec; --yellow: #f5c842; --blue: #2563a8;
+      --off-white: #f7f6f2; --warm-gray: #ece9e3;
+      --text-dark: #1a1a18; --text-mid: #4a4a44; --text-light: #888880;
+      --white: #ffffff; --radius: 12px; --radius-sm: 8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,77,46,0.1); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-dots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; width: 28px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.y { background: var(--yellow); } .dot.b { background: var(--blue); } .dot.g { background: var(--green-light); }
+    .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-dark); letter-spacing: -0.3px; }
+    .nav-logo-text span { color: var(--green-mid); }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; }
+    .nav-links a:hover { background: var(--green-pale); color: var(--green-dark); }
+    .nav-links a.active { background: var(--green-pale); color: var(--green-dark); }
+    .nav-cta { background: var(--green-dark); color: var(--white) !important; padding: 10px 22px !important; border-radius: 50px !important; font-weight: 500 !important; }
+    .nav-cta:hover { background: var(--green-mid) !important; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 1px solid rgba(26,77,46,0.25); color: var(--text-mid); font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; text-decoration: none; }
+    .lang-toggle:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); }
+
+    /* HERO */
+    .page-hero { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); padding: 80px 5% 72px; }
+    .page-hero-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--yellow); margin-bottom: 12px; }
+    .page-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; color: var(--white); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 16px; }
+    .page-hero p { font-size: 18px; color: rgba(255,255,255,0.7); font-weight: 300; }
+    .breadcrumb { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 18px; letter-spacing: 0.2px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+
+    /* FILTER + GRID */
+    .portfolio-section { padding: 64px 5%; }
+    .portfolio-section-inner { max-width: 1100px; margin: 0 auto; }
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .filter-btn { background: var(--off-white); border: 1px solid var(--warm-gray); color: var(--text-mid); font-size: 14px; font-weight: 500; padding: 9px 20px; border-radius: 50px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .filter-btn:hover { border-color: var(--green-mid); color: var(--green-dark); background: var(--green-pale); }
+    .filter-btn.active { background: var(--green-dark); border-color: var(--green-dark); color: var(--white); }
+
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .project-card { border-radius: var(--radius); overflow: hidden; position: relative; min-height: 280px; transition: transform 0.25s, box-shadow 0.25s; }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .project-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,25,18,0.9) 0%, rgba(10,25,18,0.15) 55%, transparent 100%); padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .project-tag { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 50px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; }
+    .project-tag.solar   { background: var(--yellow); color: var(--text-dark); }
+    .project-tag.roofing { background: var(--blue); color: var(--white); }
+    .project-tag.asbestos { background: #a86325; color: var(--white); }
+    .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: var(--white); line-height: 1.3; margin-bottom: 6px; }
+    .project-meta { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+    .no-results { text-align: center; padding: 64px 24px; color: var(--text-light); font-size: 15px; display: none; }
+    .no-results.show { display: block; }
+
+    /* FOOTER */
+    footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 14px; line-height: 1.7; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand .nav-logo-text { color: var(--white); }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 14px; transition: background 0.2s; }
+    .social-btn:hover { background: var(--green-mid); color: var(--white); }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-contact p { font-size: 14px; line-height: 1.9; }
+    .footer-contact a { color: var(--green-light); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* WHATSAPP */
+    .whatsapp-float { position: fixed; bottom: 28px; right: 28px; z-index: 50; }
+    .whatsapp-btn { width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: var(--white); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,0.4); transition: transform 0.2s; }
+    .whatsapp-btn:hover { transform: scale(1.08); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links a:not(.nav-cta):not(.lang-toggle) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html?lang=en" class="nav-logo">
+    <div class="nav-logo-dots">
+      <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+      <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+      <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+    </div>
+    <span class="nav-logo-text">NRG <span>Energia</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../../index.html?lang=en#servizi">Services</a>
+    <a href="portfolio.html" class="active">Portfolio</a>
+    <a href="../../index.html?lang=en#chi-siamo">About us</a>
+    <a href="../../index.html?lang=en#news">News &amp; Blog</a>
+    <a href="../../index.html?lang=en#contatti">Contact</a>
+    <a href="../../index.html?lang=en#preventivo" class="nav-cta">Get a quote</a>
+    <a href="../../portfolio.html" class="lang-toggle"><span>🇮🇹</span> IT</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="../../index.html">Home</a> › Portfolio</div>
+    <div class="section-label">Our work</div>
+    <h1>Portfolio</h1>
+    <p>Our completed projects</p>
+  </div>
+</div>
+
+<section class="portfolio-section">
+  <div class="portfolio-section-inner">
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="fotovoltaico">Solar</button>
+      <button class="filter-btn" data-filter="coperture">Roofing</button>
+      <button class="filter-btn" data-filter="amianto">Asbestos removal</button>
+    </div>
+
+    <div class="project-grid" id="projectGrid">
+
+      <div class="project-card" data-category="fotovoltaico">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Residential solar installation</div>
+          <div class="project-meta">Brisighella · 2025</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Residential solar installation</div>
+          <div class="project-meta">Belluno · 2024</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Battery storage system</div>
+          <div class="project-meta">Ferrara · 2024</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="amianto">
+        <div class="project-card-bg" style="background: linear-gradient(135deg, #3d2d1a 0%, #a86325 100%)"></div>
+        <div class="project-overlay">
+          <div class="project-tag asbestos">Asbestos removal</div>
+          <div class="project-title">Full complex asbestos removal</div>
+          <div class="project-meta">Ferrara · 2023</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="no-results" id="noResults">No projects found for this category.</div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand footer-col">
+        <a href="../../index.html?lang=en" class="nav-logo">
+          <div class="nav-logo-dots">
+            <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+            <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+            <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+          </div>
+          <span class="nav-logo-text">NRG <span>Energia</span></span>
+        </a>
+        <p>Renewable Energy &amp; Environment.<br/>Via I Maggio 70/b, 40026 Imola (BO)<br/>S.r.l. · VAT IT03056811205</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="renewable-energy.html">Renewable energy</a></li>
+          <li><a href="electrical-systems.html">Electrical systems</a></li>
+          <li><a href="roofing.html">Roofing</a></li>
+          <li><a href="asbestos-removal.html">Asbestos removal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../../index.html?lang=en#chi-siamo">About us</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="../../index.html?lang=en#news">News &amp; Blog</a></li>
+          <li><a href="../../index.html?lang=en#contatti">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p>
+          <a href="mailto:info@nrgenergia.it">info@nrgenergia.it</a><br/>
+          <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
+          <span style="color:rgba(255,255,255,0.4);font-size:13px;">Mon–Fri: 8:30–12:30<br/>Mon–Fri: 14:30–17:30</span>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NRG Energia S.r.l.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Quality Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="whatsapp-float">
+  <a href="https://wa.me/390542552010" target="_blank" class="whatsapp-btn">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.02L7.55 18.85L4.43 19.65L5.25 16.61L5.06 16.29C4.24 14.98 3.8 13.46 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67ZM8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8.01 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.37 17.04 14.27C16.97 14.17 16.81 14.1 16.56 13.98C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.48 13.06 14.31 13.31C14.15 13.56 13.67 14.1 13.53 14.27C13.38 14.44 13.24 14.46 12.99 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.47 11.14 9.61 11 9.73 10.88C9.84 10.77 9.98 10.59 10.1 10.44C10.22 10.29 10.26 10.18 10.34 10.01C10.42 9.84 10.38 9.69 10.32 9.57C10.26 9.46 9.77 8.23 9.56 7.73C9.36 7.24 9.16 7.31 9 7.3C8.86 7.29 8.69 7.29 8.53 7.29V7.33Z"/>
+    </svg>
+  </a>
+</div>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      var cards = document.querySelectorAll('.project-card');
+      var visible = 0;
+      cards.forEach(function(card) {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('noResults').classList.toggle('show', visible === 0);
+    });
+  });
+</script>
+</body>
+</html>

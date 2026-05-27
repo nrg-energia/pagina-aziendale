@@ -72,7 +72,7 @@
     .hero-breadcrumb span { opacity: 0.4; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,200,66,0.15); border: 1px solid rgba(245,200,66,0.4); color: var(--yellow); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; margin-bottom: 24px; }
     .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
-    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; color: var(--white); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 20px; }
     .hero h1 em { color: var(--yellow); font-style: normal; }
     .hero p { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; font-weight: 300; max-width: 580px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -92,7 +92,7 @@
     section { padding: 88px 5%; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
-    h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--text-dark); letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; }
+    h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-dark); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 14px; }
     .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; font-weight: 300; margin-bottom: 48px; }
 
     /* SERVICE CARDS */
@@ -134,7 +134,12 @@
     .warning-inner strong { color: var(--text-dark); }
 
     /* CTA */
-    .cta-banner { background: var(--green-dark); padding: 80px 5%; text-align: center; }
+    @keyframes gradientWave {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .cta-banner { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 8s ease infinite; padding: 80px 5%; text-align: center; }
     .cta-banner h2 { color: var(--white); margin-bottom: 12px; }
     .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 36px; font-weight: 300; }
     .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -260,8 +265,6 @@
     <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo"><span class="pn-icon">⚡</span>Cosa offriamo</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo"><span class="pn-icon">🔄</span>Come lavoriamo</a><div class="page-nav-divider"></div><a href="#perche-sceglierci" class="page-nav-link" data-target="perche-sceglierci"><span class="pn-icon">★</span>Perché sceglierci</a>
   </div>
 </div>
-<div class="stats-bar"><div class="stats-inner"><div class="stat-item"><div class="stat-num">20<sup>+</sup></div><div class="stat-label">Anni di esperienza</div></div><div class="stat-item"><div class="stat-num">5★★★★★</div><div class="stat-label">Valutazione clienti</div></div></div></div>
-
 <section id="cosa-offriamo" class="bg-off">
   <div class="section-inner">
     <div class="section-label">Cosa offriamo</div>

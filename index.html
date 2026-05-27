@@ -47,26 +47,30 @@
   .nav-cta:hover { background: var(--green-mid) !important; }
 
   .hero {
-    min-height: 100vh; background: var(--green-dark);
+    min-height: 100vh; background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 0.5s ease forwards;
     display: flex; flex-direction: column; padding-top: 72px;
     position: relative; overflow: hidden;
   }
   .hero-slide {
     position: absolute; inset: 0;
     background-size: cover; background-position: center;
-    transition: opacity 1.4s ease; opacity: 0;
+    transition: opacity 4s ease; opacity: 0;
   }
   .hero-slide.active { opacity: 1; animation: heroZoom 8s ease-out forwards; }
   @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  @keyframes heroGradientWave {
+    0%   { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
 
   /* Green wipe overlay */
   .hero-wipe {
     position: absolute; inset: 0; z-index: 5; pointer-events: none;
-    background: var(--green-dark);
+    background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 0.5s ease forwards;
     transform: scaleX(0); transform-origin: left center;
   }
-  .hero-wipe.wipe-in  { animation: wipeIn  0.5s cubic-bezier(0.77,0,0.18,1) forwards; }
-  .hero-wipe.wipe-out { animation: wipeOut 0.5s cubic-bezier(0.77,0,0.18,1) forwards; }
+  .hero-wipe.wipe-in  { animation: wipeIn  0.75s cubic-bezier(0.77,0,0.18,1) forwards; }
+  .hero-wipe.wipe-out { animation: wipeOut 0.75s cubic-bezier(0.77,0,0.18,1) forwards; }
   @keyframes wipeIn  { from { transform: scaleX(0); transform-origin: left center; }  to { transform: scaleX(1); transform-origin: left center; } }
   @keyframes wipeOut { from { transform: scaleX(1); transform-origin: right center; } to { transform: scaleX(0); transform-origin: right center; } }
 
@@ -91,8 +95,8 @@
   .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
   .hero-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800;
-    color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px;
+    font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700;
+    color: var(--white); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 20px;
   }
   .hero-title em { color: var(--yellow); font-style: normal; }
   .hero-desc { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; font-weight: 300; }
@@ -113,17 +117,9 @@
   }
   .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
-  .stats-bar { background: var(--white); border-bottom: 1px solid var(--warm-gray); padding: 0 5%; }
-  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
-  .stat-item { padding: 52px 24px; text-align: center; border-right: 1px solid var(--warm-gray); }
-  .stat-item:last-child { border-right: none; }
-  .stat-num { font-family: 'Syne', sans-serif; font-size: 3.2rem; font-weight: 800; color: var(--green-dark); letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
-  .stat-num sup { font-size: 1.3rem; vertical-align: super; }
-  .stat-label { font-size: 15px; color: var(--text-light); }
-
   section { padding: 96px 5%; }
   .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
-  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 800; color: var(--text-dark); letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 700; color: var(--text-dark); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 16px; }
   .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; font-weight: 300; }
 
   .services { background: var(--off-white); }
@@ -154,7 +150,12 @@
   .portfolio-bg-teal { background: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg') center/cover no-repeat; }
   .portfolio-bg-asbestos { background: linear-gradient(135deg, #3d2d1a 0%, #a86325 100%); }
 
-  .about-strip { background: var(--green-dark); color: var(--white); padding: 100px 5%; }
+  @keyframes gradientWave {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .about-strip { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 8s ease infinite; color: var(--white); padding: 100px 5%; }
   .about-text { max-width: 100%; }
   .about-text .section-label { color: var(--yellow); }
   .about-text .section-title { color: var(--white); }
@@ -180,12 +181,13 @@
   .news-excerpt { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; }
   .news-read { font-size: 13px; font-weight: 600; color: var(--green-mid); text-decoration: none; }
 
-  .cta-banner { background: var(--green-dark); padding: 80px 5%; text-align: center; }
-  .cta-banner h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 12px; }
+  .cta-banner { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 8s ease infinite; padding: 80px 5%; text-align: center; }
+  .cta-banner h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; color: var(--white); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 12px; }
+  .cta-banner h2 em { color: var(--yellow); font-style: normal; }
   .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 36px; }
   .cta-banner-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .btn-white { background: var(--white); color: var(--green-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-  .btn-white:hover { background: var(--yellow); }
+  .btn-white { background: var(--yellow); color: var(--text-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-white:hover { background: var(--white); color: var(--text-dark); }
   .btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
   .btn-outline-white:hover { background: rgba(255,255,255,0.08); }
 
@@ -224,8 +226,6 @@
   .hero-title { animation: fadeUp 0.5s 0.1s ease both; }
   .hero-desc { animation: fadeUp 0.5s 0.2s ease both; }
   .hero-ctas { animation: fadeUp 0.5s 0.3s ease both; }
-  .stats-inner { animation: fadeUp 0.5s 0.1s ease both; }
-
   /* CAROUSEL CONTROLS */
   .carousel-arrow {
     position: absolute; top: 50%; transform: translateY(-50%);
@@ -390,15 +390,6 @@
   </div>
 </section>
 
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item"><div class="stat-num">500<sup>+</sup></div><div class="stat-label">Impianti installati</div></div>
-    <div class="stat-item"><div class="stat-num">20<sup>+</sup></div><div class="stat-label">Anni di esperienza</div></div>
-    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Aree di servizio</div></div>
-    <div class="stat-item"><div class="stat-num">5<sup>★</sup></div><div class="stat-label">Valutazione clienti</div></div>
-  </div>
-</div>
-
 <section class="services" id="servizi">
   <div class="services-header">
     <div>
@@ -436,14 +427,14 @@
       <h2 class="section-title">Portfolio recente</h2>
       <p class="section-desc">Alcuni dei progetti realizzati nel territorio.</p>
     </div>
-    <a href="#" class="btn-primary" style="flex-shrink:0">Vedi tutto il portfolio →</a>
+    <a href="portfolio.html" id="link-portfolio" class="btn-primary" style="flex-shrink:0">Vedi tutto il portfolio →</a>
   </div>
   <div class="portfolio-grid">
     <div class="portfolio-card tall portfolio-bg-solar">
-      <div class="portfolio-overlay"><div class="portfolio-tag">Coperture</div><div class="portfolio-title">14,7 MW Fotovoltaico Galleggiante</div><div class="portfolio-meta">Brisighella · 2025</div></div>
+      <div class="portfolio-overlay"><div class="portfolio-tag">Fotovoltaico</div><div class="portfolio-title">Impianto domestico</div><div class="portfolio-meta">Brisighella · 2025</div></div>
     </div>
     <div class="portfolio-card portfolio-bg-electric">
-      <div class="portfolio-overlay"><div class="portfolio-tag">Coperture</div><div class="portfolio-title">Impianto industriale 80 kWp</div><div class="portfolio-meta">Belluno · 2024</div></div>
+      <div class="portfolio-overlay"><div class="portfolio-tag">Fotovoltaico</div><div class="portfolio-title">Impianto domestico</div><div class="portfolio-meta">Belluno · 2024</div></div>
     </div>
     <div class="portfolio-card portfolio-bg-teal">
       <div class="portfolio-overlay"><div class="portfolio-tag">Fotovoltaico</div><div class="portfolio-title">Sistema di accumulo</div><div class="portfolio-meta">Ferrara · 2024</div></div>
@@ -489,8 +480,7 @@
 </section>
 
 <div class="cta-banner" id="preventivo">
-  <h2>Pronti a fare il passo successivo?</h2>
-  <p>Richiedi un preventivo gratuito — risposta entro 24 ore.</p>
+  <h2>Pronti a fare il <em>passo successivo?</em></h2>
   <div class="cta-banner-btns">
     <a href="/cdn-cgi/l/email-protection#640d0a020b240a160349010a0116030d054a0d10" class="btn-white" onclick="openModal();return false;">Richiedi preventivo gratuito</a>
     <a href="tel:+390542 55201" class="btn-outline-white">📞 Chiamaci: 0542 55201</a>
@@ -577,40 +567,48 @@ var contents = [
     // 1. Fade out text
     heroText.classList.add('fade-out');
 
-    // 2. Wipe in (green covers the hero)
+    // 2. Wipe in (gradient covers the current slide)
     setTimeout(function() {
       wipe.className = 'hero-wipe wipe-in';
     }, 200);
 
-    // 3. At peak of wipe, swap slides and text content
+    // 3. Once wipe fully covers (200ms + 750ms), swap everything hidden underneath
     setTimeout(function() {
-      slides[current].style.opacity = '0';
-      slides[current].classList.remove('active');
+      // Freeze outgoing slide at its current zoom position before removing animation
+      var outSlide = slides[current];
+      outSlide.style.transform = window.getComputedStyle(outSlide).transform;
+      outSlide.style.animation = 'none';
+      outSlide.style.opacity = '0';
+      outSlide.classList.remove('active');
       dots[current].classList.remove('active');
 
-      var next = index;
-      slides[next].style.opacity = '1';
-      slides[next].classList.add('active');
-      dots[next].classList.add('active');
+      // Clear any frozen state on incoming slide so heroZoom restarts from scale(1)
+      var inSlide = slides[index];
+      inSlide.style.transform = '';
+      inSlide.style.animation = '';
+      inSlide.style.opacity = '1';
+      inSlide.classList.add('active');
+      dots[index].classList.add('active');
 
-      var c = contents[next];
+      // Swap text content
+      var c = contents[index];
       document.querySelector('.hero-badge').textContent = c.badge;
       document.querySelector('.hero-title').innerHTML = c.title;
       document.querySelector('.hero-desc').textContent = c.desc;
-      current = next;
+      current = index;
 
-      // 4. Wipe out (green reveals new slide)
+      // 4. Wipe out (gradient reveals new slide)
       wipe.className = 'hero-wipe wipe-out';
 
       // 5. Fade text back in
       heroText.classList.remove('fade-out');
-    }, 700);
+    }, 950);
 
-    // 6. Done
+    // 6. Done (950ms + 750ms wipe-out + 50ms buffer)
     setTimeout(function() {
       wipe.className = 'hero-wipe';
       transitioning = false;
-    }, 1300);
+    }, 1750);
   }
 
   function next() { go((current + 1) % 3); }
@@ -623,7 +621,7 @@ var contents = [
 
   window.addEventListener('load', function() {
     var slides = getSlides();
-    slides.forEach(function(s) { s.style.transition = 'opacity 1.4s ease'; });
+    slides.forEach(function(s) { s.style.transition = 'opacity 0.5s ease'; });
 
     document.querySelector('.carousel-arrow.prev').addEventListener('click', function() {
       prev(); startTimer();
@@ -650,11 +648,6 @@ var T = {
     nav_contact: 'Contatti',
     nav_cta: 'Richiedi preventivo',
 
-    stat1_label: 'Impianti installati',
-    stat2_label: 'Anni di esperienza',
-    stat3_label: 'Aree di servizio',
-    stat4_label: 'Valutazione clienti',
-
     services_label: 'Cosa facciamo',
     services_title: 'I nostri servizi',
     services_desc: "Dalla progettazione alla realizzazione, gestiamo l'intero processo internamente per garantire qualità, efficienza e coerenza con i nostri valori. Un impegno di lungo termine che ci responsabilizza, a partire dall'idea progettuale, e per l'intera vita degli impianti che realizziamo.",
@@ -674,8 +667,8 @@ var T = {
     portfolio_desc: 'Alcuni dei progetti realizzati nel territorio.',
     portfolio_cta: 'Vedi tutto il portfolio →',
 
-    ptag1: 'Coperture', ptitle1: '14,7 MW Fotovoltaico Galleggiante', pmeta1: 'Brisighella · 2025',
-    ptag2: 'Coperture',    ptitle2: 'Impianto industriale 80 kWp',       pmeta2: 'Belluno · 2024',
+    ptag1: 'Fotovoltaico', ptitle1: 'Impianto domestico', pmeta1: 'Brisighella · 2025',
+    ptag2: 'Fotovoltaico',    ptitle2: 'Impianto domestico',       pmeta2: 'Belluno · 2024',
     ptag3: 'Fotovoltaico', ptitle3: 'Sistema di accumulo',             pmeta3: 'Ferrara · 2024',
     ptag4: 'Amianto',      ptitle4: 'Bonifica amianto complesso',        pmeta4: 'Ferrara · 2023',
 
@@ -693,8 +686,7 @@ var T = {
     news2_date: '28 febbraio 2026', news2_title: 'Aggiornamento normativo impianti elettrici civili 2026', news2_excerpt: "Cosa cambia per le installazioni residenziali e industriali quest'anno.", news2_read: 'Leggi di più →',
     news3_date: '15 febbraio 2026', news3_title: 'Bonifica amianto: tempi, costi e agevolazioni disponibili', news3_excerpt: 'Tutto quello che devi sapere prima di avviare una pratica di smaltimento.', news3_read: 'Leggi di più →',
 
-    cta_title: 'Pronti a fare il passo successivo?',
-    cta_desc: 'Richiedi un preventivo gratuito — risposta entro 24 ore.',
+    cta_title: 'Pronti a fare il <em>passo successivo?</em>',
     cta_btn: 'Richiedi preventivo gratuito',
     cta_phone: '📞 Chiamaci: 0542 55201',
 
@@ -729,11 +721,6 @@ var T = {
     nav_contact: 'Contact',
     nav_cta: 'Get a quote',
 
-    stat1_label: 'Installations completed',
-    stat2_label: 'Years of experience',
-    stat3_label: 'Service areas',
-    stat4_label: 'Customer rating',
-
     services_label: 'What we do',
     services_title: 'Our services',
     services_desc: 'From design to installation, we manage the entire process internally to ensure quality, efficiency and consistency with our values. A long-term commitment that makes us accountable, from the initial project idea through the entire life of the systems we build.',
@@ -753,13 +740,13 @@ var T = {
     portfolio_desc: 'A selection of projects completed across the region.',
     portfolio_cta: 'View full portfolio →',
 
-    ptag1: 'Roofing',      ptitle1: '14.7 MW Floating Solar Plant',     pmeta1: 'Brisighella · 2025',
-    ptag2: 'Roofing', ptitle2: '80 kWp Industrial Electrical Plant', pmeta2: 'Belluno · 2024',
+    ptag1: 'Solar',      ptitle1: 'Residential solar installation',     pmeta1: 'Brisighella · 2025',
+    ptag2: 'Solar', ptitle2: 'Residential solar installation', pmeta2: 'Belluno · 2024',
     ptag3: 'Solar',      ptitle3: 'Battery storage system',           pmeta3: 'Ferrara · 2024',
     ptag4: 'Asbestos',   ptitle4: 'Full Complex Asbestos Removal',     pmeta4: 'Ferrara · 2023',
 
     about_label: 'About us',
-    about_title: 'Twenty years of <em>experience</em> in renewable energy',
+    about_title: 'Twenty years of experience in <em>renewable energy</em>',
     about_desc: 'We are a company specialising in the consultation, design and installation of solar power systems and battery storage. We manage the entire process in-house to guarantee quality, efficiency and consistency with our values. A method that makes us fully reliable.',
     about_cta: 'Our story →',
 
@@ -772,8 +759,7 @@ var T = {
     news2_date: '28 February 2026', news2_title: 'Legislative update for residential electrical systems 2026', news2_excerpt: "What's changing for residential and industrial installations this year.", news2_read: 'Read more →',
     news3_date: '15 February 2026', news3_title: 'Asbestos removal: timelines, costs and available incentives', news3_excerpt: 'Everything you need to know before starting a disposal process.', news3_read: 'Read more →',
 
-    cta_title: 'Ready to take the next step?',
-    cta_desc: 'Request a free quote — we respond within 24 hours.',
+    cta_title: 'Ready to take the <em>next step?</em>',
     cta_btn: 'Request a free quote',
     cta_phone: '📞 Call us: +39 0542 55201',
 
@@ -823,12 +809,6 @@ function applyTranslations(lang) {
   setText('[data-i18n="nav_contact"]',  'nav_contact');
   setText('[data-i18n="nav_cta"]',      'nav_cta');
 
-  // Stats labels
-  var statLabels = document.querySelectorAll('.stat-label');
-  ['stat1_label','stat2_label','stat3_label','stat4_label'].forEach(function(k,i){
-    if (statLabels[i]) statLabels[i].textContent = t[k];
-  });
-
   // Services section
   setOneText('#servizi .section-label', 'services_label');
   setOneText('#servizi .section-title', 'services_title');
@@ -876,7 +856,7 @@ function applyTranslations(lang) {
   });
 
   // CTA banner
-  setOneText('.cta-banner h2',             'cta_title');
+  setOneHTML('.cta-banner h2',             'cta_title');
   setOneText('.cta-banner p',              'cta_desc');
   setOneText('.cta-banner .btn-white',     'cta_btn');
   setOneText('.cta-banner .btn-outline-white', 'cta_phone');
@@ -962,7 +942,8 @@ if (window.location.hash === '#quote') {
   var map = {
     'link-rinnovabili': { it: 'services/energie-rinnovabili.html', en: 'services/en/renewable-energy.html' },
     'link-coperture':   { it: 'services/coperture.html',           en: 'services/en/roofing.html' },
-    'link-amianto':     { it: 'services/bonifica-amianto.html',    en: 'services/en/asbestos-removal.html' }
+    'link-amianto':     { it: 'services/bonifica-amianto.html',    en: 'services/en/asbestos-removal.html' },
+    'link-portfolio':   { it: 'portfolio.html',                    en: 'services/en/portfolio.html' }
   };
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
