@@ -125,15 +125,43 @@
   .services { background: var(--off-white); }
   .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; gap: 40px; }
   #servizi .section-desc { max-width: none; }
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .service-card { background: var(--white); border-radius: var(--radius); padding: 32px 28px; border: 1px solid var(--warm-gray); transition: all 0.25s; cursor: pointer; display: flex; flex-direction: column; }
-  .service-card:hover { transform: translateY(-4px); border-color: var(--green-light); box-shadow: 0 12px 32px rgba(26,77,46,0.08); }
-  .service-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--green-pale); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
-  .service-icon svg { width: 24px; height: 24px; }
-  .service-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
-  .service-desc { font-size: 14px; color: var(--text-mid); line-height: 1.65; flex: 1; margin-bottom: 20px; }
-  .service-link { font-size: 14px; font-weight: 600; color: var(--green-mid); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-  .service-link:hover { color: var(--green-dark); }
+  @keyframes overlay-gradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .services-grid { display: flex; flex-direction: column; gap: 32px; }
+  .service-card { position: relative; border-radius: 16px; overflow: hidden; height: 220px; cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
+  .service-card.animate { opacity: 0; transform: translateY(40px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .service-card.animate.card-visible { opacity: 1; transform: translateY(0); }
+  .service-card-image { position: absolute; inset: 0; overflow: hidden; }
+  .service-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .service-card:hover .service-card-image img { transform: scale(1.05); }
+  .service-card.animate .service-card-image img { filter: blur(4px); }
+  .service-card.animate.card-visible .service-card-image img { filter: blur(0); transition: transform 0.4s ease, filter 0.4s ease-out; transition-delay: 0s, 0.5s; }
+  .service-card-content { position: absolute; top: 0; left: 0; bottom: 0; width: 35%; background: #1a4a2e; border-radius: 12px 0 0 12px; padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
+  .service-card-content.gradient-on { background: linear-gradient(135deg, #1a4a2e, #2d6e47, #1a4a2e); background-size: 200% 200%; animation: overlay-gradient 3s ease infinite; }
+  .service-card.animate .service-card-content { transform: translateX(-100%); transition: transform 0.5s ease-out; transition-delay: 0.9s; }
+  .service-card.animate.card-visible .service-card-content { transform: translateX(0); }
+  .service-card.animate .service-card-text { opacity: 0; transition: opacity 0.3s ease; transition-delay: 1.4s; }
+  .service-card.animate.card-visible .service-card-text { opacity: 1; }
+  .service-icon { display: none; }
+  .service-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: #f5c842; margin-bottom: 12px; }
+  .service-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px; }
+  .service-link { font-size: 14px; font-weight: 600; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .service-link:hover { color: rgba(255,255,255,0.75); }
+  @media (max-width: 700px) {
+    .service-card { height: auto; border-radius: 12px; }
+    .service-card.animate { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .service-card-image { position: relative; inset: auto; height: 240px; overflow: hidden; }
+    .service-card-image img { height: 240px; }
+    .service-card.animate .service-card-image img { filter: none !important; transition: transform 0.4s ease !important; }
+    .service-card-content { position: relative; top: auto; left: auto; bottom: auto; width: 100%; border-radius: 0 0 12px 12px; }
+    .service-card.animate .service-card-content { transform: none !important; transition: none !important; }
+    .service-card.animate .service-card-text { opacity: 1 !important; transition: none !important; }
+    .service-name { font-size: 18px; }
+  }
 
   .portfolio { background: var(--white); }
   .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; gap: 40px; }
@@ -400,22 +428,37 @@
   </div>
   <div class="services-grid">
     <div class="service-card">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2d7a4a" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
-      <div class="service-name">Energie rinnovabili</div>
-      <div class="service-desc">Impianti fotovoltaici, sistemi di accumulo e soluzioni per l'efficienza energetica residenziale e industriale.</div>
-      <a href="services/energie-rinnovabili.html" class="service-link" id="link-rinnovabili">Scopri di più →</a>
+      <div class="service-card-image"><img src="https://res.cloudinary.com/dmegrbq5k/image/upload/w_1400,q_auto,f_auto/v1780486172/IMG-20180322-WA0014-1_nzgdht.webp" alt="Energie rinnovabili" loading="lazy"></div>
+      <div class="service-card-content">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
+        <div class="service-card-text">
+          <div class="service-name">Energie rinnovabili</div>
+          <div class="service-desc">Impianti fotovoltaici, sistemi di accumulo e soluzioni per l'efficienza energetica residenziale e industriale.</div>
+          <a href="services/energie-rinnovabili.html" class="service-link" id="link-rinnovabili">Scopri di più →</a>
+        </div>
+      </div>
     </div>
     <div class="service-card">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2d7a4a" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <div class="service-name">Coperture</div>
-      <div class="service-desc">Installazione e manutenzione di coperture industriali e civili integrate con impianti fotovoltaici.</div>
-      <a href="services/coperture.html" class="service-link" id="link-coperture">Scopri di più →</a>
+      <div class="service-card-image"><img src="https://res.cloudinary.com/dmegrbq5k/image/upload/w_1400,q_auto,f_auto/v1780486990/IMG_1792_ypqfls.jpg" alt="Coperture" style="object-position: center 30%;" loading="lazy"></div>
+      <div class="service-card-content">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="service-card-text">
+          <div class="service-name">Coperture</div>
+          <div class="service-desc">Installazione e manutenzione di coperture industriali e civili anche integrate con impianti fotovoltaici.</div>
+          <a href="services/coperture.html" class="service-link" id="link-coperture">Scopri di più →</a>
+        </div>
+      </div>
     </div>
     <div class="service-card">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2d7a4a" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="service-name">Bonifica amianto</div>
-      <div class="service-desc">Iscritti all'Albo Gestori Ambientali. Piani di smaltimento, bonifica e conferimento in discariche autorizzate.</div>
-      <a href="services/bonifica-amianto.html" class="service-link" id="link-amianto">Scopri di più →</a>
+      <div class="service-card-image"><img src="https://res.cloudinary.com/dmegrbq5k/image/upload/w_1400,q_auto,f_auto/v1780485647/bonifica_amianto_welcome_rexgso.webp" alt="Bonifica amianto" loading="lazy"></div>
+      <div class="service-card-content">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="service-card-text">
+          <div class="service-name">Bonifica amianto</div>
+          <div class="service-desc">Iscritti all'Albo Gestori Ambientali. Competenza nella gestione del ciclo dei rifiuti tramite bonifiche ambientali e smaltimento dell'amianto.</div>
+          <a href="services/bonifica-amianto.html" class="service-link" id="link-amianto">Scopri di più →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -656,10 +699,10 @@ var T = {
     svc1_desc: "Impianti fotovoltaici, sistemi di accumulo e soluzioni per l'efficienza energetica residenziale e industriale.",
     svc1_link: 'Scopri di più →',
     svc2_name: 'Coperture',
-    svc2_desc: 'Installazione e manutenzione di coperture industriali e civili integrate con impianti fotovoltaici.',
+    svc2_desc: 'Installazione e manutenzione di coperture industriali e civili anche integrate con impianti fotovoltaici.',
     svc2_link: 'Scopri di più →',
     svc3_name: 'Bonifica amianto',
-    svc3_desc: "Iscritti all'Albo Gestori Ambientali. Piani di smaltimento, bonifica e conferimento in discariche autorizzate.",
+    svc3_desc: "Iscritti all'Albo Gestori Ambientali. Competenza nella gestione del ciclo dei rifiuti tramite bonifiche ambientali e smaltimento dell'amianto.",
     svc3_link: 'Scopri di più →',
 
     portfolio_label: 'I nostri lavori',
@@ -729,10 +772,10 @@ var T = {
     svc1_desc: 'Solar panels, battery storage and energy efficiency solutions for residential and industrial use.',
     svc1_link: 'Learn more →',
     svc2_name: 'Roofing',
-    svc2_desc: 'Installation and maintenance of industrial and residential roofing integrated with solar panels.',
+    svc2_desc: 'Installation and maintenance of industrial and civil roofing, including integration with solar panel systems.',
     svc2_link: 'Learn more →',
     svc3_name: 'Asbestos removal',
-    svc3_desc: 'Registered in the National Register of Waste Management. Authorised disposal, remediation and transfer to licensed landfills.',
+    svc3_desc: 'Registered in the National Register of Waste Management. Expertise in waste cycle management through environmental remediation and asbestos disposal.',
     svc3_link: 'Learn more →',
 
     portfolio_label: 'Our work',
@@ -1195,7 +1238,6 @@ function submitForm() {
     '.section-label',
     '.section-title',
     '.section-desc',
-    '.service-card',
     '.portfolio-card',
     '.news-card',
     '.cert-badge',
@@ -1218,6 +1260,40 @@ function submitForm() {
         el.classList.add('reveal');
         observer.observe(el);
       }
+    });
+  });
+
+  var cardObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('card-visible');
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card').forEach(function(card) {
+    card.classList.add('animate');
+    cardObserver.observe(card);
+
+    var overlay = card.querySelector('.service-card-content');
+    if (!overlay) return;
+    var stopHandler = null;
+
+    card.addEventListener('mouseenter', function() {
+      if (stopHandler) {
+        overlay.removeEventListener('animationiteration', stopHandler);
+        stopHandler = null;
+      }
+      overlay.classList.add('gradient-on');
+    });
+
+    card.addEventListener('mouseleave', function() {
+      stopHandler = function() {
+        overlay.classList.remove('gradient-on');
+        stopHandler = null;
+      };
+      overlay.addEventListener('animationiteration', stopHandler, { once: true });
     });
   });
 })();
