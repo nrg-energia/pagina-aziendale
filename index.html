@@ -140,7 +140,7 @@
   .service-card:hover .service-card-image img { transform: scale(1.05); }
   .service-card.animate .service-card-image img { filter: blur(4px); }
   .service-card.animate.card-visible .service-card-image img { filter: blur(0); transition: transform 0.4s ease, filter 0.4s ease-out; transition-delay: 0s, 0.5s; }
-  .service-card-content { position: absolute; top: 0; left: 0; bottom: 0; width: 35%; background: #1a4a2e; border-radius: 12px 0 0 12px; padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
+  .service-card-content { position: absolute; top: 0; left: 0; bottom: 0; width: 35%; background: linear-gradient(135deg, #1a4a2e, #2d6e47); border-radius: 12px 0 0 12px; padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
   .service-card-content.gradient-on { background: linear-gradient(135deg, #1a4a2e, #2d6e47, #1a4a2e); background-size: 200% 200%; animation: overlay-gradient 3s ease infinite; }
   .service-card.animate .service-card-content { transform: translateX(-100%); transition: transform 0.5s ease-out; transition-delay: 0.9s; }
   .service-card.animate.card-visible .service-card-content { transform: translateX(0); }
@@ -149,8 +149,8 @@
   .service-icon { display: none; }
   .service-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: #f5c842; margin-bottom: 12px; }
   .service-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px; }
-  .service-link { font-size: 14px; font-weight: 600; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-  .service-link:hover { color: rgba(255,255,255,0.75); }
+  .service-link { font-size: 14px; font-weight: 600; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s ease, transform 0.2s ease; }
+  .service-link:hover { color: rgba(255,255,255,0.75); transform: scale(1.08); }
   @media (max-width: 700px) {
     .service-card { height: auto; border-radius: 12px; }
     .service-card.animate { opacity: 1 !important; transform: none !important; transition: none !important; }
@@ -450,7 +450,7 @@
       </div>
     </div>
     <div class="service-card">
-      <div class="service-card-image"><img src="https://res.cloudinary.com/dmegrbq5k/image/upload/w_1400,q_auto,f_auto/v1780485647/bonifica_amianto_welcome_rexgso.webp" alt="Bonifica amianto" loading="lazy"></div>
+      <div class="service-card-image"><img src="https://res.cloudinary.com/dmegrbq5k/image/upload/w_1400,q_auto,f_auto/v1780485647/bonifica_amianto_welcome_rexgso.webp" alt="Bonifica amianto" loading="lazy" style="object-position: 80% 60%;"></div>
       <div class="service-card-content">
         <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <div class="service-card-text">
