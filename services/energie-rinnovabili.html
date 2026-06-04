@@ -171,9 +171,10 @@
 
     /* WHY US */
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .why-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
-    .why-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--text-mid); }
-    .why-check { width: 20px; height: 20px; min-width: 20px; background: var(--green-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 2px; }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+    .why-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 1.15rem; color: var(--text-dark); line-height: 1.5; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .why-list li.why-visible { opacity: 1; transform: translateY(0); }
+    .why-check { width: 22px; height: 22px; min-width: 22px; background: var(--green-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 3px; }
     .why-visual { background: var(--green-dark); border-radius: 16px; padding: 40px 36px; display: flex; flex-direction: column; gap: 24px; }
     .why-stat { border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px; }
     .why-stat:last-child { border: none; padding: 0; }
@@ -435,12 +436,12 @@
         <div class="section-label">Perché sceglierci</div>
         <h2>Vent'anni di esperienza nel solare</h2>
         <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;">Siamo tra i primi installatori certificati in Emilia-Romagna. La nostra esperienza garantisce impianti affidabili e redditizi nel tempo.</p>
-        <ul class="why-list">
-          <li><span class="why-check">✓</span>Installatori certificati e iscritti agli albi di settore</li>
-          <li><span class="why-check">✓</span>Garanzia estesa su materiali e manodopera</li>
-          <li><span class="why-check">✓</span>Monitoraggio remoto incluso per 2 anni</li>
-        </ul>
       </div>
+      <ul class="why-list">
+        <li><span class="why-check">✓</span>Installatori certificati e iscritti agli albi di settore</li>
+        <li><span class="why-check">✓</span>Garanzia estesa su materiali e manodopera</li>
+        <li><span class="why-check">✓</span>Monitoraggio remoto incluso per 2 anni</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -852,6 +853,22 @@ function submitForm() {
 
   resetProgress(true);
   startTimer();
+})();
+
+// Perché sceglierci — staggered checklist animation
+(function() {
+  var list = document.querySelector('.why-list');
+  if (!list) return;
+  var items = list.querySelectorAll('li');
+  var obs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      items.forEach(function(item, i) {
+        setTimeout(function() { item.classList.add('why-visible'); }, i * 200);
+      });
+      obs.disconnect();
+    }
+  }, { threshold: 0.3 });
+  obs.observe(list);
 })();
 </script>
 
