@@ -171,6 +171,8 @@
 
     /* WHY US */
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .why-left { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .why-left.why-visible { opacity: 1; transform: translateY(0); }
     .why-list { list-style: none; display: flex; flex-direction: column; gap: 20px; justify-content: center; }
     .why-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 1.15rem; color: var(--text-dark); line-height: 1.5; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .why-list li.why-visible { opacity: 1; transform: translateY(0); }
@@ -430,9 +432,9 @@
 </section>
 
 <section id="perche-sceglierci" class="bg-off">
-  <div class="section-inner scroll-reveal">
+  <div class="section-inner">
     <div class="why-grid">
-      <div>
+      <div class="why-left">
         <div class="section-label">Perché sceglierci</div>
         <h2>Vent'anni di esperienza nel solare</h2>
         <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;">Siamo tra i primi installatori certificati in Emilia-Romagna. La nostra esperienza garantisce impianti affidabili e redditizi nel tempo.</p>
@@ -857,20 +859,22 @@ function submitForm() {
   startTimer();
 })();
 
-// Perché sceglierci — staggered checklist animation
+// Perché sceglierci — left column then staggered checklist animation
 (function() {
+  var left = document.querySelector('.why-left');
   var list = document.querySelector('.why-list');
-  if (!list) return;
+  if (!left || !list) return;
   var items = list.querySelectorAll('li');
   var obs = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting) {
+      left.classList.add('why-visible');
       items.forEach(function(item, i) {
-        setTimeout(function() { item.classList.add('why-visible'); }, i * 200);
+        setTimeout(function() { item.classList.add('why-visible'); }, 600 + i * 200);
       });
       obs.disconnect();
     }
-  }, { threshold: 0.3 });
-  obs.observe(list);
+  }, { threshold: 0.2 });
+  obs.observe(left);
 })();
 </script>
 
