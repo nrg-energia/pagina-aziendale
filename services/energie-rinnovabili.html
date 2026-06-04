@@ -100,9 +100,10 @@
     .processo-left { background-image: linear-gradient(rgba(10,25,15,0.65), rgba(10,25,15,0.65)), url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780577122/siwawut-phoophinyo-JlhvFEVMwng-unsplash_bf5fjr.jpg'); background-size: cover; background-position: center; padding: 3rem; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
     .processo-left .section-label { color: rgba(255,255,255,0.65); }
     .processo-left h2 { color: var(--yellow); margin-bottom: 0; }
-    .processo-right { background: var(--green-dark); padding: 3rem 3.5rem 3rem 3rem; display: flex; flex-direction: column; justify-content: center; }
-    .processo-tabs { display: flex; gap: 2rem; margin-bottom: 0; }
-    .processo-tab { background: none; border: none; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.3); padding: 10px 0; transition: color 0.2s; }
+    .processo-right { background: var(--green-dark); padding: 3rem 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
+    .processo-content-wrap { width: 65%; margin: 0 auto; }
+    .processo-tabs { display: flex; gap: 3rem; margin-bottom: 0; }
+    .processo-tab { background: none; border: none; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.3); padding: 10px 0; transition: color 0.2s; }
     .processo-tab.active { color: var(--yellow); }
     .processo-tab:hover:not(.active) { color: rgba(255,255,255,0.6); }
     .processo-tab-sep { height: 2px; background: rgba(255,255,255,0.12); margin: 0 0 1.75rem; position: relative; overflow: hidden; }
@@ -112,10 +113,10 @@
     .processo-slides { position: relative; min-height: 200px; }
     .processo-step { position: absolute; inset: 0; opacity: 0; transition: opacity 0.15s ease; pointer-events: none; }
     .processo-step.active { opacity: 1; pointer-events: auto; }
-    .processo-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .processo-title { font-size: 1.7rem; font-weight: 700; color: var(--yellow); margin-bottom: 12px; }
     .processo-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.75; }
-    .processo-chevrons { display: flex; justify-content: space-between; margin-top: 1.75rem; }
-    .processo-chevron { background: none; border: none; cursor: pointer; font-size: 2rem; line-height: 1; color: var(--yellow); padding: 8px; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+    .processo-chevrons { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; align-items: center; padding: 0 1.25rem; pointer-events: none; }
+    .processo-chevron { background: none; border: none; cursor: pointer; font-size: 2.5rem; line-height: 1; color: var(--yellow); padding: 8px; opacity: 0.6; transition: opacity 0.2s, color 0.2s; pointer-events: auto; }
     .processo-chevron:hover { opacity: 1; color: #ffe580; }
     /* Scroll reveal */
     .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -344,29 +345,31 @@
       <h2>Il nostro processo</h2>
     </div>
     <div class="processo-right">
-      <div class="processo-tabs">
-        <button class="processo-tab active" data-step="0">01</button>
-        <button class="processo-tab" data-step="1">02</button>
-        <button class="processo-tab" data-step="2">03</button>
-        <button class="processo-tab" data-step="3">04</button>
-      </div>
-      <div class="processo-tab-sep"><div class="processo-progress" id="processoProgress"></div></div>
-      <div class="processo-slides">
-        <div class="processo-step active">
-          <div class="processo-title">Sopralluogo e consulenza</div>
-          <div class="processo-desc">Grazie alla consolidata esperienza nel settore, la nostra squadra affianca il cliente fin dalle prime fasi del sopralluogo, offrendo una consulenza tecnica mirata e contribuendo alla progettazione.</div>
+      <div class="processo-content-wrap">
+        <div class="processo-tabs">
+          <button class="processo-tab active" data-step="0">01</button>
+          <button class="processo-tab" data-step="1">02</button>
+          <button class="processo-tab" data-step="2">03</button>
+          <button class="processo-tab" data-step="3">04</button>
         </div>
-        <div class="processo-step">
-          <div class="processo-title">Rapporto diretto</div>
-          <div class="processo-desc">Ci differenziamo per il rapporto diretto con il cliente. Siamo sempre disponibili e presenti per offrire supporto, aiutare e fornire le risposte più performanti in base alle esigenze del mercato.</div>
-        </div>
-        <div class="processo-step">
-          <div class="processo-title">Competenza certificata</div>
-          <div class="processo-desc">Mettiamo a disposizione dei nostri clienti rapidità nel servizio e un'approfondita conoscenza dei prodotti che installiamo, con certificazioni tecniche specifiche, che rappresentano un ulteriore valore aggiunto in termini di affidabilità e prestazioni.</div>
-        </div>
-        <div class="processo-step">
-          <div class="processo-title">Soluzioni integrate</div>
-          <div class="processo-desc">L'obiettivo è ricercare soluzioni in grado di unire funzionalità, estetica ed efficienza energetica.</div>
+        <div class="processo-tab-sep"><div class="processo-progress" id="processoProgress"></div></div>
+        <div class="processo-slides">
+          <div class="processo-step active">
+            <div class="processo-title">Sopralluogo e consulenza</div>
+            <div class="processo-desc">Grazie alla consolidata esperienza nel settore, la nostra squadra affianca il cliente fin dalle prime fasi del sopralluogo, offrendo una consulenza tecnica mirata e contribuendo alla progettazione.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Rapporto diretto</div>
+            <div class="processo-desc">Ci differenziamo per il rapporto diretto con il cliente. Siamo sempre disponibili e presenti per offrire supporto, aiutare e fornire le risposte più performanti in base alle esigenze del mercato.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Competenza certificata</div>
+            <div class="processo-desc">Mettiamo a disposizione dei nostri clienti rapidità nel servizio e un'approfondita conoscenza dei prodotti che installiamo, con certificazioni tecniche specifiche, che rappresentano un ulteriore valore aggiunto in termini di affidabilità e prestazioni.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Soluzioni integrate</div>
+            <div class="processo-desc">L'obiettivo è ricercare soluzioni in grado di unire funzionalità, estetica ed efficienza energetica.</div>
+          </div>
         </div>
       </div>
       <div class="processo-chevrons">
