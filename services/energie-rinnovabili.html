@@ -94,8 +94,22 @@
     .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; }
     h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-dark); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 14px; }
     .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 520px; font-weight: 300; margin-bottom: 48px; }
-    .come-lavoriamo-text p { font-size: 16px; color: var(--text-dark); line-height: 1.8; margin-bottom: 20px; }
-    .come-lavoriamo-text p:last-child { margin-bottom: 0; }
+    /* IL NOSTRO PROCESSO */
+    #come-lavoriamo { padding: 0; }
+    .processo-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+    .processo-left { background: linear-gradient(135deg, #1a4a2e, #2d6e47); padding: 72px 5%; display: flex; flex-direction: column; justify-content: center; }
+    .processo-left .section-label { color: rgba(255,255,255,0.65); }
+    .processo-left h2 { color: #fff; margin-bottom: 0; }
+    .processo-right { background: #fff; padding: 72px 5%; display: flex; flex-direction: column; justify-content: center; }
+    .processo-right p { font-size: 16px; color: var(--text-dark); line-height: 1.8; margin-bottom: 20px; }
+    .processo-right p:last-child { margin-bottom: 0; }
+    .processo-left, .processo-right { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-left.processo-visible { opacity: 1; transform: translateY(0); }
+    .processo-right.processo-visible { opacity: 1; transform: translateY(0); transition-delay: 175ms; }
+    @media (max-width: 768px) {
+      .processo-grid { grid-template-columns: 1fr; }
+      .processo-left, .processo-right { padding: 56px 6%; }
+    }
 
     /* SERVICE CARDS */
     .bg-off { background: var(--off-white); }
@@ -305,10 +319,12 @@
 </section>
 
 <section id="come-lavoriamo">
-  <div class="section-inner">
-    <div class="section-label">Come lavoriamo</div>
-    <h2>Il nostro processo</h2>
-    <div class="come-lavoriamo-text">
+  <div class="processo-grid">
+    <div class="processo-left">
+      <div class="section-label">Come lavoriamo</div>
+      <h2>Il nostro processo</h2>
+    </div>
+    <div class="processo-right">
       <p>Grazie alla consolidata esperienza nel settore, la nostra squadra affianca il cliente fin dalle prime fasi del sopralluogo, offrendo una consulenza tecnica mirata e contribuendo alla progettazione.</p>
       <p>Ci differenziamo per il rapporto diretto con il cliente. Siamo sempre disponibili e presenti per offrire supporto, aiutare e fornire le risposte più performanti in base alle esigenze del mercato.</p>
       <p>Mettiamo a disposizione dei nostri clienti rapidità nel servizio e un'approfondita conoscenza dei prodotti che installiamo, con certificazioni tecniche specifiche, che rappresentano un ulteriore valore aggiunto in termini di affidabilità e prestazioni.</p>
@@ -707,6 +723,21 @@ function submitForm() {
   });
 
   setup();
+})();
+
+// Il nostro processo — staggered scroll animation
+(function() {
+  var left = document.querySelector('.processo-left');
+  var right = document.querySelector('.processo-right');
+  if (!left || !right) return;
+  var obs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      left.classList.add('processo-visible');
+      right.classList.add('processo-visible');
+      obs.disconnect();
+    }
+  }, { threshold: 0.2 });
+  obs.observe(left);
 })();
 </script>
 
