@@ -166,17 +166,19 @@
   .portfolio { background: var(--white); }
   .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; gap: 40px; }
   .portfolio-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
-  .portfolio-card { border-radius: var(--radius); overflow: hidden; background: var(--green-dark); position: relative; min-height: 200px; transition: transform 0.25s; }
-  .portfolio-card:hover { transform: scale(1.01); }
+  .portfolio-card { border-radius: var(--radius); overflow: hidden; background: var(--green-dark); position: relative; min-height: 200px; }
   .portfolio-card.tall { grid-row: span 2; min-height: 420px; }
+  .portfolio-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; transition: transform 0.4s ease; }
+  .portfolio-card:hover .portfolio-card-bg { transform: scale(1.08); }
   .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,35,20,0.85) 0%, transparent 60%); padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; }
   .portfolio-tag { display: inline-block; padding: 4px 12px; background: var(--yellow); color: var(--text-dark); font-size: 11px; font-weight: 600; border-radius: 50px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; }
   .portfolio-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--white); line-height: 1.3; margin-bottom: 4px; }
   .portfolio-meta { font-size: 12px; color: rgba(255,255,255,0.6); }
-  .portfolio-bg-solar { background: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg') center/cover no-repeat; }
-  .portfolio-bg-electric { background: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg') center/cover no-repeat; }
-  .portfolio-bg-teal { background: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg') center/cover no-repeat; }
-  .portfolio-bg-asbestos { background: linear-gradient(135deg, #3d2d1a 0%, #a86325 100%); }
+  .portfolio-bg-solar { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg'); }
+  .portfolio-bg-electric { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg'); }
+  .portfolio-bg-teal { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg'); }
+  .portfolio-bg-asbestos { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/w_1400,q_auto,f_auto/v1780485647/bonifica_amianto_welcome_rexgso.webp'); }
+  .portfolio-bg-industrial { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780486990/IMG_1792_ypqfls.jpg'); }
 
   @keyframes gradientWave {
     0% { background-position: 0% 50%; }
@@ -474,17 +476,25 @@
     <a href="portfolio.html" id="link-portfolio" class="btn-primary" style="flex-shrink:0">Vedi tutto il portfolio →</a>
   </div>
   <div class="portfolio-grid">
-    <div class="portfolio-card tall portfolio-bg-solar">
+    <div class="portfolio-card tall">
+      <div class="portfolio-card-bg portfolio-bg-solar"></div>
       <div class="portfolio-overlay"><div class="portfolio-tag">Fotovoltaico</div><div class="portfolio-title">Impianto domestico</div><div class="portfolio-meta">Brisighella · 2025</div></div>
     </div>
-    <div class="portfolio-card portfolio-bg-electric">
+    <div class="portfolio-card">
+      <div class="portfolio-card-bg portfolio-bg-electric"></div>
       <div class="portfolio-overlay"><div class="portfolio-tag">Fotovoltaico</div><div class="portfolio-title">Impianto domestico</div><div class="portfolio-meta">Belluno · 2024</div></div>
     </div>
-    <div class="portfolio-card portfolio-bg-teal">
+    <div class="portfolio-card">
+      <div class="portfolio-card-bg portfolio-bg-teal"></div>
       <div class="portfolio-overlay"><div class="portfolio-tag">Fotovoltaico</div><div class="portfolio-title">Sistema di accumulo</div><div class="portfolio-meta">Ferrara · 2024</div></div>
     </div>
-    <div class="portfolio-card portfolio-bg-asbestos">
+    <div class="portfolio-card">
+      <div class="portfolio-card-bg portfolio-bg-asbestos"></div>
       <div class="portfolio-overlay"><div class="portfolio-tag">Amianto</div><div class="portfolio-title">Bonifica amianto complesso</div><div class="portfolio-meta">Ferrara · 2023</div></div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-card-bg portfolio-bg-industrial"></div>
+      <div class="portfolio-overlay"><div class="portfolio-tag">Fotovoltaico</div><div class="portfolio-title">Impianto industriale</div><div class="portfolio-meta">Imola · 2024</div></div>
     </div>
   </div>
 </section>
