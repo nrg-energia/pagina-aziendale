@@ -100,16 +100,22 @@
     .processo-left { background-image: linear-gradient(rgba(10,25,15,0.65), rgba(10,25,15,0.65)), url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780577122/siwawut-phoophinyo-JlhvFEVMwng-unsplash_bf5fjr.jpg'); background-size: cover; background-position: center; padding: 3rem; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
     .processo-left .section-label { color: rgba(255,255,255,0.65); }
     .processo-left h2 { color: var(--yellow); margin-bottom: 0; }
-    .processo-right { background: var(--green-dark); padding: 72px 5%; display: flex; flex-direction: column; justify-content: center; }
-    .processo-right p { font-size: 16px; color: #fff; line-height: 1.8; margin-bottom: 20px; }
-    .processo-right p:last-child { margin-bottom: 0; }
+    .processo-right { background: var(--green-dark); padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .processo-item { padding-bottom: 1.75rem; margin-bottom: 1.75rem; border-bottom: 1px solid rgba(255,255,255,0.1); opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .processo-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); margin-bottom: 6px; }
+    .processo-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .processo-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; }
     /* Scroll reveal */
     .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
-    .processo-left .section-label, .processo-left h2, .processo-right { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-left .section-label, .processo-left h2 { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .processo-left.processo-visible .section-label { opacity: 1; transform: translateY(0); }
     .processo-left.processo-visible h2 { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
-    .processo-right.processo-visible { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
+    .processo-right.processo-visible .processo-item:nth-child(1) { opacity: 1; transform: translateY(0); }
+    .processo-right.processo-visible .processo-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
+    .processo-right.processo-visible .processo-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
+    .processo-right.processo-visible .processo-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 450ms; }
     @media (max-width: 768px) {
       .processo-grid { grid-template-columns: 1fr; }
       .processo-left, .processo-right { padding: 56px 6%; }
@@ -329,10 +335,26 @@
       <h2>Il nostro processo</h2>
     </div>
     <div class="processo-right">
-      <p>Grazie alla consolidata esperienza nel settore, la nostra squadra affianca il cliente fin dalle prime fasi del sopralluogo, offrendo una consulenza tecnica mirata e contribuendo alla progettazione.</p>
-      <p>Ci differenziamo per il rapporto diretto con il cliente. Siamo sempre disponibili e presenti per offrire supporto, aiutare e fornire le risposte più performanti in base alle esigenze del mercato.</p>
-      <p>Mettiamo a disposizione dei nostri clienti rapidità nel servizio e un'approfondita conoscenza dei prodotti che installiamo, con certificazioni tecniche specifiche, che rappresentano un ulteriore valore aggiunto in termini di affidabilità e prestazioni.</p>
-      <p>L'obiettivo è ricercare soluzioni in grado di unire funzionalità, estetica ed efficienza energetica.</p>
+      <div class="processo-item">
+        <div class="processo-num">01</div>
+        <div class="processo-title">Sopralluogo e consulenza</div>
+        <div class="processo-desc">Grazie alla consolidata esperienza nel settore, la nostra squadra affianca il cliente fin dalle prime fasi del sopralluogo, offrendo una consulenza tecnica mirata e contribuendo alla progettazione.</div>
+      </div>
+      <div class="processo-item">
+        <div class="processo-num">02</div>
+        <div class="processo-title">Rapporto diretto</div>
+        <div class="processo-desc">Ci differenziamo per il rapporto diretto con il cliente. Siamo sempre disponibili e presenti per offrire supporto, aiutare e fornire le risposte più performanti in base alle esigenze del mercato.</div>
+      </div>
+      <div class="processo-item">
+        <div class="processo-num">03</div>
+        <div class="processo-title">Competenza certificata</div>
+        <div class="processo-desc">Mettiamo a disposizione dei nostri clienti rapidità nel servizio e un'approfondita conoscenza dei prodotti che installiamo, con certificazioni tecniche specifiche, che rappresentano un ulteriore valore aggiunto in termini di affidabilità e prestazioni.</div>
+      </div>
+      <div class="processo-item">
+        <div class="processo-num">04</div>
+        <div class="processo-title">Soluzioni integrate</div>
+        <div class="processo-desc">L'obiettivo è ricercare soluzioni in grado di unire funzionalità, estetica ed efficienza energetica.</div>
+      </div>
     </div>
   </div>
 </section>
