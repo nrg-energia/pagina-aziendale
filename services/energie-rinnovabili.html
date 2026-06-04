@@ -97,7 +97,7 @@
     /* IL NOSTRO PROCESSO */
     #come-lavoriamo { padding: 0; }
     .processo-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; box-shadow: 0 20px 60px rgba(0,0,0,0.28); }
-    .processo-left { background-image: linear-gradient(rgba(10,25,15,0.65), rgba(10,25,15,0.65)), url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780577122/siwawut-phoophinyo-JlhvFEVMwng-unsplash_bf5fjr.jpg'); background-size: cover; background-position: center; padding: 3rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+    .processo-left { background-image: linear-gradient(rgba(10,25,15,0.65), rgba(10,25,15,0.65)), url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780577122/siwawut-phoophinyo-JlhvFEVMwng-unsplash_bf5fjr.jpg'); background-size: cover; background-position: center; padding: 3rem; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
     .processo-left .section-label { color: rgba(255,255,255,0.65); }
     .processo-left h2 { color: var(--yellow); margin-bottom: 0; }
     .processo-right { background: var(--green-dark); padding: 72px 5%; display: flex; flex-direction: column; justify-content: center; }
@@ -106,9 +106,10 @@
     /* Scroll reveal */
     .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
-    .processo-left, .processo-right { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .processo-left.processo-visible { opacity: 1; transform: translateY(0); }
-    .processo-right.processo-visible { opacity: 1; transform: translateY(0); transition-delay: 175ms; }
+    .processo-left .section-label, .processo-left h2, .processo-right { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-left.processo-visible .section-label { opacity: 1; transform: translateY(0); }
+    .processo-left.processo-visible h2 { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+    .processo-right.processo-visible { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
     @media (max-width: 768px) {
       .processo-grid { grid-template-columns: 1fr; }
       .processo-left, .processo-right { padding: 56px 6%; }
