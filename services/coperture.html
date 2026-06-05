@@ -149,6 +149,27 @@
     .why-stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
     .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
+    /* PORTFOLIO CAROUSEL */
+    .carousel-wrap { position: relative; max-width: 100%; margin: 0 0 24px; }
+    .carousel-viewport { overflow: hidden; border-radius: var(--radius); }
+    .carousel-track { display: flex; gap: 20px; transition: transform 0.45s ease; }
+    .carousel-slide { flex-shrink: 0; min-height: 340px; border-radius: var(--radius); overflow: hidden; position: relative; background: var(--green-dark); }
+    .carousel-slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.4s ease; }
+    .carousel-slide:hover .carousel-slide-bg { transform: scale(1.08); }
+    .carousel-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,25,18,0.9) 0%, rgba(10,25,18,0.15) 55%, transparent 100%); padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .carousel-tag { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 50px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; background: var(--yellow); color: var(--text-dark); }
+    .carousel-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--white); line-height: 1.3; margin-bottom: 6px; }
+    .carousel-meta { font-size: 13px; color: rgba(255,255,255,0.65); }
+    .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.92); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.18); color: var(--text-dark); }
+    .carousel-arrow:hover { background: var(--white); transform: translateY(-50%) scale(1.08); }
+    .carousel-arrow.prev { left: -22px; }
+    .carousel-arrow.next { right: -22px; }
+    .carousel-dots { display: flex; gap: 7px; justify-content: center; margin-bottom: 32px; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warm-gray); border: 1px solid rgba(0,0,0,0.08); cursor: pointer; transition: background 0.2s; padding: 0; }
+    .carousel-dot.active { background: var(--green-dark); border-color: var(--green-dark); }
+    .carousel-cta { text-align: center; }
+    @media (max-width: 600px) { .carousel-arrow.prev { left: 8px; } .carousel-arrow.next { right: 8px; } }
+
     /* CERTS (bonifica) */
     .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .cert-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; }
@@ -291,7 +312,7 @@
 </section>
 <div class="page-nav">
   <div class="page-nav-inner">
-    <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo">Cosa offriamo</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo">Come lavoriamo</a><div class="page-nav-divider"></div><a href="#perche-sceglierci" class="page-nav-link" data-target="perche-sceglierci">Perché sceglierci</a>
+    <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo">Cosa offriamo</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo">Come lavoriamo</a><div class="page-nav-divider"></div><a href="#nostri-lavori" class="page-nav-link" data-target="nostri-lavori">I nostri lavori</a><div class="page-nav-divider"></div><a href="#perche-sceglierci" class="page-nav-link" data-target="perche-sceglierci">Perché sceglierci</a>
   </div>
 </div>
 <section id="cosa-offriamo" class="bg-off">
@@ -346,6 +367,33 @@
         <button class="processo-chevron" id="processoPrev" aria-label="Precedente">&#8249;</button>
         <button class="processo-chevron" id="processoNext" aria-label="Successivo">&#8250;</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="nostri-lavori">
+  <div class="section-inner">
+    <div class="section-label">I nostri lavori</div>
+    <h2>Coperture realizzate</h2>
+    <p class="section-desc" style="max-width:none;">Alcune immagini di coperture installate.</p>
+    <div class="carousel-wrap" id="coperturCarousel">
+      <div class="carousel-viewport">
+      <div class="carousel-track">
+        <div class="carousel-slide active"></div>
+        <div class="carousel-slide"></div>
+        <div class="carousel-slide"></div>
+      </div>
+      </div>
+      <button class="carousel-arrow prev" onclick="carouselPrev()" aria-label="Precedente">&#8592;</button>
+      <button class="carousel-arrow next" onclick="carouselNext()" aria-label="Successivo">&#8594;</button>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <button class="carousel-dot active" onclick="carouselGo(0)"></button>
+      <button class="carousel-dot" onclick="carouselGo(1)"></button>
+      <button class="carousel-dot" onclick="carouselGo(2)"></button>
+    </div>
+    <div class="carousel-cta">
+      <a href="../portfolio.html" class="btn-primary">Vedi tutto il portfolio →</a>
     </div>
   </div>
 </section>
@@ -682,6 +730,43 @@ function submitForm() {
 
     resetProgress(true);
     startTimer();
+  })();
+
+  // Copertura portfolio carousel — multi-card
+  (function() {
+    var vp      = document.querySelector('#coperturCarousel .carousel-viewport');
+    var track   = document.querySelector('#coperturCarousel .carousel-track');
+    var slides  = track ? track.querySelectorAll('.carousel-slide') : [];
+    var dots    = document.querySelectorAll('#carouselDots .carousel-dot');
+    var prevBtn = document.querySelector('#coperturCarousel .carousel-arrow.prev');
+    var nextBtn = document.querySelector('#coperturCarousel .carousel-arrow.next');
+    var cur = 0;
+    var GAP = 20;
+    function getCols() { if (window.innerWidth <= 600) return 1; if (window.innerWidth <= 900) return 2; return 3; }
+    function setup() {
+      var cols = getCols();
+      var w = (vp.offsetWidth - GAP * (cols - 1)) / cols;
+      [].forEach.call(slides, function(s) { s.style.width = w + 'px'; });
+      cur = Math.min(cur, Math.max(0, slides.length - cols));
+      render();
+    }
+    function render() {
+      var cols = getCols();
+      var slideW = slides[0] ? slides[0].offsetWidth + GAP : 0;
+      var max = Math.max(0, slides.length - cols);
+      track.style.transform = 'translateX(' + (-cur * slideW) + 'px)';
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+      prevBtn.style.opacity = cur <= 0 ? '0.35' : '1';
+      prevBtn.style.pointerEvents = cur <= 0 ? 'none' : '';
+      nextBtn.style.opacity = cur >= max ? '0.35' : '1';
+      nextBtn.style.pointerEvents = cur >= max ? 'none' : '';
+    }
+    function goTo(n) { var max = Math.max(0, slides.length - getCols()); cur = Math.max(0, Math.min(n, max)); render(); }
+    window.carouselPrev = function() { goTo(cur - 1); };
+    window.carouselNext = function() { goTo(cur + 1); };
+    window.carouselGo   = function(n) { goTo(n); };
+    window.addEventListener('resize', function() { var s = track.style.transition; track.style.transition = 'none'; setup(); setTimeout(function() { track.style.transition = s; }, 20); });
+    setup();
   })();
 
   // Highlight page-nav link based on scroll position
