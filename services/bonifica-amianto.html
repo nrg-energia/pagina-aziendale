@@ -173,8 +173,8 @@
     .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
     /* CERTS (bonifica) */
-    .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .cert-card { background: var(--green-dark); border: none; border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .certs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 320px)); gap: 16px; }
+    .cert-card { background: var(--green-dark); border: none; border-radius: var(--radius-sm); padding: 48px 20px; text-align: center; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .cert-card.cert-visible { opacity: 1; transform: translateY(0); }
     .cert-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 8px; }
     .cert-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
