@@ -125,14 +125,12 @@
     .carousel-cta { text-align: center; }
     @media (max-width: 600px) { .carousel-arrow.prev { left: 8px; } .carousel-arrow.next { right: 8px; } }
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .why-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
-    .why-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--text-mid); }
-    .why-check { width: 20px; height: 20px; min-width: 20px; background: var(--green-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 2px; }
-    .why-visual { background: var(--green-dark); border-radius: 16px; padding: 40px 36px; display: flex; flex-direction: column; gap: 24px; }
-    .why-stat { border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px; }
-    .why-stat:last-child { border: none; padding: 0; }
-    .why-stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
-    .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .why-left { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .why-left.why-visible { opacity: 1; transform: translateY(0); }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+    .why-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 1.15rem; color: var(--text-dark); line-height: 1.5; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .why-list li.why-visible { opacity: 1; transform: translateY(0); }
+    .why-check { width: 22px; height: 22px; min-width: 22px; background: var(--green-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 3px; }
     .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .cert-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; }
     .cert-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 8px; }
@@ -361,23 +359,18 @@
 <section id="why-choose-us" class="bg-off">
   <div class="section-inner">
     <div class="why-grid">
-      <div>
+      <div class="why-left">
         <div class="section-label">Why choose us</div>
         <h2>Twenty years of solar expertise</h2>
         <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;">We are among the first certified installers in Emilia-Romagna. Our experience guarantees reliable and profitable systems over time.</p>
-        <ul class="why-list">
-          <li><span class="why-check">✓</span>Certified installers registered with sector registers</li>
-          <li><span class="why-check">✓</span>Extended warranty on materials and labour</li>
-          <li><span class="why-check">✓</span>Continuous remote monitoring</li>
-          <li><span class="why-check">✓</span>After-sales assistance</li>
-          <li><span class="why-check">✓</span>Over 1,000 systems located mainly in Emilia-Romagna serving families and businesses</li>
-        </ul>
       </div>
-      <div class="why-visual">
-        <div class="why-stat"><div class="why-stat-num">14.7 MW</div><div class="why-stat-label">Our largest project — floating solar plant in Imola</div></div>
-        <div class="why-stat"><div class="why-stat-num">€ 0</div><div class="why-stat-label">Cost of site survey and quote — always free, no commitment</div></div>
-        <div class="why-stat"><div class="why-stat-num">24h</div><div class="why-stat-label">Maximum response time to your quote request</div></div>
-      </div>
+      <ul class="why-list">
+        <li><span class="why-check">✓</span>Certified installers registered with sector registers</li>
+        <li><span class="why-check">✓</span>Extended warranty on materials and labour</li>
+        <li><span class="why-check">✓</span>Continuous remote monitoring</li>
+        <li><span class="why-check">✓</span>After-sales assistance</li>
+        <li><span class="why-check">✓</span>Over 1,000 systems located mainly in Emilia-Romagna serving families and businesses</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -702,6 +695,24 @@ function submitForm() {
 
   resetProgress(true);
   startTimer();
+})();
+
+// Why choose us — left column then staggered checklist animation
+(function() {
+  var left = document.querySelector('.why-left');
+  var list = document.querySelector('.why-list');
+  if (!left || !list) return;
+  var items = list.querySelectorAll('li');
+  var obs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      left.classList.add('why-visible');
+      items.forEach(function(item, i) {
+        setTimeout(function() { item.classList.add('why-visible'); }, 600 + i * 200);
+      });
+      obs.disconnect();
+    }
+  }, { threshold: 0.2 });
+  obs.observe(left);
 })();
 
 // Solar portfolio carousel — multi-card
