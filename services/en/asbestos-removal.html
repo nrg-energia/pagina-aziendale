@@ -76,10 +76,36 @@
     #card-assessment.card-visible, #card-management.card-visible, #card-renewal.card-visible { opacity: 1; transform: translateY(0); }
     .service-card h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
     .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
-    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .step-number { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--green-dark); opacity: 0.1; line-height: 1; margin-bottom: -12px; }
-    .process-step h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
-    .process-step p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+    /* HOW WE WORK — tabbed slideshow */
+    #how-we-work { padding: 0; }
+    .processo-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; box-shadow: 0 20px 60px rgba(0,0,0,0.28); }
+    .processo-left { background-image: linear-gradient(rgba(10,25,15,0.65), rgba(10,25,15,0.65)), url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780584349/iStock-92238282_iz2itk.jpg'); background-size: cover; background-position: center; padding: 3rem; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: stretch; text-align: right; }
+    .processo-left .section-label { color: rgba(255,255,255,0.65); }
+    .processo-left h2 { color: var(--yellow); margin-bottom: 0; }
+    .processo-right { background: var(--green-dark); padding: 3rem 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
+    .processo-content-wrap { width: 65%; margin: 0 auto; }
+    .processo-tabs { display: flex; gap: 3rem; margin-bottom: 0; }
+    .processo-tab { background: none; border: none; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 2.3rem; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.3); padding: 10px 0; transition: color 0.2s; }
+    .processo-tab.active { color: var(--yellow); }
+    .processo-tab:hover:not(.active) { color: rgba(255,255,255,0.6); }
+    .processo-tab-sep { height: 2px; background: rgba(255,255,255,0.12); margin: 0 0 1.75rem; position: relative; overflow: hidden; }
+    .processo-progress { position: absolute; inset: 0; background: var(--yellow); width: 0%; }
+    @keyframes processoProg { from { width: 0% } to { width: 100% } }
+    .processo-progress.animating { animation: processoProg 8s linear forwards; }
+    .processo-slides { position: relative; min-height: 200px; }
+    .processo-step { position: absolute; inset: 0; opacity: 0; transition: opacity 0.15s ease; pointer-events: none; }
+    .processo-step.active { opacity: 1; pointer-events: auto; }
+    .processo-title { font-size: 1.7rem; font-weight: 700; color: var(--yellow); margin-bottom: 12px; }
+    .processo-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.75; }
+    .processo-chevrons { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; align-items: center; padding: 0 1.25rem; pointer-events: none; }
+    .processo-chevron { background: none; border: none; cursor: pointer; font-size: 2.5rem; line-height: 1; color: var(--yellow); padding: 8px; opacity: 0.6; transition: opacity 0.2s, color 0.2s; pointer-events: auto; }
+    .processo-chevron:hover { opacity: 1; color: #ffe580; }
+    .processo-left .section-label, .processo-left h2 { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-left.processo-visible .section-label { opacity: 1; transform: translateY(0); }
+    .processo-left.processo-visible h2 { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+    .processo-content-wrap { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-right.processo-visible .processo-content-wrap { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
+    @media (max-width: 768px) { .processo-grid { grid-template-columns: 1fr; } .processo-left, .processo-right { padding: 56px 6%; } }
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     .why-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
     .why-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--text-mid); }
@@ -226,17 +252,43 @@
   </div>
 </section>
 <section id="how-we-work">
-  <div class="section-inner">
-    <div class="section-label">How we work</div>
-    <h2>The remediation process step by step</h2>
-    <p class="section-desc">A structured process in full compliance with Italian and European asbestos legislation.</p>
-    <div class="process-grid">
-      <div class="process-step"><div class="step-number">01</div><h3>Survey &amp; assessment</h3><p>Inspection and sampling to identify the presence and condition of asbestos-containing materials.</p></div>
-      <div class="process-step"><div class="step-number">02</div><h3>Work plan</h3><p>Plan submitted to the local health authority (ASL) at least 30 days before work begins, as required by law.</p></div>
-      <div class="process-step"><div class="step-number">03</div><h3>Site preparation</h3><p>Area demarcation and containment, decontamination unit installation and PPE distribution to all personnel.</p></div>
-      <div class="process-step"><div class="step-number">04</div><h3>Removal</h3><p>Controlled removal, packaging in approved hazardous-waste bags and full site decontamination.</p></div>
-      <div class="process-step"><div class="step-number">05</div><h3>Disposal</h3><p>Transport by authorised vehicles to a licensed hazardous special-waste disposal facility.</p></div>
-      <div class="process-step"><div class="step-number">06</div><h3>Final documentation</h3><p>Handover of disposal certificates, transport forms and remediation completion certificate.</p></div>
+  <div class="processo-grid">
+    <div class="processo-left">
+      <div class="section-label">How we work</div>
+      <h2>Our process</h2>
+    </div>
+    <div class="processo-right">
+      <div class="processo-content-wrap">
+        <div class="processo-tabs">
+          <button class="processo-tab active" data-step="0">01</button>
+          <button class="processo-tab" data-step="1">02</button>
+          <button class="processo-tab" data-step="2">03</button>
+          <button class="processo-tab" data-step="3">04</button>
+        </div>
+        <div class="processo-tab-sep"><div class="processo-progress" id="processoProgress"></div></div>
+        <div class="processo-slides">
+          <div class="processo-step active">
+            <div class="processo-title">Site survey &amp; consultation</div>
+            <div class="processo-desc">Our team supports the client from the very first site survey, offering comprehensive technical advice based on our extensive experience in the sector.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Regulatory compliance</div>
+            <div class="processo-desc">We follow every phase in full compliance with current regulations, with particular attention to health and safety and environmental requirements.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Documentation &amp; paperwork</div>
+            <div class="processo-desc">We handle the preparation of all required documents and communications to the relevant authorities, including the mandatory ASL notification within the statutory timeframe.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Complete organisational process</div>
+            <div class="processo-desc">We coordinate the entire organisational process — from project planning through to the handover of final documentation — ensuring transparency and compliance at every stage.</div>
+          </div>
+        </div>
+      </div>
+      <div class="processo-chevrons">
+        <button class="processo-chevron" id="processoPrev" aria-label="Previous">&#8249;</button>
+        <button class="processo-chevron" id="processoNext" aria-label="Next">&#8250;</button>
+      </div>
     </div>
   </div>
 </section>
@@ -514,6 +566,50 @@ function submitForm() {
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+})();
+
+// How we work — scroll animation + tabbed slideshow
+(function() {
+  var left = document.querySelector('.processo-left');
+  var right = document.querySelector('.processo-right');
+  if (!left || !right) return;
+  var obs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      left.classList.add('processo-visible');
+      right.classList.add('processo-visible');
+      obs.disconnect();
+    }
+  }, { threshold: 0.2 });
+  obs.observe(left);
+  var tabs = document.querySelectorAll('.processo-tab');
+  var steps = document.querySelectorAll('.processo-step');
+  var progress = document.getElementById('processoProgress');
+  if (!tabs.length || !steps.length || !progress) return;
+  var current = 0;
+  var timer = null;
+  function resetProgress(animate) {
+    progress.classList.remove('animating');
+    void progress.offsetWidth;
+    if (animate) progress.classList.add('animating');
+  }
+  function goTo(n, auto) {
+    steps[current].classList.remove('active');
+    tabs[current].classList.remove('active');
+    current = (n + steps.length) % steps.length;
+    steps[current].classList.add('active');
+    tabs[current].classList.add('active');
+    resetProgress(auto);
+  }
+  tabs.forEach(function(tab, i) {
+    tab.addEventListener('click', function() { clearInterval(timer); goTo(i, false); });
+  });
+  var prevBtn = document.getElementById('processoPrev');
+  var nextBtn = document.getElementById('processoNext');
+  if (prevBtn) prevBtn.addEventListener('click', function() { clearInterval(timer); goTo(current - 1, true); startTimer(); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { clearInterval(timer); goTo(current + 1, true); startTimer(); });
+  function startTimer() { timer = setInterval(function() { goTo(current + 1, true); }, 8000); }
+  resetProgress(true);
+  startTimer();
 })();
 
 // Cert cards — staggered animation

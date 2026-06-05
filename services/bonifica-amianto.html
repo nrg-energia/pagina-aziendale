@@ -109,10 +109,36 @@
     .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
 
     /* PROCESS */
-    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .step-number { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--green-dark); opacity: 0.1; line-height: 1; margin-bottom: -12px; }
-    .process-step h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
-    .process-step p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+    /* COME LAVORIAMO — tabbed slideshow */
+    #come-lavoriamo { padding: 0; }
+    .processo-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; box-shadow: 0 20px 60px rgba(0,0,0,0.28); }
+    .processo-left { background-image: linear-gradient(rgba(10,25,15,0.65), rgba(10,25,15,0.65)), url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780584349/iStock-92238282_iz2itk.jpg'); background-size: cover; background-position: center; padding: 3rem; min-height: 360px; display: flex; flex-direction: column; justify-content: center; align-items: stretch; text-align: right; }
+    .processo-left .section-label { color: rgba(255,255,255,0.65); }
+    .processo-left h2 { color: var(--yellow); margin-bottom: 0; }
+    .processo-right { background: var(--green-dark); padding: 3rem 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
+    .processo-content-wrap { width: 65%; margin: 0 auto; }
+    .processo-tabs { display: flex; gap: 3rem; margin-bottom: 0; }
+    .processo-tab { background: none; border: none; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 2.3rem; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.3); padding: 10px 0; transition: color 0.2s; }
+    .processo-tab.active { color: var(--yellow); }
+    .processo-tab:hover:not(.active) { color: rgba(255,255,255,0.6); }
+    .processo-tab-sep { height: 2px; background: rgba(255,255,255,0.12); margin: 0 0 1.75rem; position: relative; overflow: hidden; }
+    .processo-progress { position: absolute; inset: 0; background: var(--yellow); width: 0%; }
+    @keyframes processoProg { from { width: 0% } to { width: 100% } }
+    .processo-progress.animating { animation: processoProg 8s linear forwards; }
+    .processo-slides { position: relative; min-height: 200px; }
+    .processo-step { position: absolute; inset: 0; opacity: 0; transition: opacity 0.15s ease; pointer-events: none; }
+    .processo-step.active { opacity: 1; pointer-events: auto; }
+    .processo-title { font-size: 1.7rem; font-weight: 700; color: var(--yellow); margin-bottom: 12px; }
+    .processo-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.75; }
+    .processo-chevrons { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; align-items: center; padding: 0 1.25rem; pointer-events: none; }
+    .processo-chevron { background: none; border: none; cursor: pointer; font-size: 2.5rem; line-height: 1; color: var(--yellow); padding: 8px; opacity: 0.6; transition: opacity 0.2s, color 0.2s; pointer-events: auto; }
+    .processo-chevron:hover { opacity: 1; color: #ffe580; }
+    .processo-left .section-label, .processo-left h2 { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-left.processo-visible .section-label { opacity: 1; transform: translateY(0); }
+    .processo-left.processo-visible h2 { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+    .processo-content-wrap { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .processo-right.processo-visible .processo-content-wrap { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
+    @media (max-width: 768px) { .processo-grid { grid-template-columns: 1fr; } .processo-left, .processo-right { padding: 56px 6%; } }
 
     /* WHY US */
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -286,17 +312,43 @@
 </section>
 
 <section id="come-lavoriamo">
-  <div class="section-inner">
-    <div class="section-label">Come lavoriamo</div>
-    <h2>Il processo di bonifica passo per passo</h2>
-    <p class="section-desc">Un processo strutturato nel pieno rispetto della normativa italiana ed europea sull'amianto.</p>
-    <div class="process-grid">
-      <div class="process-step"><div class="step-number">01</div><h3>Sopralluogo e valutazione</h3><p>Ispezione e campionamento per identificare presenza e stato di conservazione dei materiali contenenti amianto.</p></div>
-      <div class="process-step"><div class="step-number">02</div><h3>Piano di lavoro</h3><p>Redazione del piano da presentare all'ASL competente almeno 30 giorni prima dell'inizio dei lavori, come previsto dalla legge.</p></div>
-      <div class="process-step"><div class="step-number">03</div><h3>Preparazione cantiere</h3><p>Delimitazione e confinamento dell'area, installazione del sistema di decontaminazione e distribuzione DPI.</p></div>
-      <div class="process-step"><div class="step-number">04</div><h3>Rimozione</h3><p>Rimozione controllata, imballaggio in big-bag omologati per rifiuti pericolosi e decontaminazione dell'area.</p></div>
-      <div class="process-step"><div class="step-number">05</div><h3>Smaltimento</h3><p>Trasporto con veicoli autorizzati e conferimento in discarica autorizzata per rifiuti speciali pericolosi.</p></div>
-      <div class="process-step"><div class="step-number">06</div><h3>Documentazione finale</h3><p>Consegna di certificati, formulari e attestazione di avvenuta bonifica per la tua tutela legale.</p></div>
+  <div class="processo-grid">
+    <div class="processo-left">
+      <div class="section-label">Come lavoriamo</div>
+      <h2>Il nostro processo</h2>
+    </div>
+    <div class="processo-right">
+      <div class="processo-content-wrap">
+        <div class="processo-tabs">
+          <button class="processo-tab active" data-step="0">01</button>
+          <button class="processo-tab" data-step="1">02</button>
+          <button class="processo-tab" data-step="2">03</button>
+          <button class="processo-tab" data-step="3">04</button>
+        </div>
+        <div class="processo-tab-sep"><div class="processo-progress" id="processoProgress"></div></div>
+        <div class="processo-slides">
+          <div class="processo-step active">
+            <div class="processo-title">Sopralluogo e consulenza</div>
+            <div class="processo-desc">La nostra squadra affianca il cliente fin dalle prime fasi del sopralluogo, offrendo una consulenza tecnica completa grazie alla consolidata esperienza nel settore.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Gestione normativa</div>
+            <div class="processo-desc">Seguiamo ogni fase nel pieno rispetto della normativa vigente, con particolare attenzione alle disposizioni in materia di sicurezza sul lavoro e ambientale.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Documentazione e pratiche</div>
+            <div class="processo-desc">Ci occupiamo della redazione di tutti i documenti necessari e della gestione delle comunicazioni agli enti competenti, inclusa la notifica all'ASL nei termini di legge.</div>
+          </div>
+          <div class="processo-step">
+            <div class="processo-title">Processo organizzativo completo</div>
+            <div class="processo-desc">Coordiniamo l'intero processo organizzativo — dalla pianificazione dei lavori alla consegna della documentazione finale — garantendo trasparenza e conformità in ogni fase.</div>
+          </div>
+        </div>
+      </div>
+      <div class="processo-chevrons">
+        <button class="processo-chevron" id="processoPrev" aria-label="Precedente">&#8249;</button>
+        <button class="processo-chevron" id="processoNext" aria-label="Successivo">&#8250;</button>
+      </div>
     </div>
   </div>
 </section>
@@ -564,6 +616,50 @@ function submitForm() {
   document.getElementById('successMsg').textContent   = t.successMsg;
   setTimeout(closeModal, 3000);
 }
+  // Come lavoriamo — scroll animation + tabbed slideshow
+  (function() {
+    var left = document.querySelector('.processo-left');
+    var right = document.querySelector('.processo-right');
+    if (!left || !right) return;
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        left.classList.add('processo-visible');
+        right.classList.add('processo-visible');
+        obs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    obs.observe(left);
+    var tabs = document.querySelectorAll('.processo-tab');
+    var steps = document.querySelectorAll('.processo-step');
+    var progress = document.getElementById('processoProgress');
+    if (!tabs.length || !steps.length || !progress) return;
+    var current = 0;
+    var timer = null;
+    function resetProgress(animate) {
+      progress.classList.remove('animating');
+      void progress.offsetWidth;
+      if (animate) progress.classList.add('animating');
+    }
+    function goTo(n, auto) {
+      steps[current].classList.remove('active');
+      tabs[current].classList.remove('active');
+      current = (n + steps.length) % steps.length;
+      steps[current].classList.add('active');
+      tabs[current].classList.add('active');
+      resetProgress(auto);
+    }
+    tabs.forEach(function(tab, i) {
+      tab.addEventListener('click', function() { clearInterval(timer); goTo(i, false); });
+    });
+    var prevBtn = document.getElementById('processoPrev');
+    var nextBtn = document.getElementById('processoNext');
+    if (prevBtn) prevBtn.addEventListener('click', function() { clearInterval(timer); goTo(current - 1, true); startTimer(); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { clearInterval(timer); goTo(current + 1, true); startTimer(); });
+    function startTimer() { timer = setInterval(function() { goTo(current + 1, true); }, 8000); }
+    resetProgress(true);
+    startTimer();
+  })();
+
   // Service cards — staggered animation
   (function() {
     var grid = document.querySelector('#cosa-offriamo .services-grid');
