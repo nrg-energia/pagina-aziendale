@@ -99,7 +99,10 @@
     .bg-off { background: var(--off-white); }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .service-card { background: var(--white); border-radius: var(--radius); padding: 28px 24px; border: 1px solid var(--warm-gray); transition: all 0.25s; }
-    .service-card:hover { transform: translateY(-4px); border-color: var(--green-light); box-shadow: 0 12px 32px rgba(26,77,46,0.08); }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,77,46,0.08); }
+    #card-industriali:hover { box-shadow: 0 12px 32px rgba(26,77,46,0.08), inset 0 0 0 2px #2d6e47; }
+    #card-civili:hover      { box-shadow: 0 12px 32px rgba(26,77,46,0.08), inset 0 0 0 2px #1A73E8; }
+    #card-fotovoltaica:hover { box-shadow: 0 12px 32px rgba(26,77,46,0.08), inset 0 0 0 2px #F5C518; }
     .service-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--green-pale); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
     .service-card h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
     .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
@@ -272,9 +275,9 @@
     <h2>Coperture per ogni esigenza</h2>
     <p class="section-desc">Progettiamo coperture durevoli che si integrano perfettamente con i sistemi fotovoltaici, massimizzando resa e protezione.</p>
     <div class="services-grid">
-      <div class="service-card"><div class="service-icon">🏭</div><h3>Coperture industriali</h3><p>Capannoni e strutture produttive. Lamiere coibentate, pannelli sandwich e sistemi di impermeabilizzazione ad alta durabilità.</p></div>
-      <div class="service-card"><div class="service-icon">🏠</div><h3>Coperture civili</h3><p>Tetti per abitazioni private in coppi, tegole o lamiera. Rifacimenti completi o riparazioni parziali con garanzia sull'impermeabilità.</p></div>
-      <div class="service-card"><div class="service-icon">☀️</div><h3>Integrazione fotovoltaica</h3><p>Progettazione della copertura in sinergia con l'impianto fotovoltaico. Strutture ottimizzate per inclinazione e orientamento.</p></div>
+      <div class="service-card" id="card-industriali"><div style="width:40px;height:40px;border-radius:50%;background-color:#2d6e47;margin-bottom:16px;flex-shrink:0;"></div><h3>Coperture industriali</h3><p>Capannoni e strutture produttive. Lamiere coibentate, pannelli sandwich e sistemi di impermeabilizzazione ad alta durabilità.</p></div>
+      <div class="service-card" id="card-civili"><div style="width:40px;height:40px;border-radius:50%;background-color:#1A73E8;margin-bottom:16px;flex-shrink:0;"></div><h3>Coperture civili</h3><p>Tetti per abitazioni private in coppi, tegole o lamiera. Rifacimenti completi o riparazioni parziali con garanzia sull'impermeabilità.</p></div>
+      <div class="service-card" id="card-fotovoltaica"><div style="width:40px;height:40px;border-radius:50%;background-color:#F5C518;margin-bottom:16px;flex-shrink:0;"></div><h3>Integrazione fotovoltaica</h3><p>Progettazione della copertura in sinergia con l'impianto fotovoltaico. Strutture ottimizzate per inclinazione e orientamento.</p></div>
     </div>
   </div>
 </section>
