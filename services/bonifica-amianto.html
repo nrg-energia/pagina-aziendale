@@ -126,8 +126,9 @@
     .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
     /* CERTS (bonifica) */
-    .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .cert-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; }
+    .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .cert-card { background: var(--green-dark); border: none; border-radius: var(--radius-sm); padding: 28px 20px; text-align: center; opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .cert-card.cert-visible { opacity: 1; transform: translateY(0); }
     .cert-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 8px; }
     .cert-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
     .cert-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
@@ -268,7 +269,7 @@
 </section>
 <div class="page-nav">
   <div class="page-nav-inner">
-    <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo">Cosa offriamo</a><div class="page-nav-divider"></div><a href="#le-nostre-certificazioni" class="page-nav-link" data-target="le-nostre-certificazioni">Le nostre certificazioni</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo">Come lavoriamo</a><div class="page-nav-divider"></div><a href="#perche-sceglierci" class="page-nav-link" data-target="perche-sceglierci">Perché sceglierci</a>
+    <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo">Cosa offriamo</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo">Come lavoriamo</a><div class="page-nav-divider"></div><a href="#le-nostre-certificazioni" class="page-nav-link" data-target="le-nostre-certificazioni">Le nostre certificazioni</a>
   </div>
 </div>
 <section id="cosa-offriamo" class="bg-off">
@@ -283,25 +284,6 @@
     </div>
   </div>
 </section>
-
-<section id="le-nostre-certificazioni" style="background:var(--green-dark); padding:88px 5%;">
-  <div class="section-inner">
-    <div class="section-label" style="color:var(--yellow);">Le nostre certificazioni</div>
-    <h2 style="color:var(--white); margin-bottom:10px;">Operatori autorizzati a norma di legge</h2>
-    <p style="font-size:16px;color:rgba(255,255,255,0.65);font-weight:300;max-width:520px;margin-bottom:40px;">Le nostre iscrizioni garantiscono che ogni intervento sia eseguito nel pieno rispetto della normativa vigente.</p>
-    <div class="certs-grid">
-      <div class="cert-card"><div class="cert-num">Cat. 10</div><div class="cert-title">Albo Gestori Ambientali</div><div class="cert-desc">Bonifica di beni contenenti amianto — iscrizione obbligatoria per la mansione.</div></div>
-      <div class="cert-card"><div class="cert-num">Cat. 5</div><div class="cert-title">Albo Gestori Ambientali</div><div class="cert-desc">Raccolta e trasporto di rifiuti pericolosi — autorizzazione ministeriale</div></div>
-      <div class="cert-card"><div class="cert-num">DPI III</div><div class="cert-title">Dispositivi protezione</div><div class="cert-desc">Tutto il personale opera con DPI di terza categoria per la massima sicurezza</div></div>
-    </div>
-  </div>
-</section>
-
-<div class="warning-banner">
-  <div class="warning-inner">
-    ⚠️ <strong>Importante:</strong> La bonifica dell'amianto è soggetta a normativa specifica. Affidarsi a operatori non iscritti all'Albo Gestori Ambientali è illegale e pericoloso. NRG Energia opera in piena conformità di legge.
-  </div>
-</div>
 
 <section id="come-lavoriamo">
   <div class="section-inner">
@@ -319,30 +301,25 @@
   </div>
 </section>
 
-<section id="perche-sceglierci" class="bg-off">
+<section id="le-nostre-certificazioni" class="bg-off">
   <div class="section-inner">
-    <div class="why-grid">
-      <div>
-        <div class="section-label">Perché sceglierci</div>
-        <h2>Esperienza e legalità garantite</h2>
-        <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;">Affidarsi a soggetti non iscritti all'Albo espone a rischi sanitari, legali e a sanzioni molto pesanti. La nostra iscrizione è la tua garanzia.</p>
-        <ul class="why-list">
-          <li><span class="why-check">✓</span>Iscritti all'Albo Gestori Ambientali Cat. 10 e Cat. 5</li>
-          <li><span class="why-check">✓</span>Personale formato secondo il D.Lgs. 81/2008</li>
-          <li><span class="why-check">✓</span>Gestione completa di pratiche con ASL e ARPA</li>
-          <li><span class="why-check">✓</span>Possibilità di installare nuova copertura dopo bonifica</li>
-          <li><span class="why-check">✓</span>Accesso agli incentivi per la sostituzione dell'amianto</li>
-          <li><span class="why-check">✓</span>Documentazione completa per la tutela del committente</li>
-        </ul>
-      </div>
-      <div class="why-visual">
-        <div class="why-stat"><div class="why-stat-num">Albo</div><div class="why-stat-label">Iscrizione obbligatoria Albo Gestori Ambientali Cat. 10 e Cat. 5</div></div>
-        <div class="why-stat"><div class="why-stat-num">30 gg</div><div class="why-stat-label">Preavviso obbligatorio all'ASL prima dei lavori — lo gestiamo noi per te</div></div>
-        <div class="why-stat"><div class="why-stat-num">100%</div><div class="why-stat-label">Conformità normativa garantita su ogni intervento realizzato</div></div>
-      </div>
+    <div class="section-label">Le nostre certificazioni</div>
+    <h2>Operatori autorizzati a norma di legge</h2>
+    <p style="font-size:16px;color:var(--text-mid);line-height:1.7;font-weight:300;max-width:520px;margin-bottom:40px;">Le nostre iscrizioni garantiscono che ogni intervento sia eseguito nel pieno rispetto della normativa vigente.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-num">Cat. 10</div><div class="cert-title">Albo Gestori Ambientali</div><div class="cert-desc">Bonifica di beni contenenti amianto — iscrizione obbligatoria per la mansione.</div></div>
+      <div class="cert-card"><div class="cert-num">Cat. 5</div><div class="cert-title">Albo Gestori Ambientali</div><div class="cert-desc">Raccolta e trasporto di rifiuti pericolosi — autorizzazione ministeriale</div></div>
+      <div class="cert-card"><div class="cert-num">DPI III</div><div class="cert-title">Dispositivi protezione</div><div class="cert-desc">Tutto il personale opera con DPI di terza categoria per la massima sicurezza</div></div>
     </div>
   </div>
 </section>
+
+<div class="warning-banner">
+  <div class="warning-inner">
+    ⚠️ <strong>Importante:</strong> La bonifica dell'amianto è soggetta a normativa specifica. Affidarsi a operatori non iscritti all'Albo Gestori Ambientali è illegale e pericoloso. NRG Energia opera in piena conformità di legge.
+  </div>
+</div>
+
 <section class="cta-banner">
   <div class="section-inner" style="text-align:center;">
     <div class="section-label" style="color:rgba(255,255,255,0.45);display:flex;justify-content:center;">Hai amianto da bonificare?</div>
@@ -596,6 +573,22 @@ function submitForm() {
       if (entries[0].isIntersecting) {
         cards.forEach(function(card, i) {
           setTimeout(function() { card.classList.add('card-visible'); }, i * 200);
+        });
+        obs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    obs.observe(grid);
+  })();
+
+  // Cert cards — staggered animation
+  (function() {
+    var grid = document.querySelector('#le-nostre-certificazioni .certs-grid');
+    if (!grid) return;
+    var cards = grid.querySelectorAll('.cert-card');
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        cards.forEach(function(card, i) {
+          setTimeout(function() { card.classList.add('cert-visible'); }, i * 200);
         });
         obs.disconnect();
       }
