@@ -61,12 +61,48 @@
     .project-tag { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 50px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; }
     .project-tag.solar   { background: var(--yellow); color: var(--text-dark); }
     .project-tag.roofing { background: var(--blue); color: var(--white); }
-    .project-tag.asbestos { background: #a86325; color: var(--white); }
+    .project-tag.asbestos { background: var(--green-light); color: var(--white); }
     .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: var(--white); line-height: 1.3; margin-bottom: 6px; }
     .project-meta { font-size: 12px; color: rgba(255,255,255,0.6); }
 
     .no-results { text-align: center; padding: 64px 24px; color: var(--text-light); font-size: 15px; display: none; }
     .no-results.show { display: block; }
+
+    /* MODAL */
+    .pmodal-overlay { display:none; position:fixed; inset:0; background:rgba(10,25,15,0.72); z-index:9999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+    .pmodal-overlay.open { display:flex; }
+    .pmodal { background:var(--white); border-radius:var(--radius); max-width:560px; width:100%; max-height:90vh; overflow-y:auto; position:relative; box-shadow:0 24px 64px rgba(0,0,0,0.32); animation:pmodal-in 0.22s ease; }
+    @keyframes pmodal-in { from{opacity:0;transform:translateY(14px) scale(0.98)} to{opacity:1;transform:translateY(0) scale(1)} }
+    .pmodal.closing { animation:pmodal-out 0.18s ease forwards; }
+    @keyframes pmodal-out { to{opacity:0;transform:translateY(14px) scale(0.98)} }
+    .pmodal-img { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius) var(--radius) 0 0; display:block; }
+    .pmodal-body { padding:24px 28px 36px; position:relative; }
+    .pmodal-tag { display:inline-block; padding:4px 12px; font-size:11px; font-weight:700; border-radius:50px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; width:fit-content; }
+    .pmodal-tag.solar   { background:var(--yellow); color:var(--text-dark); }
+    .pmodal-tag.roofing { background:var(--blue);   color:var(--white); }
+    .pmodal-tag.asbestos{ background:var(--green-light); color:var(--white); }
+    .pmodal-title { font-family:'Syne',sans-serif; font-weight:700; font-size:21px; color:var(--text-dark); line-height:1.25; margin:0 0 6px; }
+    .pmodal-location { font-size:13px; color:var(--text-light); margin-bottom:16px; }
+    .pmodal-desc { font-size:15px; color:var(--text-mid); line-height:1.7; margin:0; }
+    .pmodal-img-wrap { position:relative; }
+    .pmodal-logo { position:absolute; bottom:12px; right:12px; opacity:0.75; line-height:0; }
+    .pmodal-logo .nav-logo-dots { width:26px; gap:3px; }
+    .pmodal-logo .dot { width:7px; height:7px; }
+    .pmodal-close { position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.92); border:none; border-radius:50%; width:32px; height:32px; font-size:18px; line-height:1; cursor:pointer; color:var(--text-dark); display:flex; align-items:center; justify-content:center; z-index:1; box-shadow:0 2px 8px rgba(0,0,0,0.14); transition:background 0.15s; }
+    .pmodal-close:hover { background:var(--off-white); }
+    .project-card { cursor:pointer; }
+    .pmodal-prev,.pmodal-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.82); border:none; border-radius:50%; width:36px; height:36px; font-size:22px; cursor:pointer; color:var(--text-dark); display:none; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.18); transition:background 0.15s; z-index:2; padding:0; line-height:1; }
+    .pmodal-prev { left:10px; }
+    .pmodal-next { right:10px; }
+    .pmodal-prev:hover,.pmodal-next:hover { background:rgba(255,255,255,1); }
+    .pmodal-img-wrap.has-carousel .pmodal-prev,
+    .pmodal-img-wrap.has-carousel .pmodal-next { display:flex; }
+    .pmodal-carousel-dots { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:none; gap:6px; z-index:2; }
+    .pmodal-img-wrap.has-carousel .pmodal-carousel-dots { display:flex; }
+    .pmodal-cdot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.5); border:none; cursor:pointer; padding:0; transition:background 0.15s; }
+    .pmodal-cdot.active { background:#fff; }
+    .pmodal-slide-badge { position:absolute; top:12px; left:12px; display:none; padding:4px 12px; font-size:11px; font-weight:700; font-family:'DM Sans',sans-serif; border-radius:50px; text-transform:uppercase; letter-spacing:0.5px; background:rgba(15,15,15,0.62); color:#fff; z-index:3; }
+    @media(max-width:600px){ .pmodal-overlay{padding:10px;align-items:flex-end;} .pmodal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0;} .pmodal-img{aspect-ratio:4/3;} }
 
     /* FOOTER */
     footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
@@ -151,39 +187,184 @@
 
     <div class="project-grid" id="projectGrid">
 
-      <div class="project-card" data-category="fotovoltaico">
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg" data-badge="solar" data-desc="High-efficiency residential solar installation. A bespoke solution for clean energy production and long-term energy cost reduction.">
         <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg')"></div>
         <div class="project-overlay">
           <div class="project-tag solar">Solar</div>
           <div class="project-title">Residential solar installation</div>
-          <div class="project-meta">Brisighella · 2025</div>
+          <div class="project-meta">Brisighella</div>
         </div>
       </div>
 
-      <div class="project-card" data-category="fotovoltaico">
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg" data-badge="solar" data-desc="Residential solar installation designed to maximise seasonal energy yield and reduce grid consumption.">
         <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg')"></div>
         <div class="project-overlay">
           <div class="project-tag solar">Solar</div>
           <div class="project-title">Residential solar installation</div>
-          <div class="project-meta">Belluno · 2024</div>
+          <div class="project-meta">Belluno</div>
         </div>
       </div>
 
-      <div class="project-card" data-category="fotovoltaico">
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg" data-badge="solar" data-desc="Battery storage system paired with an existing solar installation. Optimises self-consumption and ensures energy independence even overnight and on cloudy days.">
         <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg')"></div>
         <div class="project-overlay">
           <div class="project-tag solar">Solar</div>
           <div class="project-title">Battery storage system</div>
-          <div class="project-meta">Ferrara · 2024</div>
+          <div class="project-meta">Ferrara</div>
         </div>
       </div>
 
-      <div class="project-card" data-category="amianto">
-        <div class="project-card-bg" style="background: linear-gradient(135deg, #3d2d1a 0%, #a86325 100%)"></div>
+
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915275/2_FOTO_Impianti_fotovoltaici_residenziali_integrati_su_pannello_sandwich_finto_coppo_a_Mordano._bem5kz.jpg" data-badge="solar" data-desc="Residential solar installation integrated on sandwich panel with finto coppo finish in Mordano, combining high energy efficiency with seamless integration into the existing architecture.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915275/2_FOTO_Impianti_fotovoltaici_residenziali_integrati_su_pannello_sandwich_finto_coppo_a_Mordano._bem5kz.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Residential solar installation</div>
+          <div class="project-meta">Mordano</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915268/1_FOTO_Impianto_fotovoltaico_residenziale_integrato_realizzato_a_Dozza._uqfbcl.jpg" data-badge="solar" data-desc="Residential solar installation integrated on roof tiles in Dozza, designed to blend naturally with the existing roofscape.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915268/1_FOTO_Impianto_fotovoltaico_residenziale_integrato_realizzato_a_Dozza._uqfbcl.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Residential solar installation</div>
+          <div class="project-meta">Dozza</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="amianto" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780916111/Untitled_design_-_2026-06-08T125438.963_hhmpak.png" data-badge="asbestos" data-desc="Project on an industrial building in the province of Ravenna involving full asbestos removal and installation of a new steel sheet roof with ecological mineral wool.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780916111/Untitled_design_-_2026-06-08T125438.963_hhmpak.png')"></div>
         <div class="project-overlay">
           <div class="project-tag asbestos">Asbestos removal</div>
-          <div class="project-title">Full complex asbestos removal</div>
-          <div class="project-meta">Ferrara · 2023</div>
+          <div class="project-title">Asbestos removal and roof replacement</div>
+          <div class="project-meta">Ravenna</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780917023/IMG_9567_fvungk.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780917023/IMG_9567_fvungk.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780920646/IMG_9324_alx5ux.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780920644/IMG_9568_xokjqr.jpg"]' data-badge="roofing" data-desc="Project on an industrial building in the province of Ravenna: installation of curved metal roofing with profiled sheets designed to perfectly follow the specific geometry of the project.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780917023/IMG_9567_fvungk.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Roofing</div>
+          <div class="project-title">Industrial roofing</div>
+          <div class="project-meta">Massa Lombarda</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780916982/Imola_centro_copertura_con_pannello_ad_alta_integrazione_architettonica_ambientale_sbtcvf.jpg" data-badge="roofing" data-desc="Residential roofing intervention in Imola with a panel offering high architectural and environmental integration, designed to harmonise with the existing urban context while guaranteeing excellent technical performance and durability.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780916982/Imola_centro_copertura_con_pannello_ad_alta_integrazione_architettonica_ambientale_sbtcvf.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Roofing</div>
+          <div class="project-title">Domestic roofing</div>
+          <div class="project-meta">Imola</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923603/FINE_LAVORI_kbiqng.jpg" data-badge="roofing" data-desc="Private residence in Imola: new sandwich panel roof in testa di moro colour, chosen for its natural integration with the surrounding landscape. The project includes an integrated solar panel system to maximise energy efficiency without compromising aesthetics.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923603/FINE_LAVORI_kbiqng.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Roofing</div>
+          <div class="project-title">Domestic roofing integrated with solar</div>
+          <div class="project-meta">Imola</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923714/IMG_1792_dbr4wy.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923714/IMG_1792_dbr4wy.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923786/IMG_1782_ifaaoq.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923791/IMG_2070_vyhpds.jpg"]' data-badge="roofing" data-desc="Intervention in the historic centre of Bologna on a roof section using a panel with high architectural and environmental integration, respecting the surrounding historic context.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923714/IMG_1792_dbr4wy.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Roofing</div>
+          <div class="project-title">Domestic roofing</div>
+          <div class="project-meta">Bologna</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923899/5dopo_yqaa0i.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923899/5dopo_yqaa0i.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923903/1prima_clww92.jpg"]' data-slide-badges='["After","Before"]' data-badge="roofing" data-desc="Project on a rural building in the province of Ferrara: full replacement of a deteriorated old roof with sandwich panel, ensuring new thermal performance, waterproofing and long-term durability.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780923899/5dopo_yqaa0i.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Roofing</div>
+          <div class="project-title">Industrial roofing</div>
+          <div class="project-meta">Argenta (Fe)</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924391/071_xbpqtd.jpg" data-badge="solar" data-desc="20kWp solar panel system on the curved roof of a mechanical workshop.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924391/071_xbpqtd.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Industrial solar installation</div>
+          <div class="project-meta">Imola</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924495/FERRARA_wnsejx.jpg" data-badge="solar" data-desc="Photovoltaic system on flat industrial roof with ballasted mounting system.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924495/FERRARA_wnsejx.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Industrial solar installation</div>
+          <div class="project-meta">Ferrara</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924612/WhatsApp_Image_2023-03-29_at_16.09.08_q7lbil.jpg" data-badge="solar" data-desc="Battery storage system providing a high level of domestic energy independence in Imola.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924612/WhatsApp_Image_2023-03-29_at_16.09.08_q7lbil.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Solar</div>
+          <div class="project-title">Battery storage system</div>
+          <div class="project-meta">Imola</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="amianto" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924899/1_work_in_progress_oxxs50.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924899/1_work_in_progress_oxxs50.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924953/2_DOPO_wm5nce.jpg"]' data-slide-badges='["Work in progress","After"]' data-badge="asbestos" data-desc="Project on an industrial building in Ozzano Emilia, Bologna, involving the disposal of the entire asbestos roof (4,000 sqm) and installation of a new steel sheet roof with ecological mineral wool.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780924899/1_work_in_progress_oxxs50.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag asbestos">Asbestos removal</div>
+          <div class="project-title">Asbestos removal and roof replacement</div>
+          <div class="project-meta">Ozzano dell&apos;Emilia</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="amianto" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925072/work_in_progress7_zve7ti.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925072/work_in_progress7_zve7ti.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925163/work_in_progress3_fayloi.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925178/dopo6_sdxjyq.jpg"]' data-slide-badges='["Work in progress","Before","After"]' data-badge="asbestos" data-desc="Project on an industrial building in Imola involving the disposal of the entire asbestos roof (1,000 sqm) and installation of a new curved sandwich panel roof.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925072/work_in_progress7_zve7ti.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag asbestos">Asbestos removal</div>
+          <div class="project-title">Asbestos removal and roof replacement</div>
+          <div class="project-meta">Imola</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="amianto" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925309/4_IN_CORSO_xopaan.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925309/4_IN_CORSO_xopaan.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925377/1_PRIMA_vaw42p.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925400/7_DOPO_vfvjv1.jpg"]' data-slide-badges='["Work in progress","Before","After"]' data-badge="asbestos" data-desc="Project on a rural outbuilding adjacent to a private residence in Mordano, Bologna, involving the disposal of the entire asbestos roof (200 sqm) and installation of a new steel sheet roof.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780925309/4_IN_CORSO_xopaan.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag asbestos">Asbestos removal</div>
+          <div class="project-title">Asbestos removal and roof replacement</div>
+          <div class="project-meta">Mordano</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="amianto" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780928905/3prima_oxolqz.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780928905/3prima_oxolqz.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780928909/4dopo_f6yskd.jpg"]' data-slide-badges='["Before","After"]' data-badge="asbestos" data-desc="Livestock facility renovation for animal welfare improvement.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780928905/3prima_oxolqz.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag asbestos">Asbestos removal</div>
+          <div class="project-title">Asbestos removal and roof replacement</div>
+          <div class="project-meta">Marradi (FI)</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780929157/IMG-20260130-WA0003_vkxytj.jpg" data-badge="roofing" data-desc="Private residence in Bologna: full removal of old roof tiles and installation of new insulated antique-finish finto coppo panel. Project includes installation of a new safety lifeline (Linea Vita).">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780929157/IMG-20260130-WA0003_vkxytj.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Roofing</div>
+          <div class="project-title">Domestic roofing</div>
+          <div class="project-meta">Bologna</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780930091/37_vumpct.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780930091/37_vumpct.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780930231/1IN_CORSO_y1e2cf.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780930261/26IN_CORSO_fpzdw8.jpg"]' data-slide-badges='["After","Before","In progress"]' data-badge="roofing" data-desc="Project on a private residence in Imola: partial replacement of roof tiles with sheet metal and ecological mineral wool insulation, with integrated solar panel system.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780930091/37_vumpct.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Roofing</div>
+          <div class="project-title">Domestic roofing integrated with solar</div>
+          <div class="project-meta">Imola</div>
         </div>
       </div>
 
@@ -258,7 +439,34 @@
   </a>
 </div>
 
+<div id="portfolio-modal" class="pmodal-overlay" role="dialog" aria-modal="true">
+  <div class="pmodal">
+    <button class="pmodal-close" aria-label="Close">&#x2715;</button>
+    <div class="pmodal-img-wrap">
+      <img class="pmodal-img" src="" alt="">
+      <div class="pmodal-slide-badge"></div>
+      <button class="pmodal-prev" aria-label="Previous">&#8249;</button>
+      <button class="pmodal-next" aria-label="Next">&#8250;</button>
+      <div class="pmodal-carousel-dots"></div>
+      <div class="pmodal-logo">
+        <div class="nav-logo-dots">
+          <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+          <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+          <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+        </div>
+      </div>
+    </div>
+    <div class="pmodal-body">
+      <div class="pmodal-tag"></div>
+      <h3 class="pmodal-title"></h3>
+      <div class="pmodal-location"></div>
+      <p class="pmodal-desc"></p>
+    </div>
+  </div>
+</div>
+
 <script>
+  // Filter
   document.querySelectorAll('.filter-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
@@ -277,6 +485,95 @@
       document.getElementById('noResults').classList.toggle('show', visible === 0);
     });
   });
+
+  // Modal
+  (function(){
+    var overlay     = document.getElementById('portfolio-modal');
+    var modal       = overlay.querySelector('.pmodal');
+    var imgEl       = overlay.querySelector('.pmodal-img');
+    var imgWrap     = overlay.querySelector('.pmodal-img-wrap');
+    var dotsWrap    = overlay.querySelector('.pmodal-carousel-dots');
+    var prevBtn     = overlay.querySelector('.pmodal-prev');
+    var nextBtn     = overlay.querySelector('.pmodal-next');
+    var tagEl       = overlay.querySelector('.pmodal-tag');
+    var titleEl     = overlay.querySelector('.pmodal-title');
+    var locEl       = overlay.querySelector('.pmodal-location');
+    var descEl      = overlay.querySelector('.pmodal-desc');
+    var closeBtn    = overlay.querySelector('.pmodal-close');
+    var slideBadgeEl= overlay.querySelector('.pmodal-slide-badge');
+    var slides      = [];
+    var slideBadges = [];
+    var current     = 0;
+
+    function updateSlideBadge(i) {
+      var label = slideBadges[i];
+      if (label) { slideBadgeEl.textContent = label; slideBadgeEl.style.display = 'inline-block'; }
+      else        { slideBadgeEl.style.display = 'none'; }
+    }
+
+    function goTo(i) {
+      current = (i + slides.length) % slides.length;
+      imgEl.src = slides[current];
+      dotsWrap.querySelectorAll('.pmodal-cdot').forEach(function(d, idx){ d.classList.toggle('active', idx === current); });
+      updateSlideBadge(current);
+    }
+
+    function openModal(card) {
+      var tagNode = card.querySelector('.project-tag');
+      tagEl.className    = 'pmodal-tag ' + (card.dataset.badge || 'solar');
+      tagEl.textContent  = tagNode ? tagNode.textContent : '';
+      titleEl.textContent= (card.querySelector('.project-title') || {textContent:''}).textContent;
+      locEl.textContent  = (card.querySelector('.project-meta')  || {textContent:''}).textContent.replace(/\s*·\s*\d{4}/,'');
+      descEl.textContent = card.dataset.desc || '';
+      slideBadges = card.dataset.slideBadges ? JSON.parse(card.dataset.slideBadges) : [];
+
+      if (card.dataset.images) {
+        slides = JSON.parse(card.dataset.images);
+        imgWrap.classList.add('has-carousel');
+        dotsWrap.innerHTML = '';
+        slides.forEach(function(_, i){
+          var d = document.createElement('button');
+          d.className = 'pmodal-cdot' + (i === 0 ? ' active' : '');
+          d.addEventListener('click', function(e){ e.stopPropagation(); goTo(i); });
+          dotsWrap.appendChild(d);
+        });
+        current = 0;
+        imgEl.src = slides[0];
+        updateSlideBadge(0);
+      } else {
+        slides = [];
+        imgWrap.classList.remove('has-carousel');
+        dotsWrap.innerHTML = '';
+        slideBadgeEl.style.display = 'none';
+        imgEl.src = card.dataset.img || '';
+      }
+      imgEl.alt = tagEl.textContent;
+      modal.classList.remove('closing');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.add('closing');
+      setTimeout(function(){ overlay.classList.remove('open'); document.body.style.overflow=''; }, 180);
+    }
+
+    prevBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(current - 1); });
+    nextBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(current + 1); });
+
+    document.querySelectorAll('.project-card').forEach(function(card){
+      card.addEventListener('click', function(){ openModal(card); });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+    document.addEventListener('keydown', function(e){
+      if (!overlay.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft'  && slides.length) goTo(current - 1);
+      if (e.key === 'ArrowRight' && slides.length) goTo(current + 1);
+    });
+  })();
 </script>
 </body>
 </html>
