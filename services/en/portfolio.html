@@ -36,7 +36,8 @@
     .lang-toggle:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); }
 
     /* HERO */
-    .page-hero { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); padding: 80px 5% 72px; }
+    @keyframes gradientWave { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .page-hero { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 8s ease infinite; padding: 80px 5% 72px; }
     .page-hero-inner { max-width: 1100px; margin: 0 auto; }
     .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--yellow); margin-bottom: 12px; }
     .page-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; color: var(--white); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 16px; }
@@ -56,7 +57,8 @@
     .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .project-card { border-radius: var(--radius); overflow: hidden; position: relative; min-height: 280px; transition: transform 0.25s, box-shadow 0.25s; }
     .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
-    .project-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .project-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.4s ease; }
+    .project-card:hover .project-card-bg { transform: scale(1.08); }
     .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,25,18,0.9) 0%, rgba(10,25,18,0.15) 55%, transparent 100%); padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; }
     .project-tag { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 50px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; }
     .project-tag.solar   { background: var(--yellow); color: var(--text-dark); }
@@ -171,7 +173,7 @@
     <div class="breadcrumb"><a href="../../index.html">Home</a> › Portfolio</div>
     <div class="section-label">Our work</div>
     <h1>Portfolio</h1>
-    <p>Our completed projects</p>
+    <p>Our selected projects</p>
   </div>
 </div>
 
