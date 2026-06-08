@@ -61,7 +61,7 @@
     .project-tag { display: inline-block; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 50px; margin-bottom: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; }
     .project-tag.solar   { background: var(--yellow); color: var(--text-dark); }
     .project-tag.roofing { background: var(--blue); color: var(--white); }
-    .project-tag.asbestos { background: #a86325; color: var(--white); }
+    .project-tag.asbestos { background: var(--green-light); color: var(--white); }
     .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: var(--white); line-height: 1.3; margin-bottom: 6px; }
     .project-meta { font-size: 12px; color: rgba(255,255,255,0.6); }
 
@@ -151,41 +151,69 @@
 
     <div class="project-grid" id="projectGrid">
 
-      <div class="project-card" data-category="fotovoltaico">
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915275/2_FOTO_Impianti_fotovoltaici_residenziali_integrati_su_pannello_sandwich_finto_coppo_a_Mordano._bem5kz.jpg" data-badge="solar" data-desc="Impianto fotovoltaico residenziale integrato su pannello sandwich finto coppo. Soluzione che coniuga alta efficienza energetica con un'estetica rispettosa dell'architettura esistente.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915275/2_FOTO_Impianti_fotovoltaici_residenziali_integrati_su_pannello_sandwich_finto_coppo_a_Mordano._bem5kz.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Fotovoltaico</div>
+          <div class="project-title">Impianto domestico</div>
+          <div class="project-meta">Mordano</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915268/1_FOTO_Impianto_fotovoltaico_residenziale_integrato_realizzato_a_Dozza._uqfbcl.jpg" data-badge="solar" data-desc="Realizzazione di impianto fotovoltaico residenziale integrato. Progettazione personalizzata per massimizzare la produzione energetica nel rispetto del contesto abitativo.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915268/1_FOTO_Impianto_fotovoltaico_residenziale_integrato_realizzato_a_Dozza._uqfbcl.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag solar">Fotovoltaico</div>
+          <div class="project-title">Impianto domestico</div>
+          <div class="project-meta">Dozza</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="amianto" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780916111/Untitled_design_-_2026-06-08T125438.963_hhmpak.png" data-badge="asbestos" data-desc="Bonifica completa della copertura in amianto con smaltimento certificato, seguita dal rifacimento del manto di copertura nel rispetto delle normative ambientali vigenti.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780916111/Untitled_design_-_2026-06-08T125438.963_hhmpak.png')"></div>
+        <div class="project-overlay">
+          <div class="project-tag asbestos">Amianto</div>
+          <div class="project-title">Bonifica amianto e rifacimento copertura</div>
+          <div class="project-meta">Ravenna</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="coperture" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1780917023/IMG_9567_fvungk.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1780917023/IMG_9567_fvungk.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780920646/IMG_9324_alx5ux.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1780920644/IMG_9568_xokjqr.jpg"]' data-badge="roofing" data-desc="Progetto su edificio industriale in provincia di Ravenna, esecuzione di copertura metallica curva con lastre profilate per garantire il pieno adattamento alla specifica geometria di progetto.">
+        <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780917023/IMG_9567_fvungk.jpg')"></div>
+        <div class="project-overlay">
+          <div class="project-tag roofing">Coperture</div>
+          <div class="project-title">Copertura industriale</div>
+          <div class="project-meta">Massa Lombarda</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg" data-badge="solar" data-desc="Impianto fotovoltaico residenziale ad alta efficienza. Soluzione su misura per la produzione di energia pulita e la riduzione dei costi energetici nel lungo periodo.">
         <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173324/IMGP5592_y0lzhm.jpg')"></div>
         <div class="project-overlay">
           <div class="project-tag solar">Fotovoltaico</div>
           <div class="project-title">Impianto domestico</div>
-          <div class="project-meta">Brisighella · 2025</div>
+          <div class="project-meta">Brisighella</div>
         </div>
       </div>
 
-      <div class="project-card" data-category="fotovoltaico">
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg" data-badge="solar" data-desc="Impianto fotovoltaico residenziale integrato progettato per massimizzare la resa energetica stagionale e ridurre i consumi da rete.">
         <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173458/1677767889648_i8o6mn.jpg')"></div>
         <div class="project-overlay">
           <div class="project-tag solar">Fotovoltaico</div>
           <div class="project-title">Impianto domestico</div>
-          <div class="project-meta">Belluno · 2024</div>
+          <div class="project-meta">Belluno</div>
         </div>
       </div>
 
-      <div class="project-card" data-category="fotovoltaico">
+      <div class="project-card" data-category="fotovoltaico" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg" data-badge="solar" data-desc="Sistema di accumulo energetico abbinato a impianto fotovoltaico esistente. Ottimizza l'autoconsumo e garantisce autonomia energetica anche nelle ore notturne e nelle giornate nuvolose.">
         <div class="project-card-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg')"></div>
         <div class="project-overlay">
           <div class="project-tag solar">Fotovoltaico</div>
           <div class="project-title">Sistema di accumulo</div>
-          <div class="project-meta">Ferrara · 2024</div>
+          <div class="project-meta">Ferrara</div>
         </div>
       </div>
 
-      <div class="project-card" data-category="amianto">
-        <div class="project-card-bg" style="background: linear-gradient(135deg, #3d2d1a 0%, #a86325 100%)"></div>
-        <div class="project-overlay">
-          <div class="project-tag asbestos">Bonifica amianto</div>
-          <div class="project-title">Bonifica amianto complesso</div>
-          <div class="project-meta">Ferrara · 2023</div>
-        </div>
-      </div>
 
     </div>
     <div class="no-results" id="noResults">Nessun progetto trovato per questa categoria.</div>
@@ -277,6 +305,145 @@
       document.getElementById('noResults').classList.toggle('show', visible === 0);
     });
   });
+</script>
+
+<style>
+  .pmodal-overlay { display:none; position:fixed; inset:0; background:rgba(10,25,15,0.72); z-index:9999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+  .pmodal-overlay.open { display:flex; }
+  .pmodal { background:var(--white); border-radius:var(--radius); max-width:560px; width:100%; max-height:90vh; overflow-y:auto; position:relative; box-shadow:0 24px 64px rgba(0,0,0,0.32); animation:pmodal-in 0.22s ease; }
+  @keyframes pmodal-in { from{opacity:0;transform:translateY(14px) scale(0.98)} to{opacity:1;transform:translateY(0) scale(1)} }
+  .pmodal.closing { animation:pmodal-out 0.18s ease forwards; }
+  @keyframes pmodal-out { to{opacity:0;transform:translateY(14px) scale(0.98)} }
+  .pmodal-img { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius) var(--radius) 0 0; display:block; }
+  .pmodal-body { padding:24px 28px 36px; position:relative; }
+  .pmodal-tag { display:inline-block; padding:4px 12px; font-size:11px; font-weight:700; border-radius:50px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; width:fit-content; }
+  .pmodal-tag.solar   { background:var(--yellow); color:var(--text-dark); }
+  .pmodal-tag.roofing { background:var(--blue);   color:var(--white); }
+  .pmodal-tag.asbestos{ background:var(--green-light); color:var(--white); }
+  .pmodal-title { font-family:'Syne',sans-serif; font-weight:700; font-size:21px; color:var(--text-dark); line-height:1.25; margin:0 0 6px; }
+  .pmodal-location { font-size:13px; color:var(--text-light); margin-bottom:16px; }
+  .pmodal-desc { font-size:15px; color:var(--text-mid); line-height:1.7; margin:0; }
+  .pmodal-img-wrap { position:relative; }
+  .pmodal-logo { position:absolute; bottom:12px; right:12px; opacity:0.75; line-height:0; }
+  .pmodal-logo .nav-logo-dots { width:26px; gap:3px; }
+  .pmodal-logo .dot { width:7px; height:7px; }
+  .pmodal-close { position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.92); border:none; border-radius:50%; width:32px; height:32px; font-size:18px; line-height:1; cursor:pointer; color:var(--text-dark); display:flex; align-items:center; justify-content:center; z-index:1; box-shadow:0 2px 8px rgba(0,0,0,0.14); transition:background 0.15s; }
+  .pmodal-close:hover { background:var(--off-white); }
+  .project-card { cursor:pointer; }
+  .pmodal-prev,.pmodal-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.82); border:none; border-radius:50%; width:36px; height:36px; font-size:22px; cursor:pointer; color:var(--text-dark); display:none; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.18); transition:background 0.15s; z-index:2; padding:0; line-height:1; }
+  .pmodal-prev { left:10px; }
+  .pmodal-next { right:10px; }
+  .pmodal-prev:hover,.pmodal-next:hover { background:rgba(255,255,255,1); }
+  .pmodal-img-wrap.has-carousel .pmodal-prev,
+  .pmodal-img-wrap.has-carousel .pmodal-next { display:flex; }
+  .pmodal-carousel-dots { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:none; gap:6px; z-index:2; }
+  .pmodal-img-wrap.has-carousel .pmodal-carousel-dots { display:flex; }
+  .pmodal-cdot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.5); border:none; cursor:pointer; padding:0; transition:background 0.15s; }
+  .pmodal-cdot.active { background:#fff; }
+  @media(max-width:600px){ .pmodal-overlay{padding:10px;align-items:flex-end;} .pmodal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0;} .pmodal-img{aspect-ratio:4/3;} }
+</style>
+
+<div id="portfolio-modal" class="pmodal-overlay" role="dialog" aria-modal="true">
+  <div class="pmodal">
+    <button class="pmodal-close" aria-label="Chiudi">&#x2715;</button>
+    <div class="pmodal-img-wrap">
+      <img class="pmodal-img" src="" alt="">
+      <button class="pmodal-prev" aria-label="Precedente">&#8249;</button>
+      <button class="pmodal-next" aria-label="Successivo">&#8250;</button>
+      <div class="pmodal-carousel-dots"></div>
+      <div class="pmodal-logo">
+        <div class="nav-logo-dots">
+          <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+          <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+          <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+        </div>
+      </div>
+    </div>
+    <div class="pmodal-body">
+      <div class="pmodal-tag"></div>
+      <h3 class="pmodal-title"></h3>
+      <div class="pmodal-location"></div>
+      <p class="pmodal-desc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay   = document.getElementById('portfolio-modal');
+  var modal     = overlay.querySelector('.pmodal');
+  var imgEl     = overlay.querySelector('.pmodal-img');
+  var imgWrap   = overlay.querySelector('.pmodal-img-wrap');
+  var dotsWrap  = overlay.querySelector('.pmodal-carousel-dots');
+  var prevBtn   = overlay.querySelector('.pmodal-prev');
+  var nextBtn   = overlay.querySelector('.pmodal-next');
+  var tagEl     = overlay.querySelector('.pmodal-tag');
+  var titleEl   = overlay.querySelector('.pmodal-title');
+  var locEl     = overlay.querySelector('.pmodal-location');
+  var descEl    = overlay.querySelector('.pmodal-desc');
+  var closeBtn  = overlay.querySelector('.pmodal-close');
+  var slides    = [];
+  var current   = 0;
+
+  function goTo(i) {
+    current = (i + slides.length) % slides.length;
+    imgEl.src = slides[current];
+    dotsWrap.querySelectorAll('.pmodal-cdot').forEach(function(d, idx){ d.classList.toggle('active', idx === current); });
+  }
+
+  function openModal(card) {
+    var tagNode = card.querySelector('.project-tag');
+    tagEl.className    = 'pmodal-tag ' + (card.dataset.badge || 'solar');
+    tagEl.textContent  = tagNode ? tagNode.textContent : '';
+    titleEl.textContent= (card.querySelector('.project-title') || {textContent:''}).textContent;
+    locEl.textContent  = (card.querySelector('.project-meta')  || {textContent:''}).textContent.replace(/\s*·\s*\d{4}/,'');
+    descEl.textContent = card.dataset.desc || '';
+
+    if (card.dataset.images) {
+      slides = JSON.parse(card.dataset.images);
+      imgWrap.classList.add('has-carousel');
+      dotsWrap.innerHTML = '';
+      slides.forEach(function(_, i){
+        var d = document.createElement('button');
+        d.className = 'pmodal-cdot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', function(e){ e.stopPropagation(); goTo(i); });
+        dotsWrap.appendChild(d);
+      });
+      current = 0;
+      imgEl.src = slides[0];
+    } else {
+      slides = [];
+      imgWrap.classList.remove('has-carousel');
+      dotsWrap.innerHTML = '';
+      imgEl.src = card.dataset.img || '';
+    }
+    imgEl.alt = tagEl.textContent;
+    modal.classList.remove('closing');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.add('closing');
+    setTimeout(function(){ overlay.classList.remove('open'); document.body.style.overflow=''; }, 180);
+  }
+
+  prevBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(current - 1); });
+  nextBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(current + 1); });
+
+  document.querySelectorAll('.project-card').forEach(function(card){
+    card.addEventListener('click', function(){ openModal(card); });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft'  && slides.length) goTo(current - 1);
+    if (e.key === 'ArrowRight' && slides.length) goTo(current + 1);
+  });
+})();
 </script>
 </body>
 </html>
