@@ -563,6 +563,13 @@
   .mobile-menu-lang:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
 
   @media (max-width: 768px) {
+    /* About section: centre headline, body and CTA; keep eyebrow label left */
+    .about-text .section-title,
+    .about-text .section-desc,
+    .about-text .btn-primary { text-align: center; }
+    .about-text .btn-primary { display: block; width: fit-content; margin-left: auto; margin-right: auto; }
+    .about-text .section-desc { max-width: 100%; }
+
     nav .nav-logo-dots { width: 26px !important; gap: 3px !important; }
     nav .nav-logo-dots .dot { width: 7px !important; height: 7px !important; }
     nav .nav-logo-text { font-size: 15px !important; letter-spacing: -0.2px; }
