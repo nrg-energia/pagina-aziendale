@@ -375,6 +375,81 @@
   .modal-success h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
   .modal-success p { font-size: 15px; color: var(--text-mid); }
 
+  /* ── MOBILE HERO Option B (≤768px) — full-bleed image, overlaid text ─────── */
+  @media (max-width: 768px) {
+    /* Hero fills 87vh, stays position:relative + overflow:hidden */
+    .hero {
+      min-height: 87vh;
+      padding-top: 72px; /* keep nav offset */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Slides still fill the whole hero — no changes needed to position/size */
+    .hero-slide {
+      background-size: cover;
+      background-position: center;
+    }
+    /* Disable zoom animation — avoids aggressive cropping on small screens */
+    .hero-slide.active { animation: none; }
+
+    /* Dark gradient overlay: transparent → dark over the bottom 60% of the hero */
+    .hero-slide-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.45) 40%,
+        transparent 100%
+      ) !important;
+    }
+
+    /* Content sits at the bottom of the hero over the gradient */
+    .hero-content {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 6% 20px;
+    }
+
+    /* Remove frosted green card entirely */
+    .hero-text {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      max-width: 100%;
+    }
+
+    /* Badge: keep yellow-on-dark styling, tighten margin */
+    .hero-badge { margin-bottom: 14px; }
+
+    /* Title: 2rem, white, yellow accent preserved */
+    .hero-title { font-size: 2rem !important; }
+
+    /* Desc: slightly smaller, stays white/light */
+    .hero-desc {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    /* Buttons: full width, stacked */
+    .hero-ctas {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 0;
+    }
+    .hero-ctas .btn-primary,
+    .hero-ctas .btn-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Hide left/right arrows — swipe only */
+    .carousel-arrow { display: none !important; }
+
+    /* Dots: stay absolutely positioned, centred at very bottom */
+    .carousel-dots { bottom: 18px; }
+  }
+
   /* ── MOBILE NAV (≤768px) ──────────────────────────────────────────────────── */
   .nav-hamburger {
     display: none;
@@ -768,6 +843,17 @@ var contents = [
     document.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
       dot.addEventListener('click', function() { go(i); startTimer(); });
     });
+
+    // Touch swipe support (mobile)
+    var heroEl = document.querySelector('.hero');
+    var touchStartX = 0;
+    heroEl.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    heroEl.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); startTimer(); }
+    }, { passive: true });
 
     startTimer();
   });
