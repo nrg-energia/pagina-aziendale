@@ -426,8 +426,12 @@
       max-width: 100%;
     }
 
-    /* Badge: keep yellow-on-dark styling, tighten margin */
-    .hero-badge { margin-bottom: 14px; }
+    /* Badge: darker background so label is legible over any image */
+    .hero-badge {
+      margin-bottom: 14px;
+      background: rgba(0, 0, 0, 0.55);
+      border-color: rgba(245, 200, 66, 0.6);
+    }
 
     /* Title: 2rem, white, yellow accent preserved */
     .hero-title { font-size: 2rem !important; }
