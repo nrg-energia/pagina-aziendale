@@ -23,8 +23,8 @@
     --radius: 12px;
     --radius-sm: 8px;
   }
-  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
 
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -377,12 +377,13 @@
 
   /* ── MOBILE HERO Option B (≤768px) — full-bleed image, overlaid text ─────── */
   @media (max-width: 768px) {
-    /* Hero fills 87vh, stays position:relative + overflow:hidden */
+    /* Hero fills 87vh; overflow:hidden prevents any horizontal bleed */
     .hero {
       min-height: 87vh;
       padding-top: 72px; /* keep nav offset */
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     /* Slides still fill the whole hero — no changes needed to position/size */
@@ -393,12 +394,18 @@
     /* Disable zoom animation — avoids aggressive cropping on small screens */
     .hero-slide.active { animation: none; }
 
-    /* Dark gradient overlay: transparent → dark over the bottom 60% of the hero */
+    /*
+     * Dark gradient overlay: solid dark band over the bottom 55% fading to
+     * transparent at the top — keeps badge, headline, desc and buttons legible
+     * over any background image.
+     */
     .hero-slide-overlay {
       background: linear-gradient(
         to top,
-        rgba(0, 0, 0, 0.82) 0%,
-        rgba(0, 0, 0, 0.45) 40%,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(0, 0, 0, 0.72) 20%,
+        rgba(0, 0, 0, 0.55) 42%,
+        rgba(0, 0, 0, 0.18) 58%,
         transparent 100%
       ) !important;
     }
