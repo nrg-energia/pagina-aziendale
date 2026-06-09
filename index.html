@@ -374,6 +374,67 @@
   .modal-success-icon { font-size: 48px; margin-bottom: 16px; }
   .modal-success h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
   .modal-success p { font-size: 15px; color: var(--text-mid); }
+
+  /* ── MOBILE NAV (≤768px) ──────────────────────────────────────────────────── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 40px; height: 40px;
+    background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--text-dark); border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+    background: var(--green-dark); z-index: 99; overflow-y: auto;
+    flex-direction: column; padding: 8px 0 40px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 600;
+    color: rgba(255,255,255,0.9); text-decoration: none;
+    padding: 18px 6%; display: block;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: color 0.15s;
+  }
+  .mobile-menu a:hover { color: var(--yellow); background: none; }
+  .mobile-menu .mobile-cta {
+    margin: 24px 6% 0; padding: 16px 0 !important;
+    background: var(--yellow) !important; color: var(--text-dark) !important;
+    text-align: center; border-radius: 50px; font-weight: 700 !important;
+    border-bottom: none !important; display: block;
+  }
+  .mobile-menu .mobile-cta:hover { background: #f0b800 !important; color: var(--text-dark) !important; }
+  .mobile-menu-lang {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    margin: 20px 6% 0; padding: 12px 20px;
+    background: transparent; border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 600;
+    border-radius: 8px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .mobile-menu-lang:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 768px) {
+    nav .nav-logo-dots { width: 26px !important; gap: 3px !important; }
+    nav .nav-logo-dots .dot { width: 7px !important; height: 7px !important; }
+    nav .nav-logo-text { font-size: 15px !important; letter-spacing: -0.2px; }
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: flex; }
+  }
+
+  @media (min-width: 769px) {
+    .nav-hamburger { display: none !important; }
+    .mobile-menu { display: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -396,7 +457,20 @@
     <a href="#" class="nav-cta" data-i18n="nav_cta" onclick="openModal();return false;">Richiedi preventivo</a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()"><span>🇬🇧</span> EN</button>
   </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Apri menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#servizi" data-i18n="nav_services" onclick="closeMobileMenu()">Servizi</a>
+  <a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a>
+  <a href="#chi-siamo" data-i18n="nav_about" onclick="closeMobileMenu()">Chi siamo</a>
+  <a href="#news" onclick="closeMobileMenu()">News &amp; Blog</a>
+  <a href="#contatti" data-i18n="nav_contact" onclick="closeMobileMenu()">Contatti</a>
+  <a href="#" class="mobile-cta" data-i18n="nav_cta" onclick="openModal(); closeMobileMenu(); return false;">Richiedi preventivo</a>
+  <button class="mobile-menu-lang" id="mobile-lang-toggle" onclick="toggleLang(); updateMobileLangBtn()"><span>🇬🇧</span>&nbsp;EN</button>
+</div>
 
 <section class="hero">
   <div class="hero-wipe" id="hero-wipe"></div>
@@ -978,6 +1052,33 @@ function applyTranslations(lang) {
   document.querySelector('.hero-desc').textContent  = c.desc;
  updateServiceLinks();
 }
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobile-menu');
+  var btn  = document.getElementById('nav-hamburger');
+  var isOpen = menu.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.setAttribute('aria-label', isOpen ? 'Chiudi menu' : 'Apri menu');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  var btn = document.getElementById('nav-hamburger');
+  btn.classList.remove('open');
+  btn.setAttribute('aria-label', 'Apri menu');
+}
+function updateMobileLangBtn() {
+  var mBtn = document.getElementById('mobile-lang-toggle');
+  if (!mBtn) return;
+  mBtn.innerHTML = LANG === 'en' ? '<span>🇮🇹</span>&nbsp;IT' : '<span>🇬🇧</span>&nbsp;EN';
+}
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('mobile-menu');
+  var hamburger = document.getElementById('nav-hamburger');
+  if (menu && menu.classList.contains('open') &&
+      !menu.contains(e.target) && !hamburger.contains(e.target)) {
+    closeMobileMenu();
+  }
+});
+
 function toggleLang() {
   LANG = LANG === 'it' ? 'en' : 'it';
   var btn = document.getElementById('lang-toggle');
@@ -990,6 +1091,7 @@ function toggleLang() {
     btn.classList.remove('active-en');
     document.documentElement.lang = 'it';
   }
+  updateMobileLangBtn();
   applyTranslations(LANG);
 }
  // Auto-switch to EN if coming from an EN page
