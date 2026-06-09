@@ -461,6 +461,13 @@
     .carousel-dots { bottom: 18px; }
   }
 
+  /* Conditional line-break helpers — shown/hidden per breakpoint */
+  br.mob-br { display: none; }
+  @media (max-width: 768px) {
+    br.mob-br { display: block; }
+    br.dsk-br { display: none; }
+  }
+
   /* ── MOBILE PORTFOLIO CAROUSEL (≤768px) ────────────────────────────────────── */
   .portfolio-mobile-dots { display: none; justify-content: center; gap: 8px; margin-top: 18px; }
   .portfolio-mobile-dot {
@@ -731,7 +738,7 @@
 <div class="about-strip" id="chi-siamo">
   <div class="about-text">
     <div class="section-label">Chi siamo</div>
-    <h2 class="section-title">Vent'anni di esperienza<br>nel <em>settore energetico</em></h2>
+    <h2 class="section-title">Vent'anni di<br class="mob-br"> esperienza<br class="dsk-br"> nel <br class="mob-br"><em>settore energetico</em></h2>
     <p class="section-desc" style="margin-bottom:28px">Siamo una società specializzata nelle attività di consulenza, progettazione e installazione di Impianti Fotovoltaici e sistemi di accumulo. Gestiamo l'intero processo internamente per garantire qualità, efficienza e coerenza con i nostri valori. Un metodo che ci rende pienamente affidabili.</p>
     <a href="#" class="btn-primary">Scopri la nostra storia →</a>
   </div>
@@ -968,7 +975,7 @@ var T = {
     ptag5: 'Coperture', ptitle5: 'Copertura industriale', pmeta5: 'Massa Lombarda',
 
     about_label: 'Chi siamo',
-    about_title: "Vent'anni di esperienza<br>nel <em>settore energetico</em>",
+    about_title: "Vent'anni di<br class=\"mob-br\"> esperienza<br class=\"dsk-br\"> nel <br class=\"mob-br\"><em>settore energetico</em>",
     about_desc: "Siamo una società specializzata nelle attività di consulenza, progettazione e installazione di Impianti Fotovoltaici e sistemi di accumulo. Gestiamo l'intero processo internamente per garantire qualità, efficienza e coerenza con i nostri valori. Un metodo che ci rende pienamente affidabili.",
     about_cta: 'Scopri la nostra storia →',
 
@@ -1042,7 +1049,7 @@ var T = {
     ptag5: 'Roofing',    ptitle5: 'Industrial roofing',                 pmeta5: 'Massa Lombarda',
 
     about_label: 'About us',
-    about_title: 'Twenty years of experience in <em>renewable energy</em>',
+    about_title: 'Twenty years of<br class="mob-br"> experience in <br class="mob-br"><em>renewable energy</em>',
     about_desc: 'We are a company specialising in the consultation, design and installation of solar power systems and battery storage. We manage the entire process in-house to guarantee quality, efficiency and consistency with our values. A method that makes us fully reliable.',
     about_cta: 'Our story →',
 
