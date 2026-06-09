@@ -461,6 +461,59 @@
     .carousel-dots { bottom: 18px; }
   }
 
+  /* ── MOBILE PORTFOLIO CAROUSEL (≤768px) ────────────────────────────────────── */
+  .portfolio-mobile-dots { display: none; justify-content: center; gap: 8px; margin-top: 18px; }
+  .portfolio-mobile-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(26,77,46,0.25); border: none; cursor: pointer; padding: 0;
+    transition: all 0.3s;
+  }
+  .portfolio-mobile-dot.active { background: var(--green-dark); width: 24px; border-radius: 4px; }
+  .portfolio-mobile-cta { display: none; width: 100%; justify-content: center; margin-top: 20px; box-sizing: border-box; }
+
+  @media (max-width: 768px) {
+    /* Stack the header so the desktop CTA can be hidden */
+    .portfolio-header { flex-direction: column; align-items: flex-start; margin-bottom: 24px; gap: 12px; }
+    /* Hide the desktop CTA inside the header */
+    .portfolio-header .btn-primary { display: none !important; }
+
+    /* Grid → horizontal scroll carousel */
+    .portfolio-grid {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 12px;
+      /* bleed edge-to-edge inside the section's 5% padding */
+      margin-left: -5vw;
+      margin-right: -5vw;
+      padding-left: 5vw;
+      padding-right: 5vw;
+    }
+    .portfolio-grid::-webkit-scrollbar { display: none; }
+
+    /* Each card: 85% wide (peek ~38px of next card) */
+    .portfolio-card {
+      flex: 0 0 85%;
+      height: 340px;
+      min-height: 340px;
+      scroll-snap-align: start;
+    }
+    /* Remove the tall span on mobile */
+    .portfolio-card.tall { grid-row: auto; height: 340px; min-height: 340px; }
+
+    /* Show mobile-only elements */
+    .portfolio-mobile-dots { display: flex; }
+    .portfolio-mobile-cta  { display: flex; }
+  }
+
+  @media (min-width: 769px) {
+    .portfolio-mobile-dots,
+    .portfolio-mobile-cta { display: none !important; }
+  }
+
   /* ── MOBILE NAV (≤768px) ──────────────────────────────────────────────────── */
   .nav-hamburger {
     display: none;
@@ -665,6 +718,8 @@
       <div class="portfolio-overlay"><div class="portfolio-tag roofing">Coperture</div><div class="portfolio-title">Copertura industriale</div><div class="portfolio-meta">Massa Lombarda</div></div>
     </div>
   </div>
+  <div class="portfolio-mobile-dots" id="portfolio-mobile-dots"></div>
+  <a href="portfolio.html" id="link-portfolio-mobile" class="btn-primary portfolio-mobile-cta">Vedi tutto il portfolio →</a>
 </section>
 
 <div class="about-strip" id="chi-siamo">
@@ -1060,6 +1115,7 @@ function applyTranslations(lang) {
   setOneText('#portfolio .section-title', 'portfolio_title');
   setOneText('#portfolio .section-desc',  'portfolio_desc');
   setOneText('#portfolio .btn-primary',   'portfolio_cta');
+  setOneText('#link-portfolio-mobile',    'portfolio_cta');
   document.querySelectorAll('.portfolio-card').forEach(function(card, i) {
     var n = i + 1;
     var tg = card.querySelector('.portfolio-tag');   if (tg) tg.textContent = t['ptag'+n];
@@ -1206,7 +1262,8 @@ if (window.location.hash === '#quote') {
     'link-rinnovabili': { it: 'services/energie-rinnovabili.html', en: 'services/en/renewable-energy.html' },
     'link-coperture':   { it: 'services/coperture.html',           en: 'services/en/roofing.html' },
     'link-amianto':     { it: 'services/bonifica-amianto.html',    en: 'services/en/asbestos-removal.html' },
-    'link-portfolio':   { it: 'portfolio.html',                    en: 'services/en/portfolio.html' }
+    'link-portfolio':        { it: 'portfolio.html', en: 'services/en/portfolio.html' },
+    'link-portfolio-mobile': { it: 'portfolio.html', en: 'services/en/portfolio.html' }
   };
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
@@ -1642,6 +1699,65 @@ function submitForm() {
 
   prevBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(current - 1); });
   nextBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(current + 1); });
+
+  // ── Mobile portfolio carousel ──────────────────────────────────────────────
+  var pgrid      = document.querySelector('.portfolio-grid');
+  var pcards     = Array.from(document.querySelectorAll('.portfolio-card'));
+  var pdotsWrap  = document.getElementById('portfolio-mobile-dots');
+  var pCurrent   = 0;
+  var pSwiped    = false;
+
+  // Build dots
+  pcards.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className = 'portfolio-mobile-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', function() { pScrollTo(i); });
+    pdotsWrap.appendChild(d);
+  });
+
+  function pUpdateDots() {
+    pdotsWrap.querySelectorAll('.portfolio-mobile-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === pCurrent);
+    });
+  }
+
+  function pScrollTo(index) {
+    pCurrent = Math.max(0, Math.min(index, pcards.length - 1));
+    var card   = pcards[pCurrent];
+    var offset = card.offsetLeft - pgrid.offsetLeft;
+    pgrid.scrollTo({ left: offset, behavior: 'smooth' });
+    pUpdateDots();
+  }
+
+  // Sync dots when user drags natively
+  pgrid.addEventListener('scroll', function() {
+    if (!pcards[0]) return;
+    var cardW = pcards[0].offsetWidth + 12; // card + gap
+    var idx   = Math.round(pgrid.scrollLeft / cardW);
+    if (idx !== pCurrent) { pCurrent = idx; pUpdateDots(); }
+  }, { passive: true });
+
+  // Touch swipe — 50px threshold → scroll to next/prev card
+  var pTouchX = 0;
+  pgrid.addEventListener('touchstart', function(e) {
+    pTouchX  = e.changedTouches[0].clientX;
+    pSwiped  = false;
+  }, { passive: true });
+  pgrid.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - pTouchX;
+    if (Math.abs(dx) > 50) {
+      pSwiped = true;
+      pScrollTo(dx < 0 ? pCurrent + 1 : pCurrent - 1);
+      // Clear swipe flag after click event fires (~200ms)
+      setTimeout(function() { pSwiped = false; }, 300);
+    }
+  }, { passive: true });
+
+  // Prevent modal opening after a swipe gesture
+  pgrid.addEventListener('click', function(e) {
+    if (pSwiped) { e.stopPropagation(); }
+  }, true);
 
   document.querySelectorAll('.portfolio-card').forEach(function(card){
     card.addEventListener('click', function(){ openModal(card); });
