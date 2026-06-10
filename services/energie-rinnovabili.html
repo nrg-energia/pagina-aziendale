@@ -66,7 +66,7 @@
     .page-nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 
     /* HERO */
-    .hero { background: var(--green-dark); padding: 72px 5% 64px; position: relative; overflow: hidden; }
+    .hero { background: #05100a; padding: 72px 5% 64px; position: relative; overflow: hidden; }
     .hero::after { content: none; } /* removed — video replaces the decorative gradient */
     .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; filter: blur(0.5px); }
     .hero-vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.62) 100%); }
@@ -408,7 +408,7 @@
   <a href="en/renewable-energy.html" class="mobile-menu-lang"><span>🇬🇧</span>&nbsp;EN</a>
 </div>
 <section class="hero">
-  <video class="hero-video" autoplay loop muted playsinline>
+  <video class="hero-video" autoplay loop muted playsinline preload="auto">
     <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/q_auto,f_auto/v1781085728/NRG_energia_compressed_oufmsf.mp4" type="video/mp4">
   </video>
   <div class="hero-vignette"></div>
@@ -1154,11 +1154,13 @@ document.addEventListener('DOMContentLoaded', function(){
     function setRate() { v.playbackRate = 0.4; }
     if (v.readyState >= 1) { setRate(); } else { v.addEventListener('loadedmetadata', setRate, { once: true }); }
   }
-  // Trigger hero entrance 2s after page load — video plays alone first
-  setTimeout(function() {
-    var hero = document.querySelector('.hero');
-    if (hero) hero.classList.add('hero-animate');
-  }, 2000);
+  // Trigger hero entrance 1.5s after video actually starts playing
+  var hero = document.querySelector('.hero');
+  if (v && hero) {
+    v.addEventListener('playing', function() {
+      setTimeout(function() { hero.classList.add('hero-animate'); }, 1500);
+    }, { once: true });
+  }
 })();
 </script>
 </body>
