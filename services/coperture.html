@@ -66,8 +66,32 @@
     .page-nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 
     /* HERO */
-    .hero { background: var(--green-dark); padding: 72px 5% 64px; position: relative; overflow: hidden; }
-    .hero::after { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(74,171,109,0.18) 0%, transparent 70%); pointer-events: none; }
+    .hero { background: #05100a; padding: 72px 5% 64px; position: relative; overflow: hidden; }
+    .hero::after { content: none; }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; filter: blur(0.5px); }
+    .hero-vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.62) 100%); }
+    /* ── Hero entrance: hidden by default, revealed by .hero-animate class ── */
+    .hero-text-box {
+      background: rgba(18,52,22,0.80);
+      padding: 28px 48px 28px 36px; border-radius: 8px; max-width: min(1000px, 100%);
+      opacity: 0; transform: translateX(-120px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .hero-text-box .hero-breadcrumb,
+    .hero-text-box .hero-badge,
+    .hero-text-box h1,
+    .hero-text-box p,
+    .hero-text-box .hero-actions {
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+    }
+    .hero.hero-animate .hero-text-box { opacity: 1; transform: translateX(0); }
+    .hero.hero-animate .hero-text-box .hero-breadcrumb { opacity: 1; transform: none; transition-delay: 0.65s; }
+    .hero.hero-animate .hero-text-box .hero-badge      { opacity: 1; transform: none; transition-delay: 0.82s; }
+    .hero.hero-animate .hero-text-box h1               { opacity: 1; transform: none; transition-delay: 1.00s; }
+    .hero.hero-animate .hero-text-box p                { opacity: 1; transform: none; transition-delay: 1.20s; }
+    .hero.hero-animate .hero-text-box .hero-actions    { opacity: 1; transform: none; transition-delay: 1.40s; }
+    .hero h1 em { white-space: nowrap; }
     .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
     .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
     .hero-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
@@ -373,17 +397,23 @@
   <a href="en/roofing.html" class="mobile-menu-lang"><span>🇬🇧</span>&nbsp;EN</a>
 </div>
 <section class="hero">
+  <video class="hero-video" autoplay loop muted playsinline preload="auto">
+    <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/q_auto,f_auto/v1781116609/Roof-nrg-energia-compressed_kfo1iq.mp4" type="video/mp4">
+  </video>
+  <div class="hero-vignette"></div>
   <div class="hero-inner">
-    <div class="hero-breadcrumb">
-      <a href="../index.html">Home</a><span>›</span>
-      <a href="../index.html#servizi">Servizi</a><span>›</span>
-      <span style="color:rgba(255,255,255,0.8)">Coperture</span>
-    </div>
-    <div class="hero-badge">Coperture</div>
-    <h1>Coperture industriali e civili <em>integrate anche con fotovoltaico</em></h1>
-    <p>Progettiamo coperture durevoli con materiali innovativi ed ecocompatibili, che si integrano perfettamente con la tecnologia del fotovoltaico, massimizzando resa e protezione.</p>
-    <div class="hero-actions">
-      <a href="#" onclick="openModal(); return false;" class="btn-primary">Richiedi preventivo gratuito →</a>
+    <div class="hero-text-box">
+      <div class="hero-breadcrumb">
+        <a href="../index.html">Home</a><span>›</span>
+        <a href="../index.html#servizi">Servizi</a><span>›</span>
+        <span style="color:rgba(255,255,255,0.8)">Coperture</span>
+      </div>
+      <div class="hero-badge">Coperture</div>
+      <h1>Coperture industriali e civili <em>integrate anche con fotovoltaico</em></h1>
+      <p>Progettiamo coperture durevoli con materiali innovativi ed ecocompatibili, che si integrano perfettamente con la tecnologia del fotovoltaico, massimizzando resa e protezione.</p>
+      <div class="hero-actions">
+        <a href="#" onclick="openModal(); return false;" class="btn-primary">Richiedi preventivo gratuito →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1112,5 +1142,20 @@ function submitForm() {
 })();
 </script>
 
+<script>
+(function() {
+  var v = document.querySelector('.hero-video');
+  if (v) {
+    function setRate() { v.playbackRate = 0.4; }
+    if (v.readyState >= 1) { setRate(); } else { v.addEventListener('loadedmetadata', setRate, { once: true }); }
+  }
+  var hero = document.querySelector('.hero');
+  if (v && hero) {
+    v.addEventListener('playing', function() {
+      setTimeout(function() { hero.classList.add('hero-animate'); }, 1500);
+    }, { once: true });
+  }
+})();
+</script>
 </body>
 </html>
