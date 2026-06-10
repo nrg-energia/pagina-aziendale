@@ -68,7 +68,7 @@
     /* HERO */
     .hero { background: var(--green-dark); padding: 72px 5% 64px; position: relative; overflow: hidden; }
     .hero::after { content: none; } /* removed — video replaces the decorative gradient */
-    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; filter: blur(0.5px); opacity: 0; transition: opacity 0.5s ease; }
     .hero-text-box { background: rgba(40,80,40,0.65); padding: 24px 32px; border-radius: 8px; max-width: 800px; }
     .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
     .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
@@ -394,7 +394,7 @@
         <span style="color:rgba(255,255,255,0.8)">Energie Rinnovabili</span>
       </div>
       <div class="hero-badge">Energie Rinnovabili</div>
-      <h1>Impianti fotovoltaici<br><em>per&nbsp;casa e azienda</em></h1>
+      <h1>Energia solare<br><em>per casa e azienda</em></h1>
       <p>DAL SOLE ALL'ENERGIA: lavoriamo da sempre per rendere l'energia più sostenibile e rispettosa dell'ambiente, utilizzando la risorsa naturale del sole nel modo più efficiente possibile per rispondere ai bisogni energetici di oggi e di domani.</p>
       <div class="hero-actions">
         <a href="#" onclick="openModal(); return false;" class="btn-primary">Richiedi preventivo gratuito →</a>
@@ -1124,9 +1124,22 @@ document.addEventListener('DOMContentLoaded', function(){
 (function() {
   var v = document.querySelector('.hero-video');
   if (!v) return;
-  // Set slow cinematic playback rate once metadata is available
-  function setRate() { v.playbackRate = 0.5; }
-  if (v.readyState >= 1) { setRate(); } else { v.addEventListener('loadedmetadata', setRate); }
+  function init() {
+    v.playbackRate = 0.4;
+    v.style.opacity = '1'; // fade in once playable
+  }
+  if (v.readyState >= 3) { init(); } else { v.addEventListener('canplay', init, { once: true }); }
+  // Seamless loop: fade out just before end, reset, fade back in
+  v.addEventListener('timeupdate', function() {
+    if (v.duration && v.currentTime >= v.duration - 0.4 && v.style.opacity !== '0') {
+      v.style.opacity = '0';
+      setTimeout(function() {
+        v.currentTime = 0;
+        v.play();
+        v.style.opacity = '1';
+      }, 450);
+    }
+  });
 })();
 </script>
 </body>
