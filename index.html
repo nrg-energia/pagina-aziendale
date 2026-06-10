@@ -626,6 +626,9 @@
     /* ── Footer ── */
     footer { padding: 48px 6% 28px; }
 
+    /* Override browser auto-detected links (e.g. P.IVA auto-linked by iOS) */
+    .footer-brand p a { color: var(--white) !important; text-decoration: none; }
+
     /* Single-column stacked grid */
     .footer-grid {
       grid-template-columns: 1fr;
