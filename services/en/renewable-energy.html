@@ -43,7 +43,7 @@
     .page-nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
     .hero { background: var(--green-dark); padding: 72px 5% 64px; position: relative; overflow: hidden; }
     .hero::after { content: none; }
-    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; filter: blur(0.5px); opacity: 0; transition: opacity 0.5s ease; }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; filter: blur(0.5px); }
     .hero-vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.62) 100%); }
     @keyframes heroCardIn {
       from { transform: translateX(-36px); opacity: 0; }
@@ -1037,17 +1037,8 @@ document.addEventListener('DOMContentLoaded', function(){
 (function() {
   var v = document.querySelector('.hero-video');
   if (!v) return;
-  function init() {
-    v.playbackRate = 0.4;
-    v.style.opacity = '1';
-  }
-  if (v.readyState >= 3) { init(); } else { v.addEventListener('canplay', init, { once: true }); }
-  v.addEventListener('timeupdate', function() {
-    if (v.duration && v.currentTime >= v.duration - 0.4 && v.style.opacity !== '0') {
-      v.style.opacity = '0';
-      setTimeout(function() { v.currentTime = 0; v.play(); v.style.opacity = '1'; }, 450);
-    }
-  });
+  function setRate() { v.playbackRate = 0.4; }
+  if (v.readyState >= 1) { setRate(); } else { v.addEventListener('loadedmetadata', setRate, { once: true }); }
 })();
 </script>
 </body>
