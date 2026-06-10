@@ -45,7 +45,7 @@
     .hero::after { content: none; }
     .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; filter: blur(0.5px); opacity: 0; transition: opacity 0.5s ease; }
     .hero-vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.62) 100%); }
-    .hero-text-box { background: rgba(40,80,40,0.65); padding: 24px 32px; border-radius: 8px; max-width: 800px; }
+    .hero-text-box { background: rgba(40,80,40,0.65); padding: 28px 48px 28px 36px; border-radius: 8px; max-width: min(1000px, 100%); }
     .hero h1 em { white-space: nowrap; }
     .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
     .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
@@ -326,7 +326,7 @@
         <span style="color:rgba(255,255,255,0.8)">Renewable Energy</span>
       </div>
       <div class="hero-badge">Renewable Energy</div>
-      <h1>Solar energy<br><em>for homes and businesses</em></h1>
+      <h1>Solar energy<br><em>for homes and<br>businesses</em></h1>
       <p>FROM SUN TO ENERGY: we have always worked to make energy more sustainable and respectful of the environment, using the natural resource of the sun in the most efficient way possible to meet the energy needs of today and tomorrow.</p>
       <div class="hero-actions">
         <a href="#" onclick="openModal(); return false;" class="btn-primary">Get a free quote →</a>
