@@ -468,6 +468,59 @@
     br.dsk-br { display: none; }
   }
 
+  /* ── MOBILE NEWS CAROUSEL (≤768px) ─────────────────────────────────────────── */
+  .news-mobile-dots { display: none; justify-content: center; gap: 8px; margin-top: 18px; }
+  .news-mobile-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(26,77,46,0.25); border: none; cursor: pointer; padding: 0;
+    transition: all 0.3s;
+  }
+  .news-mobile-dot.active { background: var(--green-dark); width: 24px; border-radius: 4px; }
+
+  @media (max-width: 768px) {
+    /* Header: single column, stacked */
+    .news-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .news-header .btn-primary {
+      width: 100%;
+      justify-content: center;
+      flex-shrink: unset;
+    }
+
+    /* Grid → horizontal swipe carousel */
+    .news-grid {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 12px;
+      margin-left: -5vw;
+      margin-right: -5vw;
+      padding-left: 5vw;
+      padding-right: 5vw;
+    }
+    .news-grid::-webkit-scrollbar { display: none; }
+
+    /* Each card: ~90% wide for a slight peek, auto height */
+    .news-card {
+      flex: 0 0 90%;
+      scroll-snap-align: start;
+    }
+
+    /* Show dots */
+    .news-mobile-dots { display: flex; }
+  }
+
+  @media (min-width: 769px) {
+    .news-mobile-dots { display: none !important; }
+  }
+
   /* ── MOBILE PORTFOLIO CAROUSEL (≤768px) ────────────────────────────────────── */
   .portfolio-mobile-dots { display: none; justify-content: center; gap: 8px; margin-top: 18px; }
   .portfolio-mobile-dot {
@@ -766,6 +819,7 @@
       <div class="news-body"><div class="news-date">15 febbraio 2026</div><div class="news-title">Bonifica amianto: tempi, costi e agevolazioni disponibili</div><div class="news-excerpt">Tutto quello che devi sapere prima di avviare una pratica di smaltimento.</div><a href="#" class="news-read">Leggi di più →</a></div>
     </div>
   </div>
+  <div class="news-mobile-dots" id="news-mobile-dots"></div>
 </section>
 
 <div class="cta-banner" id="preventivo">
@@ -1783,6 +1837,53 @@ function submitForm() {
     if (e.key === 'ArrowLeft'  && slides.length) goTo(current - 1);
     if (e.key === 'ArrowRight' && slides.length) goTo(current + 1);
   });
+})();
+
+// ── Mobile news carousel ──────────────────────────────────────────────────────
+(function() {
+  var ngrid     = document.querySelector('.news-grid');
+  var ncards    = Array.from(document.querySelectorAll('.news-card'));
+  var ndotsWrap = document.getElementById('news-mobile-dots');
+  var nCurrent  = 0;
+
+  // Build dots
+  ncards.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className = 'news-mobile-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', function() { nScrollTo(i); });
+    ndotsWrap.appendChild(d);
+  });
+
+  function nUpdateDots() {
+    ndotsWrap.querySelectorAll('.news-mobile-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === nCurrent);
+    });
+  }
+
+  function nScrollTo(index) {
+    nCurrent = Math.max(0, Math.min(index, ncards.length - 1));
+    ngrid.scrollTo({ left: ncards[nCurrent].offsetLeft - ngrid.offsetLeft, behavior: 'smooth' });
+    nUpdateDots();
+  }
+
+  // Sync dots on native drag
+  ngrid.addEventListener('scroll', function() {
+    if (!ncards[0]) return;
+    var cardW = ncards[0].offsetWidth + 12;
+    var idx   = Math.round(ngrid.scrollLeft / cardW);
+    if (idx !== nCurrent) { nCurrent = idx; nUpdateDots(); }
+  }, { passive: true });
+
+  // Touch swipe — 50px threshold
+  var nTouchX = 0;
+  ngrid.addEventListener('touchstart', function(e) {
+    nTouchX = e.changedTouches[0].clientX;
+  }, { passive: true });
+  ngrid.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - nTouchX;
+    if (Math.abs(dx) > 50) { nScrollTo(dx < 0 ? nCurrent + 1 : nCurrent - 1); }
+  }, { passive: true });
 })();
 </script>
 </body>
