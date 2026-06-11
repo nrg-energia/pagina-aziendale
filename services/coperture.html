@@ -1148,7 +1148,12 @@ function submitForm() {
 
 <script>
 (function() {
+  // Set cinematic playback rate
   var v = document.querySelector('.hero-video');
+  if (v) {
+    function setRate() { v.playbackRate = 0.4; }
+    if (v.readyState >= 1) { setRate(); } else { v.addEventListener('loadedmetadata', setRate, { once: true }); }
+  }
   var hero = document.querySelector('.hero');
   if (v && hero) {
     v.addEventListener('playing', function() {
