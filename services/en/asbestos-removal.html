@@ -433,6 +433,14 @@
             <div class="carousel-meta">Marradi (FI)</div>
           </div>
         </div>
+        <div class="carousel-slide" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167215/2prima_z8xivb.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167215/2prima_z8xivb.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167233/4dopo_fzb0ce.jpg","video:https://res.cloudinary.com/dmegrbq5k/video/upload/v1781128981/Untitled_design_58_l5gpg8.mp4"]' data-slide-badges='["Before","After","Video"]' data-badge="asbestos" data-desc="Full asbestos roof removal with certified disposal, replacement of the roof covering and building restoration in full compliance with current environmental regulations.">
+          <div class="carousel-slide-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167215/2prima_z8xivb.jpg')"></div>
+          <div class="carousel-overlay">
+            <div class="carousel-tag">Asbestos</div>
+            <div class="carousel-title">Asbestos removal and roof replacement</div>
+            <div class="carousel-meta">Loiano (BO)</div>
+          </div>
+        </div>
       </div>
       </div>
       <button class="carousel-arrow prev" onclick="carouselPrev()" aria-label="Previous">&#8592;</button>
@@ -442,6 +450,9 @@
       <button class="carousel-dot active" onclick="carouselGo(0)"></button>
       <button class="carousel-dot" onclick="carouselGo(1)"></button>
       <button class="carousel-dot" onclick="carouselGo(2)"></button>
+      <button class="carousel-dot" onclick="carouselGo(3)"></button>
+      <button class="carousel-dot" onclick="carouselGo(4)"></button>
+      <button class="carousel-dot" onclick="carouselGo(5)"></button>
     </div>
     <div class="carousel-cta">
       <a href="portfolio.html" class="btn-primary">View full portfolio →</a>
@@ -940,7 +951,14 @@ document.addEventListener('DOMContentLoaded', function(){
   .pmodal-cdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.5);border:none;cursor:pointer;padding:0;transition:background 0.15s;}
   .pmodal-cdot.active{background:#fff;}
   .pmodal-slide-badge{position:absolute;top:12px;left:12px;display:none;padding:4px 12px;font-size:11px;font-weight:700;font-family:'DM Sans',sans-serif;border-radius:50px;text-transform:uppercase;letter-spacing:0.5px;background:rgba(15,15,15,0.62);color:#fff;z-index:3;}
-  @media(max-width:600px){.pmodal-overlay{padding:10px;align-items:flex-end;}.pmodal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0;}.pmodal-img{aspect-ratio:4/3;}}
+
+  .pmodal-video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;display:none;}
+  .pmodal-video.pmodal-media-active{display:block;}
+  .pmodal-img.pmodal-media-hidden{display:none;}
+  .pf-mute-btn{position:absolute;bottom:46px;right:10px;z-index:3;display:none;align-items:center;gap:5px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50px;padding:5px 12px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;}
+  .pf-mute-btn.visible{display:flex;}
+  .pf-mute-btn:hover{background:rgba(0,0,0,0.80);}
+  @media(max-width:600px){.pmodal-overlay{padding:10px;align-items:flex-end;}.pmodal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0;}.pmodal-img{aspect-ratio:4/3;}.pmodal-video{aspect-ratio:4/3;}}
 </style>
 <div id="pf-modal" class="pmodal-overlay" role="dialog" aria-modal="true">
   <div class="pmodal">
