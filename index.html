@@ -184,6 +184,7 @@
   .portfolio-bg-teal { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1779173715/1747423271435_e5f7f5.jpg'); }
   .portfolio-bg-asbestos { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/w_1400,q_auto,f_auto/v1780485647/bonifica_amianto_welcome_rexgso.webp'); }
   .portfolio-bg-industrial { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780917023/IMG_9567_fvungk.jpg'); }
+  .portfolio-bg-loiano { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167215/2prima_z8xivb.jpg'); }
   .portfolio-bg-mordano { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915275/2_FOTO_Impianti_fotovoltaici_residenziali_integrati_su_pannello_sandwich_finto_coppo_a_Mordano._bem5kz.jpg'); }
   .portfolio-bg-dozza { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780915268/1_FOTO_Impianto_fotovoltaico_residenziale_integrato_realizzato_a_Dozza._uqfbcl.jpg'); }
   .portfolio-bg-ravenna { background-image: url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1780916111/Untitled_design_-_2026-06-08T125438.963_hhmpak.png'); }
@@ -808,6 +809,10 @@
       <div class="portfolio-card-bg portfolio-bg-industrial"></div>
       <div class="portfolio-overlay"><div class="portfolio-tag roofing">Coperture</div><div class="portfolio-title">Copertura industriale</div><div class="portfolio-meta">Massa Lombarda</div></div>
     </div>
+    <div class="portfolio-card" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167215/2prima_z8xivb.jpg" data-badge="asbestos" data-desc="Bonifica completa della copertura in amianto con smaltimento certificato, rifacimento del manto di copertura e ripristino dell'immobile nel rispetto delle normative ambientali vigenti." data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167215/2prima_z8xivb.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1781167233/4dopo_fzb0ce.jpg","video:https://res.cloudinary.com/dmegrbq5k/video/upload/v1781128981/Untitled_design_58_l5gpg8.mp4"]' data-slide-labels='["Prima","Dopo","Video"]'>
+      <div class="portfolio-card-bg portfolio-bg-loiano"></div>
+      <div class="portfolio-overlay"><div class="portfolio-tag asbestos">Amianto</div><div class="portfolio-title">Bonifica Amianto e rifacimento tetto</div><div class="portfolio-meta">Loiano (BO)</div></div>
+    </div>
   </div>
   <div class="portfolio-mobile-dots" id="portfolio-mobile-dots"></div>
   <a href="portfolio.html" id="link-portfolio-mobile" class="btn-primary portfolio-mobile-cta">Vedi tutto il portfolio →</a>
@@ -1052,6 +1057,7 @@ var T = {
     ptag3: 'Fotovoltaico', ptitle3: 'Sistema di accumulo', pmeta3: 'Ferrara',
     ptag4: 'Amianto',      ptitle4: 'Bonifica amianto e rifacimento copertura', pmeta4: 'Ravenna',
     ptag5: 'Coperture', ptitle5: 'Copertura industriale', pmeta5: 'Massa Lombarda',
+    ptag6: 'Amianto',  ptitle6: 'Bonifica Amianto e rifacimento tetto', pmeta6: 'Loiano (BO)',
 
     about_label: 'Chi siamo',
     about_title: "Vent'anni di<br class=\"mob-br\"> esperienza<br class=\"dsk-br\"> nel <br class=\"mob-br\"><em>settore energetico</em>",
@@ -1126,6 +1132,7 @@ var T = {
     ptag3: 'Solar',      ptitle3: 'Battery storage system',             pmeta3: 'Ferrara',
     ptag4: 'Asbestos',   ptitle4: 'Asbestos removal and roof replacement', pmeta4: 'Ravenna',
     ptag5: 'Roofing',    ptitle5: 'Industrial roofing',                 pmeta5: 'Massa Lombarda',
+    ptag6: 'Asbestos',  ptitle6: 'Asbestos removal and roof replacement', pmeta6: 'Loiano (BO)',
 
     about_label: 'About us',
     about_title: 'Twenty years of<br class="mob-br"> experience in <br class="mob-br"><em>renewable energy</em>',
@@ -1701,7 +1708,18 @@ function submitForm() {
   .pmodal-img-wrap.has-carousel .pmodal-carousel-dots { display:flex; }
   .pmodal-cdot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.5); border:none; cursor:pointer; padding:0; transition:background 0.15s; }
   .pmodal-cdot.active { background:#fff; }
-  @media(max-width:600px){ .pmodal-overlay{padding:6vh 10px 10px;align-items:flex-start;} .pmodal{max-height:88vh;border-radius:var(--radius);} .pmodal-img{aspect-ratio:4/3;} }
+  .pmodal-video { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius) var(--radius) 0 0; display:none; }
+  .pmodal-video.pmodal-media-active { display:block; }
+  .pmodal-img.pmodal-media-hidden { display:none; }
+  .pmodal-mute-btn {
+    position:absolute; bottom:46px; right:10px; z-index:3; display:none;
+    align-items:center; gap:5px; background:rgba(0,0,0,0.55); color:#fff;
+    border:none; border-radius:50px; padding:5px 12px; font-size:12px;
+    font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s;
+  }
+  .pmodal-mute-btn.visible { display:flex; }
+  .pmodal-mute-btn:hover { background:rgba(0,0,0,0.80); }
+  @media(max-width:600px){ .pmodal-overlay{padding:6vh 10px 10px;align-items:flex-start;} .pmodal{max-height:88vh;border-radius:var(--radius);} .pmodal-img{aspect-ratio:4/3;} .pmodal-video{aspect-ratio:4/3;} }
 </style>
 
 <div id="portfolio-modal" class="pmodal-overlay" role="dialog" aria-modal="true">
@@ -1709,6 +1727,8 @@ function submitForm() {
     <button class="pmodal-close" aria-label="Chiudi">&#x2715;</button>
     <div class="pmodal-img-wrap">
       <img class="pmodal-img" src="" alt="">
+      <video class="pmodal-video" autoplay loop muted playsinline></video>
+      <button class="pmodal-mute-btn" id="pmodal-mute-btn">🔇 Attiva audio</button>
       <button class="pmodal-prev" aria-label="Precedente">&#8249;</button>
       <button class="pmodal-next" aria-label="Successivo">&#8250;</button>
       <div class="pmodal-carousel-dots"></div>
@@ -1734,6 +1754,8 @@ function submitForm() {
   var overlay   = document.getElementById('portfolio-modal');
   var modal     = overlay.querySelector('.pmodal');
   var imgEl     = overlay.querySelector('.pmodal-img');
+  var videoEl   = overlay.querySelector('.pmodal-video');
+  var muteBtn   = document.getElementById('pmodal-mute-btn');
   var imgWrap   = overlay.querySelector('.pmodal-img-wrap');
   var dotsWrap  = overlay.querySelector('.pmodal-carousel-dots');
   var prevBtn   = overlay.querySelector('.pmodal-prev');
@@ -1746,10 +1768,39 @@ function submitForm() {
   var slides    = [];
   var current   = 0;
 
+  function showImage(src) {
+    videoEl.pause(); videoEl.removeAttribute('src');
+    videoEl.classList.remove('pmodal-media-active');
+    imgEl.classList.remove('pmodal-media-hidden');
+    imgEl.src = src;
+    muteBtn.classList.remove('visible');
+  }
+
+  function showVideo(src) {
+    imgEl.classList.add('pmodal-media-hidden');
+    videoEl.src = src;
+    videoEl.muted = true;
+    videoEl.classList.add('pmodal-media-active');
+    videoEl.play();
+    muteBtn.innerHTML = '🔇 Attiva audio';
+    muteBtn.classList.add('visible');
+  }
+
+  muteBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    videoEl.muted = !videoEl.muted;
+    muteBtn.innerHTML = videoEl.muted ? '🔇 Attiva audio' : '🔊 Disattiva audio';
+  });
+
   function goTo(i) {
     current = (i + slides.length) % slides.length;
-    imgEl.src = slides[current];
     dotsWrap.querySelectorAll('.pmodal-cdot').forEach(function(d, idx){ d.classList.toggle('active', idx === current); });
+    var slide = slides[current];
+    if (typeof slide === 'string' && slide.indexOf('video:') === 0) {
+      showVideo(slide.slice(6));
+    } else {
+      showImage(slide);
+    }
   }
 
   function openModal(card) {
@@ -1759,6 +1810,12 @@ function submitForm() {
     titleEl.textContent= (card.querySelector('.portfolio-title') || {textContent:''}).textContent;
     locEl.textContent  = (card.querySelector('.portfolio-meta')  || {textContent:''}).textContent.replace(/\s*·\s*\d{4}/,'');
     descEl.textContent = card.dataset.desc || '';
+
+    // Reset media state
+    videoEl.pause(); videoEl.removeAttribute('src');
+    videoEl.classList.remove('pmodal-media-active');
+    imgEl.classList.remove('pmodal-media-hidden');
+    muteBtn.classList.remove('visible');
 
     if (card.dataset.images) {
       slides = JSON.parse(card.dataset.images);
@@ -1771,7 +1828,7 @@ function submitForm() {
         dotsWrap.appendChild(d);
       });
       current = 0;
-      imgEl.src = slides[0];
+      goTo(0);
     } else {
       slides = [];
       imgWrap.classList.remove('has-carousel');
@@ -1785,6 +1842,10 @@ function submitForm() {
   }
 
   function closeModal() {
+    videoEl.pause(); videoEl.removeAttribute('src');
+    videoEl.classList.remove('pmodal-media-active');
+    imgEl.classList.remove('pmodal-media-hidden');
+    muteBtn.classList.remove('visible');
     modal.classList.add('closing');
     setTimeout(function(){ overlay.classList.remove('open'); document.body.style.overflow=''; }, 180);
   }
