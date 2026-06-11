@@ -561,6 +561,14 @@
             <div class="carousel-meta">Imola</div>
           </div>
         </div>
+        <div class="carousel-slide" data-img="https://res.cloudinary.com/dmegrbq5k/image/upload/v1781176374/IMG-20171214-WA0006_fh6059.jpg" data-images='["https://res.cloudinary.com/dmegrbq5k/image/upload/v1781176374/IMG-20171214-WA0006_fh6059.jpg","https://res.cloudinary.com/dmegrbq5k/image/upload/v1781176372/IMG-20171214-WA0005_nhi7x9.jpg","video:https://res.cloudinary.com/dmegrbq5k/video/upload/v1781177396/Untitled_design_59_yigqrn.mp4"]' data-slide-badges='["","",""]' data-badge="solar" data-desc="INSTALLAZIONE DI IMPIANTO FOTOVOLTAICO IN IMOLA, 200 kWp SU COPERTURA CURVA INDUSTRIALE">
+          <div class="carousel-slide-bg" style="background-image:url('https://res.cloudinary.com/dmegrbq5k/image/upload/v1781176374/IMG-20171214-WA0006_fh6059.jpg')"></div>
+          <div class="carousel-overlay">
+            <div class="carousel-tag">Fotovoltaico</div>
+            <div class="carousel-title">Impianto industriale</div>
+            <div class="carousel-meta">Imola</div>
+          </div>
+        </div>
       </div>
       </div>
       <button class="carousel-arrow prev" onclick="carouselPrev()" aria-label="Precedente">&#8592;</button>
@@ -573,6 +581,7 @@
       <button class="carousel-dot" onclick="carouselGo(3)"></button>
       <button class="carousel-dot" onclick="carouselGo(4)"></button>
       <button class="carousel-dot" onclick="carouselGo(5)"></button>
+      <button class="carousel-dot" onclick="carouselGo(6)"></button>
     </div>
     <div class="carousel-cta">
       <a href="../portfolio.html" class="btn-primary">Vedi tutto il portfolio →</a>
@@ -1010,45 +1019,82 @@ function submitForm() {
 
 // Carousel slides — open portfolio modal on click
 document.addEventListener('DOMContentLoaded', function(){
-  var overlay     = document.getElementById('pf-modal');
+  var overlay  = document.getElementById('pf-modal');
   if (!overlay) return;
-  var modal       = overlay.querySelector('.pmodal');
-  var imgEl       = overlay.querySelector('.pmodal-img');
-  var imgWrap     = overlay.querySelector('.pmodal-img-wrap');
-  var tagEl       = overlay.querySelector('.pmodal-tag');
-  var titleEl     = overlay.querySelector('.pmodal-title');
-  var locEl       = overlay.querySelector('.pmodal-location');
-  var descEl      = overlay.querySelector('.pmodal-desc');
-  var closeBtn    = overlay.querySelector('.pmodal-close');
-
+  var modal    = overlay.querySelector('.pmodal');
+  var imgEl    = overlay.querySelector('.pmodal-img');
+  var imgWrap  = overlay.querySelector('.pmodal-img-wrap');
+  var dotsWrap = overlay.querySelector('.pmodal-carousel-dots');
+  var prevBtn  = overlay.querySelector('.pmodal-prev');
+  var nextBtn  = overlay.querySelector('.pmodal-next');
+  var videoEl  = overlay.querySelector('.pmodal-video');
+  var muteBtn  = document.getElementById('pf-mute-btn');
+  var tagEl    = overlay.querySelector('.pmodal-tag');
+  var titleEl  = overlay.querySelector('.pmodal-title');
+  var locEl    = overlay.querySelector('.pmodal-location');
+  var descEl   = overlay.querySelector('.pmodal-desc');
+  var closeBtn = overlay.querySelector('.pmodal-close');
+  var slides = [], current = 0;
+  if (muteBtn) muteBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    videoEl.muted = !videoEl.muted;
+    muteBtn.textContent = videoEl.muted ? '🔇 Attiva audio' : '🔊 Disattiva audio';
+  });
+  function showImage(s){videoEl.pause();videoEl.removeAttribute('src');videoEl.classList.remove('pmodal-media-active');imgEl.classList.remove('pmodal-media-hidden');imgEl.src=s;if(muteBtn)muteBtn.classList.remove('visible');}
+  function showVideo(s){imgEl.classList.add('pmodal-media-hidden');videoEl.src=s;videoEl.muted=true;videoEl.classList.add('pmodal-media-active');videoEl.play();if(muteBtn){muteBtn.textContent='🔇 Attiva audio';muteBtn.classList.add('visible');}}
+  function goTo(i) {
+    current = (i + slides.length) % slides.length;
+    dotsWrap.querySelectorAll('.pmodal-cdot').forEach(function(d,idx){d.classList.toggle('active',idx===current);});
+    var s = slides[current];
+    if (typeof s==='string'&&s.indexOf('video:')===0){showVideo(s.slice(6));}else{showImage(s);}
+  }
   function openModal(slide) {
     var tagNode  = slide.querySelector('.carousel-tag');
     var titleNode= slide.querySelector('.carousel-title');
     var locNode  = slide.querySelector('.carousel-meta');
-    imgEl.src          = slide.dataset.img || '';
-    imgEl.alt          = titleNode ? titleNode.textContent : '';
     tagEl.className    = 'pmodal-tag ' + (slide.dataset.badge || 'solar');
     tagEl.textContent  = tagNode  ? tagNode.textContent  : '';
     titleEl.textContent= titleNode? titleNode.textContent: '';
     locEl.textContent  = locNode  ? locNode.textContent.replace(/\s*·\s*\d{4}/,'') : '';
     descEl.textContent = slide.dataset.desc || '';
-    modal.classList.remove('closing');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    videoEl.pause();videoEl.removeAttribute('src');videoEl.classList.remove('pmodal-media-active');
+    imgEl.classList.remove('pmodal-media-hidden');if(muteBtn)muteBtn.classList.remove('visible');
+    if (slide.dataset.images) {
+      slides = JSON.parse(slide.dataset.images);
+      imgWrap.classList.add('has-carousel');
+      dotsWrap.innerHTML='';
+      slides.forEach(function(_,i){
+        var d=document.createElement('button');
+        d.className='pmodal-cdot'+(i===0?' active':'');
+        d.addEventListener('click',function(e){e.stopPropagation();goTo(i);});
+        dotsWrap.appendChild(d);
+      });
+      current=0; goTo(0);
+    } else {
+      slides=[]; imgWrap.classList.remove('has-carousel'); dotsWrap.innerHTML='';
+      imgEl.src=slide.dataset.img||'';
+    }
+    imgEl.alt=titleEl.textContent;
+    modal.classList.remove('closing'); overlay.classList.add('open'); document.body.style.overflow='hidden';
   }
   function closeModal() {
+    videoEl.pause();videoEl.removeAttribute('src');videoEl.classList.remove('pmodal-media-active');
+    imgEl.classList.remove('pmodal-media-hidden');if(muteBtn)muteBtn.classList.remove('visible');
     modal.classList.add('closing');
-    setTimeout(function(){ overlay.classList.remove('open'); document.body.style.overflow=''; }, 180);
+    setTimeout(function(){overlay.classList.remove('open');document.body.style.overflow='';},180);
   }
-
+  if(prevBtn) prevBtn.addEventListener('click',function(e){e.stopPropagation();goTo(current-1);});
+  if(nextBtn) nextBtn.addEventListener('click',function(e){e.stopPropagation();goTo(current+1);});
   document.querySelectorAll('.carousel-slide[data-img]').forEach(function(slide){
-    slide.style.cursor = 'pointer';
-    slide.addEventListener('click', function(){ openModal(slide); });
+    slide.style.cursor='pointer';
+    slide.addEventListener('click',function(){openModal(slide);});
   });
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
-  document.addEventListener('keydown', function(e){
-    if (e.key==='Escape' && overlay.classList.contains('open')) closeModal();
+  closeBtn.addEventListener('click',closeModal);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&overlay.classList.contains('open'))closeModal();
+    if(e.key==='ArrowLeft'&&slides.length)goTo(current-1);
+    if(e.key==='ArrowRight'&&slides.length)goTo(current+1);
   });
 });
 
@@ -1093,6 +1139,21 @@ document.addEventListener('DOMContentLoaded', function(){
   .pmodal-logo .dot{width:7px;height:7px;}
   .pmodal-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.92);border:none;border-radius:50%;width:32px;height:32px;font-size:18px;line-height:1;cursor:pointer;color:var(--text-dark);display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 2px 8px rgba(0,0,0,0.14);transition:background 0.15s;}
   .pmodal-close:hover{background:var(--off-white);}
+
+  .pmodal-video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;display:none;}
+  .pmodal-video.pmodal-media-active{display:block;}
+  .pmodal-img.pmodal-media-hidden{display:none;}
+  .pmodal-prev,.pmodal-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.82);border:none;border-radius:50%;width:36px;height:36px;font-size:22px;cursor:pointer;color:var(--text-dark);display:none;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.18);transition:background 0.15s;z-index:2;padding:0;line-height:1;}
+  .pmodal-prev{left:10px;} .pmodal-next{right:10px;}
+  .pmodal-prev:hover,.pmodal-next:hover{background:rgba(255,255,255,1);}
+  .pmodal-img-wrap.has-carousel .pmodal-prev,.pmodal-img-wrap.has-carousel .pmodal-next{display:flex;}
+  .pmodal-carousel-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:none;gap:6px;z-index:2;}
+  .pmodal-img-wrap.has-carousel .pmodal-carousel-dots{display:flex;}
+  .pmodal-cdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.5);border:none;cursor:pointer;padding:0;transition:background 0.15s;}
+  .pmodal-cdot.active{background:#fff;}
+  .pf-mute-btn{position:absolute;bottom:46px;right:10px;z-index:3;display:none;align-items:center;gap:5px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50px;padding:5px 12px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;}
+  .pf-mute-btn.visible{display:flex;}
+  .pf-mute-btn:hover{background:rgba(0,0,0,0.80);}
   @media(max-width:600px){.pmodal-overlay{padding:10px;align-items:flex-end;}.pmodal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0;}.pmodal-img{aspect-ratio:4/3;}}
 </style>
 <div id="pf-modal" class="pmodal-overlay" role="dialog" aria-modal="true">
@@ -1100,6 +1161,11 @@ document.addEventListener('DOMContentLoaded', function(){
     <button class="pmodal-close" aria-label="Chiudi">&#x2715;</button>
     <div class="pmodal-img-wrap">
       <img class="pmodal-img" src="" alt="">
+      <video class="pmodal-video" autoplay loop muted playsinline></video>
+      <button class="pf-mute-btn" id="pf-mute-btn">🔇 Attiva audio</button>
+      <button class="pmodal-prev" aria-label="Precedente">&#8249;</button>
+      <button class="pmodal-next" aria-label="Successivo">&#8250;</button>
+      <div class="pmodal-carousel-dots"></div>
       <div class="pmodal-logo">
         <div class="nav-logo-dots">
           <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
