@@ -399,7 +399,7 @@
 </div>
 <section class="hero">
   <video class="hero-video" autoplay loop muted playsinline preload="auto">
-    <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/q_auto,f_auto/v1781179840/Roofing-compressed_tncmfg.mp4" type="video/mp4">
+    <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1781116609/Roof-nrg-energia-compressed_kfo1iq.mp4" type="video/mp4">
   </video>
   <div class="hero-vignette"></div>
   <div class="hero-inner">
@@ -1148,12 +1148,7 @@ function submitForm() {
 
 <script>
 (function() {
-  // Set cinematic playback rate
   var v = document.querySelector('.hero-video');
-  if (v) {
-    function setRate() { v.playbackRate = 0.4; }
-    if (v.readyState >= 1) { setRate(); } else { v.addEventListener('loadedmetadata', setRate, { once: true }); }
-  }
   var hero = document.querySelector('.hero');
   if (v && hero) {
     v.addEventListener('playing', function() {
