@@ -546,8 +546,9 @@
     <button class="pmodal-close" aria-label="Close">&#x2715;</button>
     <div class="pmodal-img-wrap">
       <img class="pmodal-img" src="" alt="">
-      <video class="pmodal-video" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:none;"></video>
-      <button class="pmodal-mute-btn" id="pmodal-mute-btn">🔇 Activate audio</button>
+      <video class="pmodal-video" src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1781177396/Untitled_design_59_yigqrn.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:none;">
+      </video>
+      <button id="pmodal-mute-btn" style="position:absolute;bottom:46px;right:10px;z-index:3;display:none;align-items:center;gap:5px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50px;padding:5px 14px;font-size:13px;cursor:pointer;">🔇 Mute</button>
       <div class="pmodal-slide-badge"></div>
       <button class="pmodal-prev" aria-label="Previous">&#8249;</button>
       <button class="pmodal-next" aria-label="Next">&#8250;</button>
@@ -620,7 +621,7 @@
     if (muteBtn) muteBtn.addEventListener('click', function(e){
       e.stopPropagation();
       videoEl.muted = !videoEl.muted;
-      muteBtn.textContent = videoEl.muted ? '🔇 Activate audio' : '🔊 Mute audio';
+      muteBtn.textContent = videoEl.muted ? '🔇 Mute' : '🔊 Unmute';
     });
     function goTo(i) {
       current = (i + slides.length) % slides.length;
@@ -629,9 +630,11 @@
       dotsWrap.querySelectorAll('.pmodal-cdot').forEach(function(d, idx){ d.classList.toggle('active', idx === current); });
       if (typeof slide === 'string' && slide.indexOf('video:') === 0) {
         imgEl.style.display = 'none';
+        videoEl.src = slide.slice(6);
+        videoEl.muted = true;
         videoEl.style.display = 'block';
-        videoEl.play();
-        if (muteBtn) muteBtn.style.display = 'flex';
+        var p = videoEl.play(); if (p && p.catch) p.catch(function(){});
+        if (muteBtn) { muteBtn.style.display = 'flex'; muteBtn.textContent = '🔇 Mute'; }
       } else {
         videoEl.pause();
         videoEl.style.display = 'none';
