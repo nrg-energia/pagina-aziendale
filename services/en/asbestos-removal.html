@@ -861,9 +861,15 @@ document.addEventListener('DOMContentLoaded', function(){
     if (label) { slideBadgeEl.textContent = label; slideBadgeEl.style.display = 'inline-block'; }
     else        { slideBadgeEl.style.display = 'none'; }
   }
+  var videoEl  = overlay.querySelector('.pmodal-video');
+  var muteBtn  = document.getElementById('pf-mute-btn');
+  function showImage(s){ videoEl.pause();videoEl.removeAttribute('src');videoEl.classList.remove('pmodal-media-active');imgEl.classList.remove('pmodal-media-hidden');imgEl.src=s;muteBtn.classList.remove('visible'); }
+  function showVideo(s){ imgEl.classList.add('pmodal-media-hidden');videoEl.src=s;videoEl.muted=true;videoEl.classList.add('pmodal-media-active');videoEl.play();muteBtn.innerHTML='🔇 Activate audio';muteBtn.classList.add('visible'); }
+  muteBtn.addEventListener('click',function(e){e.stopPropagation();videoEl.muted=!videoEl.muted;muteBtn.innerHTML=videoEl.muted?'🔇 Activate audio':'🔊 Mute audio';});
   function goTo(i) {
     current = (i + slides.length) % slides.length;
-    imgEl.src = slides[current];
+    var slide = slides[current];
+    if (typeof slide==='string'&&slide.indexOf('video:')===0){showVideo(slide.slice(6));}else{showImage(slide);}
     dotsWrap.querySelectorAll('.pmodal-cdot').forEach(function(d, idx){ d.classList.toggle('active', idx === current); });
     updateSlideBadge(current);
   }
@@ -877,6 +883,7 @@ document.addEventListener('DOMContentLoaded', function(){
     locEl.textContent  = locNode  ? locNode.textContent.replace(/\s*·\s*\d{4}/,'') : '';
     descEl.textContent = card.dataset.desc || '';
     slideBadges = card.dataset.slideBadges ? JSON.parse(card.dataset.slideBadges) : [];
+    videoEl.pause();videoEl.removeAttribute('src');videoEl.classList.remove('pmodal-media-active');imgEl.classList.remove('pmodal-media-hidden');muteBtn.classList.remove('visible');
     if (card.dataset.images) {
       slides = JSON.parse(card.dataset.images);
       imgWrap.classList.add('has-carousel');
@@ -887,7 +894,7 @@ document.addEventListener('DOMContentLoaded', function(){
         d.addEventListener('click', function(e){ e.stopPropagation(); goTo(i); });
         dotsWrap.appendChild(d);
       });
-      current = 0; imgEl.src = slides[0]; updateSlideBadge(0);
+      current = 0; goTo(0);
     } else {
       slides = []; imgWrap.classList.remove('has-carousel'); dotsWrap.innerHTML = '';
       slideBadgeEl.style.display = 'none'; imgEl.src = card.dataset.img || '';
@@ -896,6 +903,7 @@ document.addEventListener('DOMContentLoaded', function(){
     modal.classList.remove('closing'); overlay.classList.add('open'); document.body.style.overflow = 'hidden';
   }
   function closeModal() {
+    videoEl.pause();videoEl.removeAttribute('src');videoEl.classList.remove('pmodal-media-active');imgEl.classList.remove('pmodal-media-hidden');muteBtn.classList.remove('visible');
     modal.classList.add('closing');
     setTimeout(function(){ overlay.classList.remove('open'); document.body.style.overflow=''; }, 180);
   }
@@ -983,9 +991,9 @@ document.addEventListener('DOMContentLoaded', function(){
   .pmodal-video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;display:none;}
   .pmodal-video.pmodal-media-active{display:block;}
   .pmodal-img.pmodal-media-hidden{display:none;}
-  .pf-mute-btn{position:absolute;bottom:46px;right:10px;z-index:3;display:none;align-items:center;gap:5px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50px;padding:5px 12px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;}
-  .pf-mute-btn.visible{display:flex;}
-  .pf-mute-btn:hover{background:rgba(0,0,0,0.80);}
+  .pmodal-mute-btn{position:absolute;bottom:46px;right:10px;z-index:3;display:none;align-items:center;gap:5px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50px;padding:5px 12px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;}
+  .pmodal-mute-btn.visible{display:flex;}
+  .pmodal-mute-btn:hover{background:rgba(0,0,0,0.80);}
   @media(max-width:600px){.pmodal-overlay{padding:10px;align-items:flex-end;}.pmodal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0;}.pmodal-img{aspect-ratio:4/3;}.pmodal-video{aspect-ratio:4/3;}}
 </style>
 <div id="pf-modal" class="pmodal-overlay" role="dialog" aria-modal="true">
@@ -994,7 +1002,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <div class="pmodal-img-wrap">
       <img class="pmodal-img" src="" alt="">
       <video class="pmodal-video" autoplay loop muted playsinline></video>
-      <button class="pf-mute-btn" id="pf-mute-btn">🔇 Activate audio</button>
+      <button class="pmodal-mute-btn" id="pf-mute-btn">🔇 Activate audio</button>
       <div class="pmodal-slide-badge"></div>
       <button class="pmodal-prev" aria-label="Previous">&#8249;</button>
       <button class="pmodal-next" aria-label="Next">&#8250;</button>
