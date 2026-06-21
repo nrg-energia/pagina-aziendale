@@ -501,10 +501,11 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       gap: 12px;
-      margin-left: -5vw;
-      margin-right: -5vw;
-      padding-left: 5vw;
-      padding-right: 5vw;
+      margin-left: -5%;
+      margin-right: -5%;
+      padding-left: 16px;
+      padding-right: 16px;
+      scroll-padding-left: 16px;
     }
     .news-grid::-webkit-scrollbar { display: none; }
 
@@ -1957,7 +1958,8 @@ function submitForm() {
 
   function nScrollTo(index) {
     nCurrent = Math.max(0, Math.min(index, ncards.length - 1));
-    ngrid.scrollTo({ left: ncards[nCurrent].offsetLeft - ngrid.offsetLeft, behavior: 'smooth' });
+    var cardW = ncards[0].offsetWidth + 12;
+    ngrid.scrollTo({ left: nCurrent * cardW, behavior: 'smooth' });
     nUpdateDots();
   }
 
