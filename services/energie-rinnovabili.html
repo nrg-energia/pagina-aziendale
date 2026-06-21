@@ -272,7 +272,7 @@
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .page-nav-link { padding: 12px 12px; font-size: 12px; }
+      .page-nav-link { padding: 16px 14px; font-size: 14px; }
     }
     /* MODAL */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; background: rgba(10,30,18,0.7); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
@@ -906,7 +906,18 @@ function submitForm() {
   function onScroll() {
     let current = targets[0];
     targets.forEach(t => { if (window.scrollY >= t.offsetTop - 160) current = t; });
-    links.forEach(l => l.classList.toggle('active', l.dataset.target === (current && current.id)));
+    links.forEach(l => {
+      const isActive = l.dataset.target === (current && current.id);
+      l.classList.toggle('active', isActive);
+      if (isActive) {
+        const navInner = document.getElementById('page-nav-inner');
+        if (navInner) {
+          const linkLeft = l.offsetLeft - navInner.offsetLeft;
+          const linkCenter = linkLeft + l.offsetWidth / 2;
+          navInner.scrollTo({ left: linkCenter - navInner.clientWidth / 2, behavior: 'smooth' });
+        }
+      }
+    });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
