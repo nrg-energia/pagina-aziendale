@@ -391,8 +391,9 @@
       background-size: cover;
       background-position: center;
     }
-    /* Disable zoom animation — avoids aggressive cropping on small screens */
-    .hero-slide.active { animation: none; }
+    /* Subtle zoom on mobile — less aggressive than desktop to avoid cropping */
+    @keyframes heroZoomMobile { from { transform: scale(1); } to { transform: scale(1.04); } }
+    .hero-slide.active { animation: heroZoomMobile 8s ease-out forwards; }
 
     /*
      * Dark gradient overlay: solid dark band over the bottom 55% fading to
@@ -1884,9 +1885,8 @@ function submitForm() {
 
   function pScrollTo(index) {
     pCurrent = Math.max(0, Math.min(index, pcards.length - 1));
-    var card   = pcards[pCurrent];
-    var offset = card.offsetLeft - pgrid.offsetLeft;
-    pgrid.scrollTo({ left: offset, behavior: 'smooth' });
+    var cardW  = pcards[0].offsetWidth + 12; // card width + gap
+    pgrid.scrollTo({ left: pCurrent * cardW, behavior: 'smooth' });
     pUpdateDots();
   }
 
