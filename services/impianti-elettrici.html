@@ -296,10 +296,10 @@
   </a>
   <div class="nav-links">
     <a href="../index.html#servizi" class="active">Servizi</a>
-    <a href="../index.html#portfolio">Portfolio</a>
+    <a href="../portfolio.html">Portfolio</a>
     <a href="../index.html#chi-siamo">Chi siamo</a>
     <a href="../index.html#news">News &amp; Blog</a>
-    <a href="../index.html#contatti">Contatti</a>
+    <a href="#contatti">Contatti</a>
     <a href="#" onclick="openModal(); return false;" class="nav-cta">Richiedi preventivo</a>
     <a href="en/electrical-systems.html" class="lang-toggle">🇬🇧 EN</a>
   </div>
@@ -310,10 +310,10 @@
 
 <div class="mobile-menu" id="mobile-menu">
   <a href="../index.html#servizi">Servizi</a>
-  <a href="../index.html#portfolio">Portfolio</a>
+  <a href="../portfolio.html">Portfolio</a>
   <a href="../index.html#chi-siamo">Chi siamo</a>
   <a href="../index.html#news">News &amp; Blog</a>
-  <a href="../index.html#contatti">Contatti</a>
+  <a href="#contatti">Contatti</a>
   <a href="#" onclick="openModal(); closeMobileMenu(); return false;" class="mobile-cta">Richiedi preventivo</a>
   <a href="en/electrical-systems.html" class="mobile-menu-lang"><span>🇬🇧</span>&nbsp;EN</a>
 </div>
@@ -395,7 +395,7 @@
     </div>
   </div>
 </section>
-<section class="cta-banner">
+<section class="cta-banner" id="contatti">
   <div class="section-inner" style="text-align:center;">
     <div class="section-label" style="color:var(--yellow);display:flex;justify-content:center;">Pronti a iniziare?</div>
     <h2 style="color:var(--white);">Richiedi il tuo preventivo gratuito</h2>
@@ -437,17 +437,17 @@
         <h4>Azienda</h4>
         <ul>
           <li><a href="../index.html#chi-siamo">Chi siamo</a></li>
-          <li><a href="../index.html#portfolio">Portfolio</a></li>
+          <li><a href="../portfolio.html">Portfolio</a></li>
           <li><a href="../index.html#news">News &amp; Blog</a></li>
-          <li><a href="../index.html#contatti">Contatti</a></li>
+          <li><a href="#contatti">Contatti</a></li>
         </ul>
       </div>
       <div class="footer-col footer-contact">
         <h4>Contatti</h4>
         <p>
-          <a href="mailto:info@nrgenergia.it">info@nrgenergia.it</a><br/>
+          <a href="mailto:info@nrg-energia.it">info@nrg-energia.it</a><br/>
           <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
-          <span style="color:rgba(255,255,255,0.4); font-size:13px;">Lun–Ven: 8:30–12:30<br/>Lun–Ven: 14:30–17:30</span>
+          <span style="color:rgba(255,255,255,0.4); font-size:13px;">Lun–Ven: 8:30–12:30<br/>Lun–Ven: 14:30–18:30</span>
         </p>
       </div>
     </div>
@@ -695,5 +695,21 @@ function submitForm() {
 })();
 </script>
 
+<div id="lightbox-overlay" class="lightbox-overlay"><button class="lightbox-close" id="lightbox-close">&#x2715;</button><img id="lightbox-img" src="" alt=""></div>
+<script>
+(function(){
+  var lb=document.getElementById("lightbox-overlay");
+  var lbImg=document.getElementById("lightbox-img");
+  var lbClose=document.getElementById("lightbox-close");
+  var zoomBtn=document.getElementById("pmodal-zoom-btn");
+  var pImg=document.querySelector(".pmodal-img");
+  function openLightbox(){lbImg.src=pImg.src;lb.classList.add("open");document.body.style.overflow="hidden";}
+  function closeLightbox(){lb.classList.remove("open");document.body.style.overflow="";}
+  zoomBtn.addEventListener("click",openLightbox);
+  lbClose.addEventListener("click",closeLightbox);
+  lb.addEventListener("click",function(e){if(e.target===lb)closeLightbox();});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&lb.classList.contains("open"))closeLightbox();});
+})();
+</script>
 </body>
 </html>

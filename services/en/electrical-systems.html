@@ -243,10 +243,10 @@
   </a>
   <div class="nav-links">
     <a href="../../index.html?lang=en#servizi" class="active">Services</a>
-    <a href="../../index.html?lang=en#portfolio">Portfolio</a>
+    <a href="portfolio.html">Portfolio</a>
     <a href="../../index.html?lang=en#chi-siamo">About us</a>
     <a href="../../index.html?lang=en#news">News &amp; Blog</a>
-    <a href="../../index.html?lang=en#contatti">Contact</a>
+    <a href="#contatti">Contact</a>
     <a href="#" onclick="openModal(); return false;" class="nav-cta">Get a quote</a>
     <a href="../impianti-elettrici.html" class="lang-toggle">🇮🇹 IT</a>
   </div>
@@ -257,10 +257,10 @@
 
 <div class="mobile-menu" id="mobile-menu">
   <a href="../../index.html?lang=en#servizi">Services</a>
-  <a href="../../index.html?lang=en#portfolio">Portfolio</a>
+  <a href="portfolio.html">Portfolio</a>
   <a href="../../index.html?lang=en#chi-siamo">About us</a>
   <a href="../../index.html?lang=en#news">News &amp; Blog</a>
-  <a href="../../index.html?lang=en#contatti">Contact</a>
+  <a href="#contatti">Contact</a>
   <a href="#" onclick="openModal(); closeMobileMenu(); return false;" class="mobile-cta">Get a quote</a>
   <a href="../impianti-elettrici.html" class="mobile-menu-lang"><span>🇮🇹</span>&nbsp;IT</a>
 </div>
@@ -336,7 +336,7 @@
     </div>
   </div>
 </section>
-<section class="cta-banner">
+<section class="cta-banner" id="contatti">
   <div class="section-inner" style="text-align:center;">
     <div class="section-label" style="color:var(--yellow);display:flex;justify-content:center;">Ready to start?</div>
     <h2 style="color:var(--white);">Get your free quote</h2>
@@ -370,14 +370,14 @@
       </ul></div>
       <div class="footer-col"><h4>Company</h4><ul>
         <li><a href="../../index.html?lang=en#chi-siamo">About us</a></li>
-        <li><a href="../../index.html?lang=en#portfolio">Portfolio</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
         <li><a href="../../index.html?lang=en#news">News &amp; Blog</a></li>
-        <li><a href="../../index.html?lang=en#contatti">Contact</a></li>
+        <li><a href="#contatti">Contact</a></li>
       </ul></div>
       <div class="footer-col footer-contact"><h4>Contact</h4>
-        <p><a href="mailto:info@nrgenergia.it">info@nrgenergia.it</a><br/>
+        <p><a href="mailto:info@nrg-energia.it">info@nrg-energia.it</a><br/>
         <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
-        <span style="color:rgba(255,255,255,0.4);font-size:13px;">Mon–Fri: 8:30–12:30<br/>Mon–Fri: 14:30–17:30</span></p>
+        <span style="color:rgba(255,255,255,0.4);font-size:13px;">Mon–Fri: 8:30–12:30<br/>Mon–Fri: 14:30–18:30</span></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -623,5 +623,21 @@ function submitForm() {
 })();
 </script>
 
+<div id="lightbox-overlay" class="lightbox-overlay"><button class="lightbox-close" id="lightbox-close">&#x2715;</button><img id="lightbox-img" src="" alt=""></div>
+<script>
+(function(){
+  var lb=document.getElementById("lightbox-overlay");
+  var lbImg=document.getElementById("lightbox-img");
+  var lbClose=document.getElementById("lightbox-close");
+  var zoomBtn=document.getElementById("pmodal-zoom-btn");
+  var pImg=document.querySelector(".pmodal-img");
+  function openLightbox(){lbImg.src=pImg.src;lb.classList.add("open");document.body.style.overflow="hidden";}
+  function closeLightbox(){lb.classList.remove("open");document.body.style.overflow="";}
+  zoomBtn.addEventListener("click",openLightbox);
+  lbClose.addEventListener("click",closeLightbox);
+  lb.addEventListener("click",function(e){if(e.target===lb)closeLightbox();});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&lb.classList.contains("open"))closeLightbox();});
+})();
+</script>
 </body>
 </html>
