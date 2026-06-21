@@ -177,12 +177,34 @@
       .why-grid { grid-template-columns: 1fr; gap: 40px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
+
+  /* Page-nav chevrons — mobile only */
+  .pnav-chevron {
+    display: none;
+    position: absolute; top: 0; bottom: 0;
+    width: 36px; align-items: center; justify-content: center;
+    background: none; border: none; color: rgba(255,255,255,0.7);
+    font-size: 22px; cursor: pointer; z-index: 2;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .pnav-chevron:hover { color: #fff; }
+  .pnav-chevron.hidden { opacity: 0; pointer-events: none; }
+  .pnav-chevron-left  { left: 0; background: linear-gradient(to right, var(--green-dark) 60%, transparent); padding-right: 6px; }
+  .pnav-chevron-right { right: 0; background: linear-gradient(to left,  var(--green-dark) 60%, transparent); padding-left: 6px; }
+
+  @media (max-width: 768px) {
+    .page-nav { position: sticky; top: 72px; z-index: 90; padding: 0; }
+    .pnav-chevron { display: flex; }
+    .page-nav-inner { padding: 0 36px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+  }
+
     @media (max-width: 600px) {
       .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr; }
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .page-nav-link { padding: 12px 12px; font-size: 12px; }
+      .page-nav-link { padding: 16px 14px; font-size: 14px; }
     }
     /* MODAL */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; background: rgba(10,30,18,0.7); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
@@ -332,8 +354,9 @@
     </div>
   </div>
 </section>
-<div class="page-nav">
-  <div class="page-nav-inner">
+<div class="page-nav" id="page-nav">
+  <button class="pnav-chevron pnav-chevron-left" id="pnav-left" aria-label="Scorri sinistra">&#8249;</button>
+  <div class="page-nav-inner" id="page-nav-inner">
     <a href="#cosa-offriamo" class="page-nav-link" data-target="cosa-offriamo">Cosa offriamo</a><div class="page-nav-divider"></div><a href="#come-lavoriamo" class="page-nav-link" data-target="come-lavoriamo">Come lavoriamo</a><div class="page-nav-divider"></div><a href="#perche-sceglierci" class="page-nav-link" data-target="perche-sceglierci">Perché sceglierci</a>
   </div>
 </div>
@@ -544,7 +567,18 @@
     function onScroll() {
       let current = targets[0];
       targets.forEach(t => { if (window.scrollY >= t.offsetTop - 160) current = t; });
-      links.forEach(l => l.classList.toggle('active', l.dataset.target === (current && current.id)));
+      links.forEach(l => {
+      const isActive = l.dataset.target === (current && current.id);
+      l.classList.toggle('active', isActive);
+      if (isActive) {
+        const navInner = document.getElementById('page-nav-inner');
+        if (navInner) {
+          const linkLeft = l.offsetLeft - navInner.offsetLeft;
+          const linkCenter = linkLeft + l.offsetWidth / 2;
+          navInner.scrollTo({ left: linkCenter - navInner.clientWidth / 2, behavior: 'smooth' });
+        }
+      }
+    });
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -658,7 +692,18 @@ function submitForm() {
   function onScroll() {
     let current = targets[0];
     targets.forEach(t => { if (window.scrollY >= t.offsetTop - 160) current = t; });
-    links.forEach(l => l.classList.toggle('active', l.dataset.target === (current && current.id)));
+    links.forEach(l => {
+      const isActive = l.dataset.target === (current && current.id);
+      l.classList.toggle('active', isActive);
+      if (isActive) {
+        const navInner = document.getElementById('page-nav-inner');
+        if (navInner) {
+          const linkLeft = l.offsetLeft - navInner.offsetLeft;
+          const linkCenter = linkLeft + l.offsetWidth / 2;
+          navInner.scrollTo({ left: linkCenter - navInner.clientWidth / 2, behavior: 'smooth' });
+        }
+      }
+    });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -709,6 +754,24 @@ function submitForm() {
   lbClose.addEventListener("click",closeLightbox);
   lb.addEventListener("click",function(e){if(e.target===lb)closeLightbox();});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&lb.classList.contains("open"))closeLightbox();});
+})();
+</script>
+<script>
+(function(){
+  var inner = document.getElementById('page-nav-inner');
+  var btnL  = document.getElementById('pnav-left');
+  var btnR  = document.getElementById('pnav-right');
+  if (!inner || !btnL || !btnR) return;
+  function update() {
+    var atStart = inner.scrollLeft <= 4;
+    var atEnd   = inner.scrollLeft >= inner.scrollWidth - inner.clientWidth - 4;
+    btnL.classList.toggle('hidden', atStart);
+    btnR.classList.toggle('hidden', atEnd);
+  }
+  inner.addEventListener('scroll', update, { passive: true });
+  btnL.addEventListener('click', function(){ inner.scrollBy({ left: -120, behavior: 'smooth' }); });
+  btnR.addEventListener('click', function(){ inner.scrollBy({ left:  120, behavior: 'smooth' }); });
+  update();
 })();
 </script>
 </body>
