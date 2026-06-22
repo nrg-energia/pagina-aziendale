@@ -245,6 +245,19 @@
     .pnav-chevron { display: flex; }
     .page-nav-inner { padding: 0 36px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
+    /* Hero mobile fixes */
+    .hero h1 { font-size: 2rem; }
+    .hero h1 span { white-space: normal; }
+    .hero p { font-size: 15px; }
+    .hero-actions .btn-primary { font-size: 14px; padding: 13px 24px; white-space: nowrap; }
+    .hero-desc-full { display: none; }
+    .hero-desc-short { display: inline; }
+    .btn-full { display: none; }
+  }
+  @media (min-width: 769px) {
+    .hero-desc-short { display: none; }
+    .hero-desc-full { display: inline; }
+    .btn-full { display: inline; }
   }
 
   @media (max-width: 600px) { .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr; } .stats-inner { grid-template-columns: 1fr 1fr; } .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); } .footer-grid { grid-template-columns: 1fr; gap: 32px; } .page-nav-link { padding: 16px 14px; font-size: 14px; } }
@@ -394,12 +407,11 @@
         <span style="color:rgba(255,255,255,0.8)">Roofing</span>
       </div>
       <div class="hero-badge">Roofing</div>
-      <h1><span style="color: white;">Industrial &amp; residential</span><br>
-<span style="color: white;">roofing </span><span style="color: #f5c400;">with optional</span><br>
-<span style="color: #f5c400;">solar power integration</span></h1>
-      <p>We design durable roofing with innovative, eco-compatible materials that integrate seamlessly with solar-powered technology, maximising yield and protection.</p>
+      <h1><span style="color: white;">Industrial &amp; residential roofing</span><br>
+<span class="hero-desc-full" style="color: #f5c400;">with optional solar power integration</span><span class="hero-desc-short" style="color: #f5c400;">with solar integration</span></h1>
+      <p><span class="hero-desc-full">We design durable roofing with innovative, eco-compatible materials that integrate seamlessly with solar-powered technology, maximising yield and protection.</span><span class="hero-desc-short">We design durable roofing with innovative, eco-compatible materials that integrate seamlessly with solar-powered technology.</span></p>
       <div class="hero-actions">
-        <a href="#" onclick="openModal(); return false;" class="btn-primary">Get a free quote →</a>
+        <a href="#" onclick="openModal(); return false;" class="btn-primary"><span class="btn-full">Get a free quote →</span><span class="btn-short">Get a quote →</span></a>
       </div>
     </div>
   </div>
