@@ -850,7 +850,7 @@ function submitForm() {
     resetProgress(auto);
   }
   tabs.forEach(function(tab, i) {
-    tab.addEventListener('click', function() { clearInterval(timer); goTo(i, false); });
+    tab.addEventListener('click', function() { clearInterval(timer); goTo(i, true); startTimer(); });
   });
   var prevBtn = document.getElementById('processoPrev');
   var nextBtn = document.getElementById('processoNext');

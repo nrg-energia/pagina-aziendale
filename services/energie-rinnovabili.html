@@ -1042,8 +1042,8 @@ function submitForm() {
   tabs.forEach(function(tab, i) {
     tab.addEventListener('click', function() {
       clearInterval(timer);
-      timer = null;
-      goTo(i, false);
+      goTo(i, true);
+      startTimer();
     });
   });
 

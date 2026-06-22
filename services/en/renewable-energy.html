@@ -880,7 +880,8 @@ function submitForm() {
   tabs.forEach(function(tab, i) {
     tab.addEventListener('click', function() {
       clearInterval(timer);
-      goTo(i, false);
+      goTo(i, true);
+      startTimer();
     });
   });
 
