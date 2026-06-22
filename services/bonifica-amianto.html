@@ -290,6 +290,15 @@
     .pnav-chevron { display: flex; }
     .page-nav-inner { padding: 0 36px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
+    /* Hero mobile fixes */
+    .hero h1 { font-size: 2rem; }
+    .hero h1 span { white-space: normal; }
+    .hero p { font-size: 15px; }
+    .hero-actions .btn-primary { font-size: 14px; padding: 13px 24px; white-space: nowrap; }
+    .btn-full { display: none; }
+  }
+  @media (min-width: 769px) {
+    .btn-full { display: inline; }
   }
 
     @media (max-width: 600px) {
@@ -451,7 +460,7 @@
 <span style="color: #f5c400;">in piena sicurezza</span></h1>
       <p>Iscritti all'Albo Nazionale Gestori Ambientali (Cat. 10 e Cat. 5). Gestiamo l'intero processo: dalla valutazione del rischio al conferimento in discarica autorizzata.</p>
       <div class="hero-actions">
-        <a href="#" onclick="openModal(); return false;" class="btn-primary">Richiedi preventivo gratuito →</a>
+        <a href="#" onclick="openModal(); return false;" class="btn-primary"><span class="btn-full">Richiedi preventivo gratuito →</span><span class="btn-short">Richiedi preventivo →</span></a>
       </div>
     </div>
   </div>
