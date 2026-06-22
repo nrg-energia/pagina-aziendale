@@ -238,6 +238,18 @@
     .pnav-chevron { display: flex; }
     .page-nav-inner { padding: 0 36px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
+    /* Hero mobile fixes */
+    .hero h1 { font-size: 2.4rem; }
+    .hero h1 em { white-space: normal; }
+    .hero p { font-size: 15px; }
+    .hero-desc-full { display: none; }
+    .hero-desc-short { display: inline; }
+    .hero-mob-br { display: inline; }
+    .hero-dsk-br { display: none; }
+  }
+  @media (min-width: 769px) {
+    .hero-mob-br { display: none; }
+    .hero-dsk-br { display: inline; }
   }
 
   @media (max-width: 600px) { .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr; } .stats-inner { grid-template-columns: 1fr 1fr; } .stat-item { border-right: none; border-bottom: 1px solid var(--warm-gray); } .footer-grid { grid-template-columns: 1fr; gap: 32px; } .page-nav-link { padding: 16px 14px; font-size: 14px; } }
@@ -387,8 +399,8 @@
         <span style="color:rgba(255,255,255,0.8)">Renewable Energy</span>
       </div>
       <div class="hero-badge">Renewable Energy</div>
-      <h1>Solar energy for<br><em>homes and businesses</em></h1>
-      <p>FROM SUN TO ENERGY: we have always worked to make energy more sustainable and respectful of the environment, using the natural resource of the sun in the most efficient way possible to meet the energy needs of today and tomorrow.</p>
+      <h1>Solar energy<span class="hero-dsk-br"> for<br></span><br class="hero-mob-br"><span class="hero-mob-br">for homes<br></span><em><span class="hero-dsk-br">homes and businesses</span><span class="hero-mob-br">and businesses</span></em></h1>
+      <p><span class="hero-desc-full">FROM SUN TO ENERGY: we have always worked to make energy more sustainable and respectful of the environment, using the natural resource of the sun in the most efficient way possible to meet the energy needs of today and tomorrow.</span><span class="hero-desc-short">FROM SUN TO ENERGY: we have always worked to make energy more sustainable and respectful of the environment.</span></p>
       <div class="hero-actions">
         <a href="#" onclick="openModal(); return false;" class="btn-primary">Get a free quote →</a>
       </div>
