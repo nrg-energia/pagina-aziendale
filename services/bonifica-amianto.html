@@ -1115,6 +1115,15 @@ function submitForm() {
   .pmodal-cdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.5);border:none;cursor:pointer;padding:0;transition:background 0.15s;}
   .pmodal-cdot.active{background:#fff;}
   .pmodal-slide-badge{position:absolute;top:12px;left:12px;display:none;padding:4px 12px;font-size:11px;font-weight:700;font-family:'DM Sans',sans-serif;border-radius:50px;text-transform:uppercase;letter-spacing:0.5px;background:rgba(15,15,15,0.62);color:#fff;z-index:3;}
+  .pmodal-zoom-btn{position:absolute;top:52px;right:12px;background:rgba(255,255,255,0.88);border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,0.18);transition:background 0.15s;}
+  .pmodal-zoom-btn:hover{background:#fff;}
+  .pmodal-zoom-btn svg{width:16px;height:16px;}
+  .pmodal-img-wrap.video-active .pmodal-zoom-btn{display:none;}
+  .lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out;}
+  .lightbox-overlay.open{display:flex;}
+  .lightbox-overlay img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 48px rgba(0,0,0,0.6);cursor:default;}
+  .lightbox-close{position:absolute;top:16px;right:20px;background:rgba(255,255,255,0.12);border:none;border-radius:50%;width:40px;height:40px;font-size:22px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s;}
+  .lightbox-close:hover{background:rgba(255,255,255,0.25);}
 
   .pmodal-video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;display:none;}
   .pmodal-video.pmodal-media-active{display:block;}
