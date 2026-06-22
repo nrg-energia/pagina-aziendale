@@ -164,7 +164,16 @@
     .processo-left.processo-visible h2 { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
     .processo-content-wrap { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .processo-right.processo-visible .processo-content-wrap { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
-    @media (max-width: 768px) { .processo-grid { grid-template-columns: 1fr; } .processo-left, .processo-right { padding: 56px 6%; } }
+    @media (max-width: 768px) {
+      .processo-grid { grid-template-columns: 1fr; }
+      .processo-left { padding: 32px 6% 28px; }
+      .processo-right { padding: 28px 4% 40px; }
+      .processo-content-wrap { width: 100%; margin: 0; }
+      .processo-tab { font-size: 1.4rem; letter-spacing: 1px; }
+      .processo-tabs { gap: 1.5rem; }
+      .processo-desc { font-size: 14px; }
+      .processo-chevrons { display: none; }
+    }
 
     /* PORTFOLIO CAROUSEL */
     .carousel-wrap { position: relative; max-width: 100%; margin: 0 0 24px; }
