@@ -305,6 +305,16 @@
     .mobile-menu  { display: none !important; }
   }
 
+  .pmodal-zoom-btn{position:absolute;top:52px;right:12px;background:rgba(255,255,255,0.88);border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,0.18);transition:background 0.15s;}
+  .pmodal-zoom-btn:hover{background:#fff;}
+  .pmodal-zoom-btn svg{width:16px;height:16px;}
+  .pmodal-img-wrap.video-active .pmodal-zoom-btn{display:none;}
+  .lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out;}
+  .lightbox-overlay.open{display:flex;}
+  .lightbox-overlay img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 48px rgba(0,0,0,0.6);cursor:default;}
+  .lightbox-close{position:absolute;top:16px;right:20px;background:rgba(255,255,255,0.12);border:none;border-radius:50%;width:40px;height:40px;font-size:22px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s;}
+  .lightbox-close:hover{background:rgba(255,255,255,0.25);}
+
 </style>
 </head>
 <body>
@@ -749,9 +759,9 @@ function submitForm() {
   var lbClose=document.getElementById("lightbox-close");
   var zoomBtn=document.getElementById("pmodal-zoom-btn");
   var pImg=document.querySelector(".pmodal-img");
-  function openLightbox(){lbImg.src=pImg.src;lb.classList.add("open");document.body.style.overflow="hidden";}
+  function openLightbox(){if(pImg)lbImg.src=pImg.src;lb.classList.add("open");document.body.style.overflow="hidden";}
   function closeLightbox(){lb.classList.remove("open");document.body.style.overflow="";}
-  zoomBtn.addEventListener("click",openLightbox);
+  if(zoomBtn)zoomBtn.addEventListener("click",openLightbox);
   lbClose.addEventListener("click",closeLightbox);
   lb.addEventListener("click",function(e){if(e.target===lb)closeLightbox();});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&lb.classList.contains("open"))closeLightbox();});
