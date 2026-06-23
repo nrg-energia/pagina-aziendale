@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagina in costruzione — NRG Energia</title>
+  <meta name="description" content="Questa sezione del sito è in fase di completamento."/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.css"/>
+  <style>
+    /* NRG Energia — cookie consent branding */
+    #cc-main {
+      --cc-font-family: 'DM Sans', sans-serif;
+      --cc-modal-border-radius: 12px;
+      --cc-btn-border-radius: 50px;
+      --cc-bg: #ffffff;
+      --cc-primary-color: #1a1a18;
+      --cc-secondary-color: #4a4a44;
+      --cc-btn-primary-bg: #1a4d2e;
+      --cc-btn-primary-color: #ffffff;
+      --cc-btn-primary-hover-bg: #2d7a4a;
+      --cc-btn-secondary-bg: transparent;
+      --cc-btn-secondary-color: #1a4d2e;
+      --cc-btn-secondary-border-color: rgba(26,77,46,0.35);
+      --cc-btn-secondary-hover-bg: #e8f5ec;
+      --cc-btn-secondary-hover-color: #1a4d2e;
+      --cc-toggle-on-bg: #1a4d2e;
+      --cc-toggle-off-bg: #ece9e3;
+      --cc-toggle-on-knob-bg: #ffffff;
+      --cc-toggle-off-knob-bg: #ffffff;
+      --cc-overlay-bg: rgba(10,25,18,0.55);
+      --cc-separator-border-color: #ece9e3;
+      --cc-cookie-category-block-bg: #f7f6f2;
+      --cc-cookie-category-block-border: #ece9e3;
+      --cc-footer-border-color: #ece9e3;
+      --cc-link-color: #1a4d2e;
+      --cc-footer-color: #1a1a18;
+      --cc-footer-link-color: #1a1a18;
+      --cc-pm-toggle-on-bg: #1a4d2e;
+      --cc-modal-title-font-family: 'Syne', sans-serif;
+    }
+    #cc-main .cm__title {
+      font-family: 'Syne', sans-serif !important;
+      font-weight: 700;
+    }
+    #cc-main .cm__footer {
+      background: #f5c842;
+      color: #1a1a18;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #1a4d2e; --green-mid: #2d7a4a; --green-light: #4aab6d;
+      --green-pale: #e8f5ec; --yellow: #f5c842; --blue: #2563a8;
+      --off-white: #f7f6f2; --warm-gray: #ece9e3;
+      --text-dark: #1a1a18; --text-mid: #4a4a44; --text-light: #888880;
+      --white: #ffffff; --radius: 12px; --radius-sm: 8px;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,77,46,0.1); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-dots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; width: 28px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.y { background: var(--yellow); }
+    .dot.b { background: var(--blue); }
+    .dot.g { background: var(--green-light); }
+    .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-dark); letter-spacing: -0.3px; }
+    .nav-logo-text span { color: var(--text-dark); }
+    nav .nav-logo-dots { width: 30px; gap: 4px; }
+    nav .nav-logo-dots .dot { width: 9px; height: 9px; }
+    nav .nav-logo-text { font-size: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--green-pale); color: var(--green-dark); }
+    .nav-cta { background: var(--green-dark); color: var(--white) !important; padding: 10px 22px !important; border-radius: 50px !important; font-weight: 500 !important; }
+    .nav-cta:hover { background: var(--green-mid) !important; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 1px solid rgba(26,77,46,0.25); color: var(--text-mid); font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.3px; }
+    .lang-toggle:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); }
+
+    /* CTA / CONTACT */
+    @keyframes gradientWave {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .cta-banner { background: linear-gradient(135deg, #1a5c3a 0%, #52b788 40%, #1a3a5c 70%, #0d1f3c 100%); background-size: 200% 200%; animation: gradientWave 8s ease infinite; padding: 80px 5%; text-align: center; }
+    .cta-banner h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--white); letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 12px; }
+    .cta-banner p { color: rgba(255,255,255,0.65); font-size: 16px; margin-bottom: 36px; font-weight: 300; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--yellow); color: var(--text-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: #f0b800; transform: translateY(-1px); }
+    .btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+    /* FOOTER */
+    footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 14px; line-height: 1.7; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand .nav-logo-text { color: var(--white); }
+    .footer-brand .nav-logo-text span { color: var(--white); }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.6); font-size: 14px; transition: background 0.2s; }
+    .social-btn:hover { background: var(--green-mid); color: var(--white); }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-contact p { font-size: 14px; line-height: 1.9; }
+    .footer-contact a { color: var(--green-light); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+    .footer-brand p a { color: var(--white) !important; text-decoration: none; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; background: rgba(10,30,18,0.7); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex !important; }
+    .modal { background: var(--white); border-radius: 16px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 64px rgba(0,0,0,0.18); animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both; }
+    @keyframes modalIn { from { opacity:0; transform: translateY(20px) scale(0.97); } to { opacity:1; transform: none; } }
+    .modal-header { padding: 28px 32px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+    .modal-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+    .modal-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px; line-height: 1.2; }
+    .modal-close { background: var(--warm-gray); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--text-mid); transition: background 0.2s; flex-shrink: 0; margin-left: 16px; }
+    .modal-close:hover { background: var(--green-pale); color: var(--green-dark); }
+    .modal-body { padding: 24px 32px 32px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 14px; }
+    .form-label { font-size: 12px; font-weight: 600; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .req { color: var(--green-mid); margin-left: 2px; }
+    .form-input, .form-select, .form-textarea { background: var(--off-white); border: 1.5px solid var(--warm-gray); border-radius: 8px; padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text-dark); transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(45,122,74,0.12); }
+    .form-input.error, .form-select.error { border-color: #e05252; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888880' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+    .form-textarea { resize: vertical; min-height: 90px; }
+    .form-file-label { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--off-white); border: 1.5px dashed var(--warm-gray); border-radius: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s; font-size: 13px; color: var(--text-light); }
+    .form-file-label:hover { border-color: var(--green-mid); background: var(--green-pale); color: var(--green-dark); }
+    .form-file-input { display: none; }
+    .file-name { font-size: 12px; color: var(--green-mid); margin-top: 5px; }
+    .form-error-msg { font-size: 12px; color: #e05252; margin-top: 4px; display: none; }
+    .form-error-msg.show { display: block; }
+    .form-divider { border: none; border-top: 1px solid var(--warm-gray); margin: 20px 0; }
+    .modal-submit { width: 100%; background: var(--green-dark); color: var(--white); border: none; border-radius: 50px; padding: 15px 32px; font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; }
+    .modal-submit:hover { background: var(--green-mid); transform: translateY(-1px); }
+    .modal-success { display: none; text-align: center; padding: 48px 32px; }
+    .modal-success.show { display: block; }
+    .modal-success-icon { font-size: 48px; margin-bottom: 16px; }
+    .modal-success h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .modal-success p { font-size: 15px; color: var(--text-mid); }
+
+    /* WHATSAPP */
+    .whatsapp-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; }
+    .whatsapp-btn { width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: var(--white); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,0.4); transition: transform 0.2s; font-size: 26px; }
+    .whatsapp-btn:hover { transform: scale(1.1); }
+    .whatsapp-tooltip { position: absolute; bottom: 66px; right: 0; background: var(--white); border-radius: 12px; padding: 12px 16px; width: 200px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); font-size: 13px; color: var(--text-dark); line-height: 1.5; border: 1px solid var(--warm-gray); display: none; }
+    .whatsapp-float:hover .whatsapp-tooltip { display: block; }
+    .whatsapp-tooltip strong { display: block; margin-bottom: 2px; }
+    .whatsapp-tooltip a { color: #25D366; font-weight: 600; text-decoration: none; }
+
+    /* MOBILE NAV */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 40px; height: 40px;
+      background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-dark); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+      background: var(--green-dark); z-index: 99; overflow-y: auto;
+      flex-direction: column; padding: 8px 0 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 600;
+      color: rgba(255,255,255,0.9); text-decoration: none;
+      padding: 18px 6%; display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.08); transition: color 0.15s;
+    }
+    .mobile-menu a:hover { color: var(--yellow); background: none; }
+    .mobile-menu .mobile-cta {
+      margin: 24px 6% 0; padding: 16px 0 !important;
+      background: var(--yellow) !important; color: var(--text-dark) !important;
+      text-align: center; border-radius: 50px; font-weight: 700 !important;
+      border-bottom: none !important; display: block;
+    }
+    .mobile-menu .mobile-cta:hover { background: #f0b800 !important; }
+    .mobile-menu-lang {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      margin: 20px 6% 0; padding: 12px 20px;
+      background: transparent; border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 600;
+      border-radius: 8px; text-decoration: none; transition: all 0.2s;
+    }
+    .mobile-menu-lang:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+    @media (max-width: 768px) {
+      nav .nav-logo-dots { width: 26px !important; gap: 3px !important; }
+      nav .nav-logo-dots .dot { width: 7px !important; height: 7px !important; }
+      nav .nav-logo-text { font-size: 15px !important; letter-spacing: -0.2px; }
+      .nav-links { display: none !important; }
+      .nav-hamburger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (min-width: 769px) {
+      .nav-hamburger { display: none !important; }
+      .mobile-menu  { display: none !important; }
+    }
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* COMING SOON ANIMATIONS */
+    @keyframes scaleIn { from{transform:scale(0.6);opacity:0}to{transform:scale(1);opacity:1} }
+    @keyframes cycleColor { 0%,28%{background:#f5c842}33%,61%{background:#1a73e8}66%,94%{background:#1a4d2e}100%{background:#f5c842} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
+    @keyframes fillBar { to{width:65%} }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="./index.html" class="nav-logo">
+    <div class="nav-logo-dots">
+      <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+      <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+      <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+    </div>
+    <span class="nav-logo-text">NRG <span>ENERGIA</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="./index.html#servizi">Servizi</a>
+    <a href="./portfolio.html">Portfolio</a>
+    <a href="./coming-soon.html" class="active">Chi siamo</a>
+    <a href="./coming-soon.html">News &amp; Blog</a>
+    <a href="#contatti">Contatti</a>
+    <a href="#" onclick="openModal(); return false;" class="nav-cta">Richiedi preventivo</a>
+    <button class="lang-toggle" id="lang-toggle-btn" onclick="toggleLang()">🇬🇧 EN</button>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Apri menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="./index.html#servizi">Servizi</a>
+  <a href="./portfolio.html">Portfolio</a>
+  <a href="./coming-soon.html">Chi siamo</a>
+  <a href="./coming-soon.html">News &amp; Blog</a>
+  <a href="#contatti">Contatti</a>
+  <a href="#" onclick="openModal(); closeMobileMenu(); return false;" class="mobile-cta">Richiedi preventivo</a>
+  <a href="#" onclick="toggleLang(); closeMobileMenu(); return false;" class="mobile-menu-lang" id="mobile-lang-btn"><span>🇬🇧</span>&nbsp;EN</a>
+</div>
+
+<main style="display:flex;align-items:center;justify-content:center;padding:6rem 2rem;min-height:60vh;">
+  <div style="max-width:680px;width:100%;text-align:center;">
+    <div id="cs-icon" style="width:72px;height:72px;margin:0 auto 2rem;border-radius:50%;animation:scaleIn 0.5s ease both,cycleColor 3s ease-in-out infinite 0.5s;"></div>
+    <p id="cs-eyebrow" style="font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-mid);margin-bottom:0.9rem;opacity:0;animation:fadeUp 0.6s ease forwards 0.15s;">Pagina in costruzione</p>
+    <h1 id="cs-heading" style="font-family:'Syne',sans-serif;font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--text-dark);margin-bottom:1.25rem;opacity:0;animation:fadeUp 0.6s ease forwards 0.25s;">Ci stiamo<br><em style="font-style:normal;color:var(--green-dark);">lavorando.</em></h1>
+    <p id="cs-body" style="font-size:1rem;line-height:1.7;color:var(--text-mid);max-width:480px;margin:0 auto 2.5rem;opacity:0;animation:fadeUp 0.6s ease forwards 0.35s;">Questa sezione del sito è in fase di completamento. Nel frattempo puoi contattarci direttamente o tornare alla home.</p>
+    <div style="margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.6s ease forwards 0.45s;">
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--text-mid);margin-bottom:0.5rem;">
+        <span id="cs-progress-label">Completamento</span><span>65%</span>
+      </div>
+      <div style="height:5px;background:var(--warm-gray);border-radius:999px;overflow:hidden;">
+        <div style="height:100%;background:var(--green-dark);border-radius:999px;width:0;animation:fillBar 1.4s cubic-bezier(0.4,0,0.2,1) forwards 0.7s;"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="cta-banner" id="contatti">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--yellow);display:flex;justify-content:center;margin-bottom:12px;" id="cta-eyebrow">Pronti a iniziare?</div>
+    <h2 id="cta-heading">Richiedi il tuo preventivo gratuito</h2>
+    <p id="cta-body">Nessun impegno. Il sopralluogo è sempre gratuito.</p>
+    <div class="cta-actions">
+      <a href="#" onclick="openModal(); return false;" class="btn-primary" id="cta-btn-modal">Richiedi preventivo gratuito →</a>
+      <a href="tel:+390542552010" class="btn-outline-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg> 0542 55201</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="./index.html" class="nav-logo">
+          <div class="nav-logo-dots">
+            <div class="dot y"></div><div class="dot y"></div><div class="dot y"></div>
+            <div class="dot b"></div><div class="dot b"></div><div class="dot b"></div>
+            <div class="dot g"></div><div class="dot g"></div><div class="dot g"></div>
+          </div>
+          <span class="nav-logo-text">NRG <span>ENERGIA</span></span>
+        </a>
+        <p>Energie Rinnovabili e Ambiente.<br/>Via I Maggio 70/b, 40026 Imola (BO)<br/>Forma societaria S.r.l. · P.IVA 03056811205</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn"><svg width="16" height="12" viewBox="0 0 24 17" fill="white" fill-rule="evenodd"><path d="M21.3.4A3 3 0 0 1 23.5 2.5C24 4.5 24 8.5 24 8.5s0 4-.5 6a3 3 0 0 1-2.2 2.1C19.5 16.9 16.6 17 12 17c-4.6 0-7.5-.1-9.3-.4A3 3 0 0 1 .5 14.5C0 12.5 0 8.5 0 8.5s0-4 .5-6a3 3 0 0 1 2.2-2.1C4.5.1 7.4 0 12 0c4.6 0 7.5.1 9.3.4zM9.5 4.9l7 3.6-7 3.6V4.9z"/></svg></a>
+          <a href="#" class="social-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="./services/energie-rinnovabili.html">Energie rinnovabili</a></li>
+          <li><a href="./services/coperture.html">Coperture</a></li>
+          <li><a href="./services/bonifica-amianto.html">Bonifica amianto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Azienda</h4>
+        <ul>
+          <li><a href="./coming-soon.html">Chi siamo</a></li>
+          <li><a href="./portfolio.html">Portfolio</a></li>
+          <li><a href="./coming-soon.html">News &amp; Blog</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contatti</h4>
+        <p>
+          <a href="mailto:info@nrg-energia.it">info@nrg-energia.it</a><br/>
+          <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
+          <span style="color:rgba(255,255,255,0.4); font-size:13px;">Lun–Ven: 8:30–12:30<br/>Lun–Ven: 14:30–18:30</span>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NRG Energia S.r.l.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Politica per la Qualità</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="whatsapp-float">
+  <div class="whatsapp-tooltip" id="wa-tooltip"><strong>Ciao! Come possiamo aiutarti?</strong><a href="https://wa.me/390542552010" target="_blank">Scrivici su WhatsApp →</a></div>
+  <a href="https://wa.me/390542552010" target="_blank" class="whatsapp-btn">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.02L7.55 18.85L4.43 19.65L5.25 16.61L5.06 16.29C4.24 14.98 3.8 13.46 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67ZM8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8.01 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.37 17.04 14.27C16.97 14.17 16.81 14.1 16.56 13.98C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.48 13.06 14.31 13.31C14.15 13.56 13.67 14.1 13.53 14.27C13.38 14.44 13.24 14.46 12.99 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.47 11.14 9.61 11 9.73 10.88C9.84 10.77 9.98 10.59 10.1 10.44C10.22 10.29 10.26 10.18 10.34 10.01C10.42 9.84 10.38 9.69 10.32 9.57C10.26 9.46 9.77 8.23 9.56 7.73C9.36 7.24 9.16 7.31 9 7.3C8.86 7.29 8.69 7.29 8.53 7.29V7.33Z"/>
+    </svg>
+  </a>
+</div>
+
+<!-- QUOTE MODAL -->
+<div class="modal-overlay" id="quoteModal" onclick="handleOverlayClick(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-success" id="modalSuccess">
+      <div class="modal-success-icon">✅</div>
+      <h3 id="successTitle">Richiesta inviata!</h3>
+      <p id="successMsg">Ti risponderemo entro 24 ore.</p>
+    </div>
+    <div id="modalForm">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <div class="modal-eyebrow" id="modalEyebrow">Preventivo gratuito</div>
+          <h2 class="modal-title" id="modalTitle">Raccontaci il tuo progetto</h2>
+        </div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Chiudi">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="serviceSelect" id="labelService">Tipo di richiesta <span class="req">*</span></label>
+          <select class="form-select" id="serviceSelect" required>
+            <option value="" id="optPlaceholder">Seleziona un servizio…</option>
+            <option value="rinnovabili" id="opt1">Energie rinnovabili</option>
+            <option value="elettrici"  id="opt2">Impianti elettrici</option>
+            <option value="coperture"  id="opt3">Coperture</option>
+            <option value="amianto"    id="opt4">Bonifica amianto</option>
+          </select>
+          <span class="form-error-msg" id="errService">Seleziona un servizio</span>
+        </div>
+        <hr class="form-divider">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="inputName" id="labelName">Nome e cognome <span class="req">*</span></label>
+            <input class="form-input" type="text" id="inputName" placeholder="Mario Rossi" required>
+            <span class="form-error-msg" id="errName">Campo obbligatorio</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inputPhone" id="labelPhone">Telefono <span class="req">*</span></label>
+            <input class="form-input" type="tel" id="inputPhone" placeholder="+39 333 000 0000" required>
+            <span class="form-error-msg" id="errPhone">Campo obbligatorio</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputEmail" id="labelEmail">Email <span class="req">*</span></label>
+          <input class="form-input" type="email" id="inputEmail" placeholder="mario@esempio.it" required>
+          <span class="form-error-msg" id="errEmail">Inserisci un'email valida</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputMessage" id="labelMessage">Messaggio <span style="color:var(--text-light);font-weight:400;text-transform:none;letter-spacing:0" id="labelOptional">(opzionale)</span></label>
+          <textarea class="form-textarea" id="inputMessage" placeholder="Descrivi brevemente il tuo progetto…"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="labelFile">Allegato <span style="color:var(--text-light);font-weight:400;text-transform:none;letter-spacing:0" id="labelOptional2">(opzionale)</span></label>
+          <label class="form-file-label" for="inputFile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span id="fileLabel">Carica un file (PDF, JPG, PNG — max 10 MB)</span>
+          </label>
+          <input class="form-file-input" type="file" id="inputFile" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFile(this)">
+          <span class="file-name" id="fileName"></span>
+        </div>
+        <button class="modal-submit" onclick="submitForm()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          <span id="submitLabel">Invia richiesta</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var LANG = 'it';
+
+var MODAL_T = {
+  it: {
+    eyebrow:'Preventivo gratuito', title:'Raccontaci il tuo progetto',
+    labelService:'Tipo di richiesta', optPlaceholder:'Seleziona un servizio…',
+    opt1:'Energie rinnovabili', opt2:'Impianti elettrici', opt3:'Coperture', opt4:'Bonifica amianto',
+    labelName:'Nome e cognome', labelPhone:'Telefono', labelEmail:'Email',
+    labelMessage:'Messaggio', labelOptional:'(opzionale)', labelOptional2:'(opzionale)',
+    labelFile:'Allegato', fileLabel:'Carica un file (PDF, JPG, PNG — max 10 MB)',
+    submitLabel:'Invia richiesta',
+    errService:'Seleziona un servizio', errName:'Campo obbligatorio',
+    errPhone:'Campo obbligatorio', errEmail:"Inserisci un'email valida",
+    successTitle:'Richiesta inviata!', successMsg:'Ti risponderemo entro 24 ore.',
+    namePlaceholder:'Mario Rossi', phonePlaceholder:'+39 333 000 0000',
+    emailPlaceholder:'mario@esempio.it', msgPlaceholder:'Descrivi brevemente il tuo progetto…'
+  },
+  en: {
+    eyebrow:'Free quote', title:'Tell us about your project',
+    labelService:'Type of enquiry', optPlaceholder:'Select a service…',
+    opt1:'Renewable energy', opt2:'Electrical systems', opt3:'Roofing', opt4:'Asbestos removal',
+    labelName:'Full name', labelPhone:'Phone', labelEmail:'Email',
+    labelMessage:'Message', labelOptional:'(optional)', labelOptional2:'(optional)',
+    labelFile:'Attachment', fileLabel:'Upload a file (PDF, JPG, PNG — max 10 MB)',
+    submitLabel:'Send request',
+    errService:'Please select a service', errName:'Required field',
+    errPhone:'Required field', errEmail:'Please enter a valid email',
+    successTitle:'Request sent!', successMsg:"We'll get back to you within 24 hours.",
+    namePlaceholder:'John Smith', phonePlaceholder:'+39 333 000 0000',
+    emailPlaceholder:'john@example.com', msgPlaceholder:'Briefly describe your project…'
+  }
+};
+
+var PAGE_T = {
+  it: {
+    eyebrow: 'Pagina in costruzione',
+    heading: 'Ci stiamo<br><em style="font-style:normal;color:var(--green-dark);">lavorando.</em>',
+    body: 'Questa sezione del sito è in fase di completamento. Nel frattempo puoi contattarci direttamente o tornare alla home.',
+    progress: 'Completamento',
+    langBtn: '🇬🇧 EN',
+    langBtnMobile: '🇬🇧&nbsp;EN',
+    ctaEyebrow: 'Pronti a iniziare?',
+    ctaHeading: 'Richiedi il tuo preventivo gratuito',
+    ctaBody: 'Nessun impegno. Il sopralluogo è sempre gratuito.',
+    ctaModal: 'Richiedi preventivo gratuito →',
+    waTooltipTitle: 'Ciao! Come possiamo aiutarti?',
+    waTooltipLink: 'Scrivici su WhatsApp →'
+  },
+  en: {
+    eyebrow: 'Coming soon',
+    heading: 'We\'re working<br><em style="font-style:normal;color:var(--green-dark);">on it.</em>',
+    body: 'This section of the site is under construction. In the meantime, feel free to contact us or head back to the homepage.',
+    progress: 'Completion',
+    langBtn: '🇮🇹 IT',
+    langBtnMobile: '🇮🇹&nbsp;IT',
+    ctaEyebrow: 'Ready to start?',
+    ctaHeading: 'Request your free quote',
+    ctaBody: 'No commitment. The site visit is always free.',
+    ctaModal: 'Request a free quote →',
+    waTooltipTitle: 'Hi! How can we help?',
+    waTooltipLink: 'Message us on WhatsApp →'
+  }
+};
+
+function toggleLang() {
+  LANG = (LANG === 'it') ? 'en' : 'it';
+  document.documentElement.lang = LANG;
+  var t = PAGE_T[LANG];
+  document.getElementById('cs-eyebrow').textContent = t.eyebrow;
+  document.getElementById('cs-heading').innerHTML = t.heading;
+  document.getElementById('cs-body').textContent = t.body;
+  document.getElementById('cs-progress-label').textContent = t.progress;
+  document.getElementById('lang-toggle-btn').textContent = t.langBtn;
+  document.getElementById('mobile-lang-btn').innerHTML = '<span>' + t.langBtnMobile + '</span>';
+  document.getElementById('cta-eyebrow').textContent = t.ctaEyebrow;
+  document.getElementById('cta-heading').textContent = t.ctaHeading;
+  document.getElementById('cta-body').textContent = t.ctaBody;
+  document.getElementById('cta-btn-modal').textContent = t.ctaModal;
+  var waTooltip = document.querySelector('.whatsapp-tooltip');
+  if (waTooltip) {
+    waTooltip.querySelector('strong').textContent = t.waTooltipTitle;
+    waTooltip.querySelector('a').textContent = t.waTooltipLink;
+  }
+  updateModalLang();
+}
+
+function openModal() {
+  document.getElementById('quoteModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modalForm').style.display = '';
+  document.getElementById('modalSuccess').classList.remove('show');
+  clearModalErrors();
+  updateModalLang();
+}
+function closeModal() {
+  document.getElementById('quoteModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('quoteModal')) closeModal();
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+function updateModalLang() {
+  var t = MODAL_T[LANG];
+  function setT(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
+  function setP(id, val) { var el = document.getElementById(id); if (el) el.placeholder = val; }
+  setT('modalEyebrow', t.eyebrow); setT('modalTitle', t.title);
+  var lbl;
+  lbl = document.getElementById('labelService'); if(lbl){ lbl.childNodes[0].textContent = t.labelService+' '; }
+  lbl = document.getElementById('labelName');    if(lbl){ lbl.childNodes[0].textContent = t.labelName+' '; }
+  lbl = document.getElementById('labelPhone');   if(lbl){ lbl.childNodes[0].textContent = t.labelPhone+' '; }
+  lbl = document.getElementById('labelEmail');   if(lbl){ lbl.childNodes[0].textContent = t.labelEmail+' '; }
+  setT('labelMessage', t.labelMessage); setT('labelOptional', t.labelOptional); setT('labelOptional2', t.labelOptional2);
+  setT('labelFile', t.labelFile); setT('fileLabel', t.fileLabel); setT('submitLabel', t.submitLabel);
+  setT('errService', t.errService); setT('errName', t.errName); setT('errPhone', t.errPhone); setT('errEmail', t.errEmail);
+  setT('opt1', t.opt1); setT('opt2', t.opt2); setT('opt3', t.opt3); setT('opt4', t.opt4);
+  var ph = document.getElementById('optPlaceholder'); if(ph) ph.textContent = t.optPlaceholder;
+  setP('inputName', t.namePlaceholder); setP('inputPhone', t.phonePlaceholder);
+  setP('inputEmail', t.emailPlaceholder); setP('inputMessage', t.msgPlaceholder);
+}
+function handleFile(input) {
+  var name = input.files && input.files[0] ? input.files[0].name : '';
+  document.getElementById('fileName').textContent = name;
+}
+function clearModalErrors() {
+  ['serviceSelect','inputName','inputPhone','inputEmail'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('error');
+  });
+  ['errService','errName','errPhone','errEmail'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.classList.remove('show');
+  });
+}
+function submitForm() {
+  var t = MODAL_T[LANG];
+  clearModalErrors();
+  var valid = true;
+  var service = document.getElementById('serviceSelect');
+  var name    = document.getElementById('inputName');
+  var phone   = document.getElementById('inputPhone');
+  var email   = document.getElementById('inputEmail');
+  if (!service.value) { service.classList.add('error'); document.getElementById('errService').classList.add('show'); valid = false; }
+  if (!name.value.trim()) { name.classList.add('error'); document.getElementById('errName').classList.add('show'); valid = false; }
+  if (!phone.value.trim()) { phone.classList.add('error'); document.getElementById('errPhone').classList.add('show'); valid = false; }
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRe.test(email.value.trim())) { email.classList.add('error'); document.getElementById('errEmail').classList.add('show'); valid = false; }
+  if (!valid) return;
+  document.getElementById('modalForm').style.display = 'none';
+  var suc = document.getElementById('modalSuccess');
+  suc.classList.add('show');
+  document.getElementById('successTitle').textContent = t.successTitle;
+  document.getElementById('successMsg').textContent   = t.successMsg;
+  setTimeout(closeModal, 3000);
+}
+
+(function() {
+  function toggleMobileMenu() {
+    var menu = document.getElementById('mobile-menu');
+    var btn  = document.getElementById('nav-hamburger');
+    var isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-label', isOpen ? 'Chiudi menu' : 'Apri menu');
+  }
+  function closeMobileMenu() {
+    var menu = document.getElementById('mobile-menu');
+    var btn  = document.getElementById('nav-hamburger');
+    if (!menu) return;
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-label', 'Apri menu');
+  }
+  window.closeMobileMenu = closeMobileMenu;
+  document.getElementById('nav-hamburger').addEventListener('click', toggleMobileMenu);
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('mobile-menu');
+    var btn  = document.getElementById('nav-hamburger');
+    if (menu && menu.classList.contains('open') &&
+        !menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+})();
+</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
+  <script defer src="./cookieconsent-config.js"></script>
+</body>
+</html>
