@@ -281,6 +281,10 @@
         <div style="height:100%;background:var(--green-dark);border-radius:999px;width:0;animation:fillBar 1.4s cubic-bezier(0.4,0,0.2,1) forwards 0.7s;"></div>
       </div>
     </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.6s ease forwards 0.55s;">
+      <a href="./index.html" style="display:inline-flex;align-items:center;gap:0.4rem;background:var(--green-dark);color:#fff;padding:0.7rem 1.5rem;border-radius:999px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:background 0.2s,transform 0.15s;" id="cs-btn-home">← Torna alla home</a>
+      <a href="mailto:info@nrg-energia.it" style="display:inline-flex;align-items:center;gap:0.4rem;background:transparent;color:var(--text-dark);padding:0.7rem 1.5rem;border-radius:999px;border:1px solid var(--warm-gray);font-size:0.88rem;font-weight:500;text-decoration:none;transition:border-color 0.2s,transform 0.15s;" id="cs-btn-contact">Contattaci</a>
+    </div>
   </div>
 </main>
 
@@ -475,6 +479,8 @@ var PAGE_T = {
     ctaHeading: 'Richiedi il tuo preventivo gratuito',
     ctaBody: 'Nessun impegno. Il sopralluogo è sempre gratuito.',
     ctaModal: 'Richiedi preventivo gratuito →',
+    btnHome: '← Torna alla home',
+    btnContact: 'Contattaci',
     waTooltipTitle: 'Ciao! Come possiamo aiutarti?',
     waTooltipLink: 'Scrivici su WhatsApp →'
   },
@@ -489,6 +495,8 @@ var PAGE_T = {
     ctaHeading: 'Request your free quote',
     ctaBody: 'No commitment. The site visit is always free.',
     ctaModal: 'Request a free quote →',
+    btnHome: '← Back to home',
+    btnContact: 'Contact us',
     waTooltipTitle: 'Hi! How can we help?',
     waTooltipLink: 'Message us on WhatsApp →'
   }
@@ -502,6 +510,8 @@ function toggleLang() {
   document.getElementById('cs-heading').innerHTML = t.heading;
   document.getElementById('cs-body').textContent = t.body;
   document.getElementById('cs-progress-label').textContent = t.progress;
+  document.getElementById('cs-btn-home').textContent = t.btnHome;
+  document.getElementById('cs-btn-contact').textContent = t.btnContact;
   document.getElementById('lang-toggle-btn').textContent = t.langBtn;
   document.getElementById('mobile-lang-btn').innerHTML = '<span>' + t.langBtnMobile + '</span>';
   document.getElementById('cta-eyebrow').textContent = t.ctaEyebrow;
