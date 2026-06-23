@@ -2,8 +2,8 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const TO_EMAIL   = 'info@nrg-energia.it';   // where submissions land
-const FROM_EMAIL = 'noreply@nrg-energia.it'; // must be a verified Resend domain
+const TO_EMAIL   = 'annarosa.castagnari@nrg-energia.it';
+const FROM_EMAIL = 'info@nrg-energia.it';
 
 export default async function handler(req, res) {
   // ── CORS headers ──────────────────────────────────────────────────────────
