@@ -95,6 +95,8 @@
     .btn-primary:hover { background: #f0b800; transform: translateY(-1px); }
     .btn-outline-white { background: transparent; color: rgba(255,255,255,0.85); padding: 14px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
     .btn-outline-white:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+    .btn-outline-dark { background: transparent; color: var(--text-dark); padding: 15px 32px; border-radius: 50px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(26,77,46,0.35); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline-dark:hover { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); transform: translateY(-1px); }
 
     /* FOOTER */
     footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
@@ -244,12 +246,12 @@
     <span class="nav-logo-text">NRG <span>ENERGIA</span></span>
   </a>
   <div class="nav-links">
-    <a href="./index.html#servizi">Servizi</a>
-    <a href="./portfolio.html">Portfolio</a>
-    <a href="./coming-soon.html" class="active">Chi siamo</a>
-    <a href="./coming-soon.html">News &amp; Blog</a>
-    <a href="#contatti">Contatti</a>
-    <a href="#" onclick="openModal(); return false;" class="nav-cta">Richiedi preventivo</a>
+    <a href="./index.html#servizi" id="nav-servizi">Servizi</a>
+    <a href="./portfolio.html" id="nav-portfolio">Portfolio</a>
+    <a href="./coming-soon.html" class="active" id="nav-about">Chi siamo</a>
+    <a href="./coming-soon.html" id="nav-news">News &amp; Blog</a>
+    <a href="#contatti" id="nav-contatti">Contatti</a>
+    <a href="#" onclick="openModal(); return false;" class="nav-cta" id="nav-cta">Richiedi preventivo</a>
     <button class="lang-toggle" id="lang-toggle-btn" onclick="toggleLang()">🇬🇧 EN</button>
   </div>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Apri menu">
@@ -258,12 +260,12 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="./index.html#servizi">Servizi</a>
-  <a href="./portfolio.html">Portfolio</a>
-  <a href="./coming-soon.html">Chi siamo</a>
-  <a href="./coming-soon.html">News &amp; Blog</a>
-  <a href="#contatti">Contatti</a>
-  <a href="#" onclick="openModal(); closeMobileMenu(); return false;" class="mobile-cta">Richiedi preventivo</a>
+  <a href="./index.html#servizi" id="mob-servizi">Servizi</a>
+  <a href="./portfolio.html" id="mob-portfolio">Portfolio</a>
+  <a href="./coming-soon.html" id="mob-about">Chi siamo</a>
+  <a href="./coming-soon.html" id="mob-news">News &amp; Blog</a>
+  <a href="#contatti" id="mob-contatti">Contatti</a>
+  <a href="#" onclick="openModal(); closeMobileMenu(); return false;" class="mobile-cta" id="mob-cta">Richiedi preventivo</a>
   <a href="#" onclick="toggleLang(); closeMobileMenu(); return false;" class="mobile-menu-lang" id="mobile-lang-btn"><span>🇬🇧</span>&nbsp;EN</a>
 </div>
 
@@ -282,8 +284,8 @@
       </div>
     </div>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.6s ease forwards 0.55s;">
-      <a href="./index.html" style="display:inline-flex;align-items:center;gap:0.4rem;background:var(--green-dark);color:#fff;padding:0.7rem 1.5rem;border-radius:999px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:background 0.2s,transform 0.15s;" id="cs-btn-home">← Torna alla home</a>
-      <a href="#contatti" style="display:inline-flex;align-items:center;gap:0.4rem;background:transparent;color:var(--text-dark);padding:0.7rem 1.5rem;border-radius:999px;border:1px solid var(--warm-gray);font-size:0.88rem;font-weight:500;text-decoration:none;transition:border-color 0.2s,transform 0.15s;" id="cs-btn-contact">Contattaci</a>
+      <a href="./index.html" class="btn-primary" id="cs-btn-home">← Torna alla home</a>
+      <a href="#contatti" class="btn-outline-dark" id="cs-btn-contact">Contattaci</a>
     </div>
   </div>
 </main>
@@ -320,24 +322,24 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Servizi</h4>
+        <h4 id="ft-servizi-h">Servizi</h4>
         <ul>
-          <li><a href="./services/energie-rinnovabili.html">Energie rinnovabili</a></li>
-          <li><a href="./services/coperture.html">Coperture</a></li>
-          <li><a href="./services/bonifica-amianto.html">Bonifica amianto</a></li>
+          <li><a href="./services/energie-rinnovabili.html" id="ft-s1">Energie rinnovabili</a></li>
+          <li><a href="./services/coperture.html" id="ft-s2">Coperture</a></li>
+          <li><a href="./services/bonifica-amianto.html" id="ft-s3">Bonifica amianto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Azienda</h4>
+        <h4 id="ft-azienda-h">Azienda</h4>
         <ul>
-          <li><a href="./coming-soon.html">Chi siamo</a></li>
-          <li><a href="./portfolio.html">Portfolio</a></li>
-          <li><a href="./coming-soon.html">News &amp; Blog</a></li>
-          <li><a href="#contatti">Contatti</a></li>
+          <li><a href="./coming-soon.html" id="ft-about">Chi siamo</a></li>
+          <li><a href="./portfolio.html" id="ft-portfolio">Portfolio</a></li>
+          <li><a href="./coming-soon.html" id="ft-news">News &amp; Blog</a></li>
+          <li><a href="#contatti" id="ft-contatti">Contatti</a></li>
         </ul>
       </div>
       <div class="footer-col footer-contact">
-        <h4>Contatti</h4>
+        <h4 id="ft-contact-h">Contatti</h4>
         <p>
           <a href="mailto:info@nrg-energia.it">info@nrg-energia.it</a><br/>
           <a href="tel:+390542552010">+39 0542 55201</a><br/><br/>
@@ -481,6 +483,10 @@ var PAGE_T = {
     ctaModal: 'Richiedi preventivo gratuito →',
     btnHome: '← Torna alla home',
     btnContact: 'Contattaci',
+    navServizi: 'Servizi', navPortfolio: 'Portfolio', navAbout: 'Chi siamo', navNews: 'News & Blog', navContatti: 'Contatti', navCta: 'Richiedi preventivo',
+    ftServiziH: 'Servizi', ftAziendaH: 'Azienda', ftContactH: 'Contatti',
+    ftS1: 'Energie rinnovabili', ftS2: 'Coperture', ftS3: 'Bonifica amianto',
+    ftAbout: 'Chi siamo', ftNews: 'News & Blog', ftContatti: 'Contatti',
     waTooltipTitle: 'Ciao! Come possiamo aiutarti?',
     waTooltipLink: 'Scrivici su WhatsApp →'
   },
@@ -497,6 +503,10 @@ var PAGE_T = {
     ctaModal: 'Request a free quote →',
     btnHome: '← Back to home',
     btnContact: 'Contact us',
+    navServizi: 'Services', navPortfolio: 'Portfolio', navAbout: 'About us', navNews: 'News & Blog', navContatti: 'Contact', navCta: 'Get a quote',
+    ftServiziH: 'Services', ftAziendaH: 'Company', ftContactH: 'Contact',
+    ftS1: 'Renewable energy', ftS2: 'Roofing', ftS3: 'Asbestos removal',
+    ftAbout: 'About us', ftNews: 'News & Blog', ftContatti: 'Contact',
     waTooltipTitle: 'Hi! How can we help?',
     waTooltipLink: 'Message us on WhatsApp →'
   }
@@ -514,6 +524,23 @@ function toggleLang() {
   document.getElementById('cs-btn-contact').textContent = t.btnContact;
   document.getElementById('lang-toggle-btn').textContent = t.langBtn;
   document.getElementById('mobile-lang-btn').innerHTML = '<span>' + t.langBtnMobile + '</span>';
+  // nav
+  ['nav-servizi','nav-portfolio','nav-about','nav-news','nav-contatti','nav-cta',
+   'mob-servizi','mob-portfolio','mob-about','mob-news','mob-contatti','mob-cta'].forEach(function(id, i) {
+    var keys = ['navServizi','navPortfolio','navAbout','navNews','navContatti','navCta',
+                'navServizi','navPortfolio','navAbout','navNews','navContatti','navCta'];
+    var el = document.getElementById(id); if (el) el.textContent = t[keys[i]];
+  });
+  // footer
+  document.getElementById('ft-servizi-h').textContent = t.ftServiziH;
+  document.getElementById('ft-azienda-h').textContent = t.ftAziendaH;
+  document.getElementById('ft-contact-h').textContent = t.ftContactH;
+  document.getElementById('ft-s1').textContent = t.ftS1;
+  document.getElementById('ft-s2').textContent = t.ftS2;
+  document.getElementById('ft-s3').textContent = t.ftS3;
+  document.getElementById('ft-about').textContent = t.ftAbout;
+  document.getElementById('ft-news').textContent = t.ftNews;
+  document.getElementById('ft-contatti').textContent = t.ftContatti;
   document.getElementById('cta-eyebrow').textContent = t.ctaEyebrow;
   document.getElementById('cta-heading').textContent = t.ctaHeading;
   document.getElementById('cta-body').textContent = t.ctaBody;
