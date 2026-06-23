@@ -3,7 +3,9 @@
  * Library: vanilla-cookieconsent v3.1.0 (orestbida)
  * https://github.com/orestbida/cookieconsent
  *
- * Language: auto-detected from the page's <html lang=""> attribute
+ * Language: reads <html lang=""> on page load; on the home page where
+ * language is toggled dynamically, patches window.toggleLang() to also
+ * update the banner language.
  * Analytics placeholder: ready for Google Analytics (currently not active)
  */
 
@@ -76,8 +78,9 @@ CookieConsent.run({
   },
 
   // ── Language ──────────────────────────────────────────────────────────────
-  // Reads the <html lang=""> attribute so IT pages show Italian,
-  // EN pages show English — toggles with the rest of the site automatically.
+  // Reads <html lang=""> at page load — already set correctly on every page.
+  // On index.html the toggleLang() function is also patched below to keep
+  // the banner in sync when the user switches language dynamically.
   language: {
     default: document.documentElement.lang === 'en' ? 'en' : 'it',
 
@@ -85,7 +88,7 @@ CookieConsent.run({
 
       it: {
         consentModal: {
-          title: 'Utilizziamo i cookie 🍪',
+          title: 'Utilizziamo i cookie',
           description: 'Utilizziamo cookie tecnici necessari al funzionamento del sito e, con il tuo consenso, cookie analitici per migliorare la tua esperienza. Puoi modificare le tue preferenze in qualsiasi momento.',
           acceptAllBtn: 'Accetta tutti',
           acceptNecessaryBtn: 'Solo necessari',
@@ -124,7 +127,7 @@ CookieConsent.run({
 
       en: {
         consentModal: {
-          title: 'We use cookies 🍪',
+          title: 'We use cookies',
           description: 'We use strictly necessary cookies to keep the site running and, with your consent, analytics cookies to improve your experience. You can change your preferences at any time.',
           acceptAllBtn: 'Accept all',
           acceptNecessaryBtn: 'Necessary only',
@@ -165,3 +168,26 @@ CookieConsent.run({
   }
 
 });
+
+// ── Sync banner language with the home page's dynamic language toggle ──────
+// index.html calls window.toggleLang() to swap IT/EN content without
+// navigating to a new page. We patch it here to also update the banner.
+(function() {
+  function patchToggleLang() {
+    if (typeof window.toggleLang !== 'function') return;
+    var _orig = window.toggleLang;
+    window.toggleLang = function() {
+      _orig.apply(this, arguments);
+      // After the original runs, documentElement.lang is already updated
+      var newLang = document.documentElement.lang === 'en' ? 'en' : 'it';
+      CookieConsent.setLanguage(newLang);
+    };
+  }
+  // toggleLang is defined after this script runs, so wait for DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', patchToggleLang);
+  } else {
+    // Small delay to ensure toggleLang is defined
+    setTimeout(patchToggleLang, 0);
+  }
+})();
