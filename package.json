@@ -1,0 +1,9 @@
+{
+  "name": "nrg-energia-pagina-aziendale",
+  "version": "1.0.0",
+  "description": "NRG Energia — contact form API",
+  "private": true,
+  "dependencies": {
+    "resend": "^3.2.0"
+  }
+}

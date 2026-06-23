@@ -233,6 +233,7 @@
     @keyframes cycleColor { 0%,28%{background:#f5c842}33%,61%{background:#1a73e8}66%,94%{background:#1a4d2e}100%{background:#f5c842} }
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
     @keyframes fillBar { to{width:65%} }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
@@ -601,25 +602,77 @@ function clearModalErrors() {
   });
 }
 function submitForm() {
-  var t = MODAL_T[LANG];
+  var t       = MODAL_T[LANG];
   clearModalErrors();
-  var valid = true;
+  var valid   = true;
   var service = document.getElementById('serviceSelect');
   var name    = document.getElementById('inputName');
   var phone   = document.getElementById('inputPhone');
   var email   = document.getElementById('inputEmail');
+  var message = document.getElementById('inputMessage');
+  var fileInput = document.getElementById('inputFile');
+  var submitBtn = document.querySelector('.modal-submit');
+
   if (!service.value) { service.classList.add('error'); document.getElementById('errService').classList.add('show'); valid = false; }
   if (!name.value.trim()) { name.classList.add('error'); document.getElementById('errName').classList.add('show'); valid = false; }
   if (!phone.value.trim()) { phone.classList.add('error'); document.getElementById('errPhone').classList.add('show'); valid = false; }
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRe.test(email.value.trim())) { email.classList.add('error'); document.getElementById('errEmail').classList.add('show'); valid = false; }
   if (!valid) return;
-  document.getElementById('modalForm').style.display = 'none';
-  var suc = document.getElementById('modalSuccess');
-  suc.classList.add('show');
-  document.getElementById('successTitle').textContent = t.successTitle;
-  document.getElementById('successMsg').textContent   = t.successMsg;
-  setTimeout(closeModal, 3000);
+
+  // Loading state
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;"></span>';
+
+  function doSend(fileBase64, fileName) {
+    fetch('/api/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service:    service.value,
+        name:       name.value.trim(),
+        phone:      phone.value.trim(),
+        email:      email.value.trim(),
+        message:    message ? message.value.trim() : '',
+        fileName:   fileName || null,
+        fileBase64: fileBase64 || null,
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<span id="submitLabel">' + t.submitLabel + '</span>';
+      if (data.ok) {
+        document.getElementById('modalForm').style.display = 'none';
+        var suc = document.getElementById('modalSuccess');
+        suc.classList.add('show');
+        document.getElementById('successTitle').textContent = t.successTitle;
+        document.getElementById('successMsg').textContent   = t.successMsg;
+        setTimeout(closeModal, 3000);
+      } else {
+        alert('Errore nell\'invio. Riprova o contattaci via WhatsApp.');
+      }
+    })
+    .catch(function() {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<span id="submitLabel">' + t.submitLabel + '</span>';
+      alert('Errore di rete. Controlla la connessione e riprova.');
+    });
+  }
+
+  // If a file is attached, read it as base64 first
+  if (fileInput && fileInput.files && fileInput.files[0]) {
+    var file   = fileInput.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      // Strip the data URI prefix (e.g. "data:application/pdf;base64,")
+      var base64 = e.target.result.split(',')[1];
+      doSend(base64, file.name);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    doSend(null, null);
+  }
 }
 
 (function() {
