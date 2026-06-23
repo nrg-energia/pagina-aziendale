@@ -194,6 +194,6 @@ La categoria analytics è **pre-configurata** per Google Analytics ma non attiva
 
 ## Manutentore
 
-**Lindsey Brock Morales**
+**Lindsey Brock**
 📧 [lindsey.brock2201@gmail.com](mailto:lindsey.brock2201@gmail.com)
 🔗 [github.com/lindsey-brock](https://github.com/lindsey-brock)
