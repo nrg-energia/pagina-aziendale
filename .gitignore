@@ -1,0 +1,7 @@
+# Claude Code internal config — not part of the website
+.claude/
+
+# Temp Office lock files
+~$*.docx
+~$*.xlsx
+~$*.pptx
