@@ -3,7 +3,7 @@
  * Library: vanilla-cookieconsent v3.1.0 (orestbida)
  * https://github.com/orestbida/cookieconsent
  *
- * Default language: Italian
+ * Language: auto-detected from the page's <html lang=""> attribute
  * Analytics placeholder: ready for Google Analytics (currently not active)
  */
 
@@ -75,10 +75,11 @@ CookieConsent.run({
 
   },
 
-  // ── Translations ──────────────────────────────────────────────────────────
+  // ── Language ──────────────────────────────────────────────────────────────
+  // Reads the <html lang=""> attribute so IT pages show Italian,
+  // EN pages show English — toggles with the rest of the site automatically.
   language: {
-    default: 'it',
-    autoDetect: 'browser',
+    default: document.documentElement.lang === 'en' ? 'en' : 'it',
 
     translations: {
 
@@ -101,21 +102,21 @@ CookieConsent.run({
           sections: [
             {
               title: 'Utilizzo dei cookie',
-              description: 'Utilizziamo i cookie per garantire le funzionalità di base del sito web e per migliorare la tua esperienza online. Puoi scegliere di accettare o rifiutare ciascuna categoria in qualsiasi momento. Per ulteriori dettagli relativi ai cookie e ad altri dati sensibili, consulta la nostra <a href="#" onclick="return false;" class="cc__link">privacy policy</a>.'
+              description: 'Utilizziamo i cookie per garantire le funzionalità di base del sito e per migliorare la tua esperienza. Puoi scegliere di accettare o rifiutare ciascuna categoria in qualsiasi momento.'
             },
             {
               title: 'Cookie strettamente necessari <span class="pm__badge">Sempre attivi</span>',
-              description: 'Questi cookie sono essenziali per il corretto funzionamento del sito web. Senza questi cookie il sito non funzionerebbe correttamente.',
+              description: 'Questi cookie sono essenziali per il corretto funzionamento del sito. Senza questi cookie il sito non funzionerebbe correttamente.',
               linkedCategory: 'necessary'
             },
             {
               title: 'Cookie analitici e di performance',
-              description: 'Questi cookie raccolgono informazioni su come utilizzi il sito web, quali pagine hai visitato e su quali link hai cliccato. Tutti i dati sono anonimizzati e non possono essere utilizzati per identificarti.',
+              description: 'Questi cookie raccolgono informazioni su come utilizzi il sito, quali pagine hai visitato e su quali link hai cliccato. Tutti i dati sono anonimizzati.',
               linkedCategory: 'analytics'
             },
             {
               title: 'Ulteriori informazioni',
-              description: 'Per qualsiasi domanda relativa alla nostra politica sui cookie e alle tue opzioni, ti preghiamo di <a class="cc__link" href="mailto:info@nrgenergia.it">contattarci</a>.'
+              description: 'Per qualsiasi domanda relativa alla nostra politica sui cookie, <a class="cc__link" href="mailto:info@nrgenergia.it">contattaci</a>.'
             }
           ]
         }
@@ -140,7 +141,7 @@ CookieConsent.run({
           sections: [
             {
               title: 'Cookie usage',
-              description: 'We use cookies to ensure the basic functionality of the website and to enhance your online experience. You can choose to accept or reject each category at any time. For more information about cookies and other sensitive data, please read our full <a href="#" onclick="return false;" class="cc__link">privacy policy</a>.'
+              description: 'We use cookies to ensure the basic functionality of the website and to enhance your online experience. You can choose to accept or reject each category at any time.'
             },
             {
               title: 'Strictly necessary cookies <span class="pm__badge">Always active</span>',
@@ -149,12 +150,12 @@ CookieConsent.run({
             },
             {
               title: 'Analytics & performance cookies',
-              description: 'These cookies collect information about how you use the website, which pages you have visited and which links you have clicked on. All data is anonymised and cannot be used to identify you.',
+              description: 'These cookies collect information about how you use the website, which pages you have visited and which links you have clicked on. All data is anonymised.',
               linkedCategory: 'analytics'
             },
             {
               title: 'More information',
-              description: 'For any questions regarding our cookie policy and your choices, please <a class="cc__link" href="mailto:info@nrgenergia.it">contact us</a>.'
+              description: 'For any questions regarding our cookie policy, <a class="cc__link" href="mailto:info@nrgenergia.it">contact us</a>.'
             }
           ]
         }
