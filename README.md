@@ -156,8 +156,39 @@ nrg-energia/
 │       ├── asbestos-removal.html # Asbestos Removal (EN)
 │       ├── electrical-systems.html # Electrical Systems (EN)
 │       └── portfolio.html        # Portfolio (EN)
+├── cookieconsent-config.js       # Config GDPR cookie consent (bilingue IT/EN)
 └── README.md
 ```
+
+---
+
+## GDPR — Cookie Consent
+
+Il sito implementa il consenso ai cookie tramite **[vanilla-cookieconsent v3.1.0](https://github.com/orestbida/cookieconsent)** (licenza MIT), caricato via CDN su tutte le pagine.
+
+### Funzionamento
+
+| Componente | Dettaglio |
+|------------|-----------|
+| Libreria | `vanilla-cookieconsent@3.1.0` via jsDelivr CDN |
+| Configurazione | `cookieconsent-config.js` nella root del progetto |
+| Lingua default | Italiano (`it`), con rilevamento automatico del browser (IT/EN) |
+| Categorie | `necessary` (sempre attivo) + `analytics` (opt-in) |
+
+### Categoria analytics — Google Analytics (non ancora attivo)
+
+La categoria analytics è **pre-configurata** per Google Analytics ma non attiva. Quando verrà aggiunto GA:
+
+1. **Aggiungi il tag script GA** con gli attributi che lo bloccano fino al consenso:
+   ```html
+   <script type="text/plain" data-category="analytics"
+           src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+   ```
+   > L'attributo `type="text/plain"` impedisce l'esecuzione finché l'utente non acconsente. `data-category="analytics"` dice a vanilla-cookieconsent quando attivarlo.
+
+2. **Decommentare i callback** `onAccept` / `onReject` in `cookieconsent-config.js` e inserire il Measurement ID (`G-XXXXXXXXXX`).
+
+3. **Script già presenti sul sito** — nessuno script di terze parti necessita attualmente del trattamento `type="text/plain"`. Google Fonts è esente (font, non tracking). WhatsApp widget è di prima parte funzionale.
 
 ---
 
