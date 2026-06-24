@@ -54,12 +54,17 @@ var LEGAL_CONTENT = {
       title: 'Politica per la Qualità',
       body: `
         <p>NRG Energia S.r.l. opera nei settori delle energie rinnovabili, delle coperture industriali e civili, della bonifica dell'amianto e degli impianti elettrici. La qualità del nostro lavoro è un impegno che guida ogni fase delle nostre attività, dal primo contatto con il cliente alla consegna dell'intervento.</p>
+        <h4>Le nostre iscrizioni e autorizzazioni</h4>
+        <p>Per gli interventi di bonifica amianto e gestione dei rifiuti pericolosi siamo iscritti all'Albo Nazionale Gestori Ambientali nelle categorie:</p>
+        <p><strong>Categoria 10</strong> — bonifica di beni contenenti amianto, iscrizione obbligatoria per la mansione.</p>
+        <p><strong>Categoria 5</strong> — raccolta e trasporto di rifiuti pericolosi, con autorizzazione ministeriale.</p>
+        <p>Tutto il nostro personale operativo è inoltre equipaggiato con dispositivi di protezione individuale di terza categoria (DPI III), il livello più alto previsto per i rischi più gravi.</p>
         <h4>I nostri principi</h4>
-        <p><strong>Sicurezza prima di tutto.</strong> Tutti gli interventi, in particolare quelli di bonifica amianto, sono condotti nel rispetto della normativa vigente in materia di sicurezza sul lavoro e tutela ambientale (D.Lgs. 81/08 e normative di settore), con personale formato e dotato dei dispositivi di protezione necessari.</p>
+        <p><strong>Sicurezza prima di tutto.</strong> Tutti gli interventi, in particolare quelli di bonifica amianto, sono condotti nel rispetto della normativa vigente in materia di sicurezza sul lavoro e tutela ambientale (D.Lgs. 81/08 e normative di settore). Affidarsi a operatori non iscritti all'Albo Gestori Ambientali per la bonifica amianto è illegale e pericoloso: NRG Energia opera in piena conformità di legge.</p>
         <p><strong>Trasparenza con il cliente.</strong> Ogni preventivo è chiaro e dettagliato; comunichiamo tempi, costi e fasi dell'intervento prima di iniziare i lavori, senza sorprese.</p>
         <p><strong>Competenza tecnica.</strong> Selezioniamo materiali e fornitori in base a criteri di affidabilità e durata, e formiamo costantemente il nostro personale sulle tecnologie e normative più recenti del settore energetico ed edilizio.</p>
         <p><strong>Miglioramento continuo.</strong> Raccogliamo il feedback dei clienti dopo ogni intervento e lo utilizziamo per migliorare i nostri processi interni e la qualità del servizio offerto.</p>
-        <p><strong>Rispetto dell'ambiente.</strong> Promuoviamo soluzioni a basso impatto ambientale, dallo smaltimento corretto dei materiali di scarto alla scelta di tecnologie per le energie rinnovabili.</p>
+        <p><strong>Rispetto dell'ambiente.</strong> Promuoviamo soluzioni a basso impatto ambientale, dal conferimento dei rifiuti in discariche autorizzate alla scelta di tecnologie per le energie rinnovabili.</p>
         <p>Per qualsiasi domanda sulla nostra politica per la qualità puoi scriverci a <a href="mailto:info@nrg-energia.it">info@nrg-energia.it</a>.</p>
       `
     }
@@ -106,12 +111,17 @@ var LEGAL_CONTENT = {
       title: 'Quality Policy',
       body: `
         <p>NRG Energia S.r.l. operates in renewable energy, industrial and residential roofing, asbestos removal, and electrical systems. Quality is a commitment that guides every stage of our work, from the first contact with a client to the completion of the job.</p>
+        <h4>Our registrations and authorisations</h4>
+        <p>For asbestos removal and hazardous waste management we are registered with the Italian National Register of Environmental Operators (Albo Nazionale Gestori Ambientali) in the following categories:</p>
+        <p><strong>Category 10</strong> — removal of asbestos-containing materials, a mandatory registration for this type of work.</p>
+        <p><strong>Category 5</strong> — collection and transport of hazardous waste, under ministerial authorisation.</p>
+        <p>All our field staff are also equipped with category III personal protective equipment (PPE III), the highest level prescribed for the most serious risks.</p>
         <h4>Our principles</h4>
-        <p><strong>Safety first.</strong> All our work, particularly asbestos removal, is carried out in compliance with applicable workplace safety and environmental regulations (Italian Legislative Decree 81/08 and sector-specific rules), with trained staff equipped with the necessary protective equipment.</p>
+        <p><strong>Safety first.</strong> All our work, particularly asbestos removal, is carried out in compliance with applicable workplace safety and environmental regulations (Italian Legislative Decree 81/08 and sector-specific rules). Relying on operators not registered with the Albo Gestori Ambientali for asbestos removal is illegal and dangerous: NRG Energia operates in full legal compliance.</p>
         <p><strong>Transparency with clients.</strong> Every quote is clear and detailed; we communicate timelines, costs and the phases of the work before starting, with no surprises.</p>
         <p><strong>Technical expertise.</strong> We select materials and suppliers based on reliability and durability, and continuously train our staff on the latest technologies and regulations in the energy and construction sectors.</p>
         <p><strong>Continuous improvement.</strong> We gather client feedback after every job and use it to improve our internal processes and the quality of the service we provide.</p>
-        <p><strong>Respect for the environment.</strong> We promote low-impact solutions, from proper disposal of waste materials to the choice of renewable energy technologies.</p>
+        <p><strong>Respect for the environment.</strong> We promote low-impact solutions, from disposing of waste at authorised facilities to the choice of renewable energy technologies.</p>
         <p>For any question about our quality policy, write to <a href="mailto:info@nrg-energia.it">info@nrg-energia.it</a>.</p>
       `
     }
