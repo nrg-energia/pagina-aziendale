@@ -414,7 +414,12 @@
     display: none; text-align: center; padding: 48px 32px;
   }
   .modal-success.show { display: block; }
-  .modal-success-icon { font-size: 48px; margin-bottom: 16px; }
+  .modal-success-icon {
+    width: 56px; height: 56px; margin: 0 auto 20px; border-radius: 50%;
+    animation: modalSuccessScaleIn 0.5s ease both, modalSuccessCycleColor 3s ease-in-out infinite 0.5s;
+  }
+  @keyframes modalSuccessScaleIn { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @keyframes modalSuccessCycleColor { 0%,28% { background: #f5c842; } 33%,61% { background: #1a73e8; } 66%,94% { background: #1a4d2e; } 100% { background: #f5c842; } }
   .modal-success h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
   .modal-success p { font-size: 15px; color: var(--text-mid); }
 
@@ -1416,9 +1421,9 @@ if (window.location.hash === '#quote') {
 
     <!-- Success state -->
     <div class="modal-success" id="modalSuccess">
-      <div class="modal-success-icon">✅</div>
+      <div class="modal-success-icon"></div>
       <h3 id="successTitle">Richiesta inviata!</h3>
-      <p id="successMsg">Ti risponderemo entro 24 ore.</p>
+      <p id="successMsg">Riceverai una risposta a breve.</p>
     </div>
 
     <!-- Form state -->
@@ -1511,7 +1516,7 @@ var MODAL_T = {
     errService:'Seleziona un servizio', errName:'Campo obbligatorio',
     errPhone:'Campo obbligatorio', errEmail:"Inserisci un'email valida",
     errFile:'File troppo grande! Il limite massimo è 10MB.',
-    successTitle:'Richiesta inviata!', successMsg:'Ti risponderemo entro 24 ore.',
+    successTitle:'Richiesta inviata!', successMsg:'Riceverai una risposta a breve.',
     submitError:"Si è verificato un errore nell'invio. Riprova più tardi.",
     sendingLabel:'Invio in corso…',
     namePlaceholder:'Mario Rossi', phonePlaceholder:'+39 333 000 0000',
@@ -1528,7 +1533,7 @@ var MODAL_T = {
     errService:'Please select a service', errName:'Required field',
     errPhone:'Required field', errEmail:'Please enter a valid email',
     errFile:'File is too large! Maximum limit is 10MB.',
-    successTitle:'Request sent!', successMsg:"We'll get back to you within 24 hours.",
+    successTitle:'Request sent!', successMsg:"You'll hear back from us shortly.",
     submitError:'Something went wrong while sending. Please try again later.',
     sendingLabel:'Sending…',
     namePlaceholder:'John Smith', phonePlaceholder:'+39 333 000 0000',
