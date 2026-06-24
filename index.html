@@ -1754,6 +1754,7 @@ function submitForm() {
       suc.classList.add('show');
       document.getElementById('successTitle').textContent = t.successTitle;
       document.getElementById('successMsg').textContent   = t.successMsg;
+      resetQuoteForm();
       setTimeout(closeModal, 3000);
     })
     .catch(function() {
@@ -1761,6 +1762,19 @@ function submitForm() {
       submitLabel.textContent = t.submitLabel;
       showSubmitError(t.submitError);
     });
+}
+
+function resetQuoteForm() {
+  document.getElementById('serviceSelect').value = '';
+  document.getElementById('inputName').value = '';
+  document.getElementById('inputPhone').value = '';
+  document.getElementById('inputEmail').value = '';
+  document.getElementById('inputMessage').value = '';
+  document.getElementById('inputFile').value = '';
+  document.getElementById('fileName').textContent = '';
+  selectedFile = null;
+  clearModalErrors();
+  hideSubmitError();
 }
 
 // Wrap toggleLang to also update modal if open
