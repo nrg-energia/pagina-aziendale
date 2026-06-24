@@ -1483,6 +1483,8 @@ if (window.location.hash === '#quote') {
           <span class="file-name" id="fileName"></span>
         </div>
 
+        <div id="modalSubmitError" style="display:none;margin-bottom:14px;padding:10px 14px;background:#fdecec;border:1px solid #e05252;border-radius:8px;color:#a83232;font-size:13px;"></div>
+
         <button class="modal-submit" onclick="submitForm()" id="submitBtn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
           <span id="submitLabel">Invia richiesta</span>
@@ -1507,6 +1509,8 @@ var MODAL_T = {
     errService:'Seleziona un servizio', errName:'Campo obbligatorio',
     errPhone:'Campo obbligatorio', errEmail:"Inserisci un'email valida",
     successTitle:'Richiesta inviata!', successMsg:'Ti risponderemo entro 24 ore.',
+    submitError:"Si è verificato un errore nell'invio. Riprova più tardi.",
+    sendingLabel:'Invio in corso…',
     namePlaceholder:'Mario Rossi', phonePlaceholder:'+39 333 000 0000',
     emailPlaceholder:'mario@esempio.it', msgPlaceholder:'Descrivi brevemente il tuo progetto…'
   },
@@ -1521,6 +1525,8 @@ var MODAL_T = {
     errService:'Please select a service', errName:'Required field',
     errPhone:'Required field', errEmail:'Please enter a valid email',
     successTitle:'Request sent!', successMsg:"We'll get back to you within 24 hours.",
+    submitError:'Something went wrong while sending. Please try again later.',
+    sendingLabel:'Sending…',
     namePlaceholder:'John Smith', phonePlaceholder:'+39 333 000 0000',
     emailPlaceholder:'john@example.com', msgPlaceholder:'Briefly describe your project…'
   }
@@ -1532,7 +1538,20 @@ function openModal() {
   document.getElementById('modalForm').style.display = '';
   document.getElementById('modalSuccess').classList.remove('show');
   clearModalErrors();
+  hideSubmitError();
   updateModalLang();
+}
+
+function hideSubmitError() {
+  var el = document.getElementById('modalSubmitError');
+  el.style.display = 'none';
+  el.textContent = '';
+}
+
+function showSubmitError(msg) {
+  var el = document.getElementById('modalSubmitError');
+  el.textContent = msg;
+  el.style.display = 'block';
 }
 
 function closeModal() {
@@ -1578,9 +1597,24 @@ function updateModalLang() {
   setP('inputMessage', t.msgPlaceholder);
 }
 
+var selectedFile = null;
+
 function handleFile(input) {
-  var name = input.files && input.files[0] ? input.files[0].name : '';
-  document.getElementById('fileName').textContent = name;
+  selectedFile = input.files && input.files[0] ? input.files[0] : null;
+  document.getElementById('fileName').textContent = selectedFile ? selectedFile.name : '';
+}
+
+function fileToBase64(file) {
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      var result = reader.result; // data:<mime>;base64,<data>
+      var base64 = result.substring(result.indexOf(',') + 1);
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 function clearModalErrors() {
@@ -1595,11 +1629,13 @@ function clearModalErrors() {
 function submitForm() {
   var t = MODAL_T[typeof LANG !== 'undefined' ? LANG : 'it'];
   clearModalErrors();
+  hideSubmitError();
   var valid = true;
   var service = document.getElementById('serviceSelect');
   var name    = document.getElementById('inputName');
   var phone   = document.getElementById('inputPhone');
   var email   = document.getElementById('inputEmail');
+  var message = document.getElementById('inputMessage');
 
   if (!service.value) {
     service.classList.add('error');
@@ -1624,12 +1660,48 @@ function submitForm() {
   }
   if (!valid) return;
 
-  document.getElementById('modalForm').style.display = 'none';
-  var suc = document.getElementById('modalSuccess');
-  suc.classList.add('show');
-  document.getElementById('successTitle').textContent = t.successTitle;
-  document.getElementById('successMsg').textContent   = t.successMsg;
-  setTimeout(closeModal, 3000);
+  var submitBtn   = document.getElementById('submitBtn');
+  var submitLabel = document.getElementById('submitLabel');
+  submitBtn.disabled = true;
+  submitLabel.textContent = t.sendingLabel;
+
+  Promise.resolve(selectedFile ? fileToBase64(selectedFile) : null)
+    .then(function(base64) {
+      var payload = {
+        nome:      name.value.trim(),
+        email:     email.value.trim(),
+        telefono:  phone.value.trim(),
+        messaggio: message.value.trim()
+      };
+      if (selectedFile && base64) {
+        payload.attachment = { name: selectedFile.name, content: base64 };
+      }
+      return fetch('/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      });
+    })
+    .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+    .then(function(result) {
+      submitBtn.disabled = false;
+      submitLabel.textContent = t.submitLabel;
+      if (!result.ok || !result.data.success) {
+        showSubmitError((result.data && result.data.error) || t.submitError);
+        return;
+      }
+      document.getElementById('modalForm').style.display = 'none';
+      var suc = document.getElementById('modalSuccess');
+      suc.classList.add('show');
+      document.getElementById('successTitle').textContent = t.successTitle;
+      document.getElementById('successMsg').textContent   = t.successMsg;
+      setTimeout(closeModal, 3000);
+    })
+    .catch(function() {
+      submitBtn.disabled = false;
+      submitLabel.textContent = t.submitLabel;
+      showSubmitError(t.submitError);
+    });
 }
 
 // Wrap toggleLang to also update modal if open
