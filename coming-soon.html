@@ -351,9 +351,9 @@
     <div class="footer-bottom">
       <span>© 2026 NRG Energia S.r.l.</span>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Cookie Policy</a>
-        <a href="#">Politica per la Qualità</a>
+        <a href="#" onclick="openLegalModal('privacy');return false;">Privacy Policy</a>
+        <a href="#" onclick="openLegalModal('cookie');return false;">Cookie Policy</a>
+        <a href="#" onclick="openLegalModal('quality');return false;">Politica per la Qualità</a>
       </div>
     </div>
   </div>
@@ -704,6 +704,7 @@ function submitForm() {
 })();
 </script>
   <script defer src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
+  <script defer src="./legal-modals.js"></script>
   <script defer src="./cookieconsent-config.js"></script>
 </body>
 </html>

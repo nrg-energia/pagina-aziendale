@@ -93,7 +93,7 @@ CookieConsent.run({
           acceptAllBtn: 'Accetta tutti',
           acceptNecessaryBtn: 'Solo necessari',
           showPreferencesBtn: 'Gestisci preferenze',
-          footer: '<a href="#" onclick="return false;">Privacy Policy</a> · <a href="#" onclick="return false;">Cookie Policy</a>'
+          footer: '<a href="#" onclick="openLegalModal(\'privacy\');return false;">Privacy Policy</a> · <a href="#" onclick="openLegalModal(\'cookie\');return false;">Cookie Policy</a>'
         },
         preferencesModal: {
           title: 'Preferenze cookie',
@@ -132,7 +132,7 @@ CookieConsent.run({
           acceptAllBtn: 'Accept all',
           acceptNecessaryBtn: 'Necessary only',
           showPreferencesBtn: 'Manage preferences',
-          footer: '<a href="#" onclick="return false;">Privacy Policy</a> · <a href="#" onclick="return false;">Cookie Policy</a>'
+          footer: '<a href="#" onclick="openLegalModal(\'privacy\');return false;">Privacy Policy</a> · <a href="#" onclick="openLegalModal(\'cookie\');return false;">Cookie Policy</a>'
         },
         preferencesModal: {
           title: 'Cookie preferences',
