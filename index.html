@@ -1481,6 +1481,7 @@ if (window.location.hash === '#quote') {
           </label>
           <input class="form-file-input" type="file" id="inputFile" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFile(this)">
           <span class="file-name" id="fileName"></span>
+          <span class="form-error-msg" id="errFile">File troppo grande! Il limite massimo è 10MB.</span>
         </div>
 
         <div id="modalSubmitError" style="display:none;margin-bottom:14px;padding:10px 14px;background:#fdecec;border:1px solid #e05252;border-radius:8px;color:#a83232;font-size:13px;"></div>
@@ -1508,6 +1509,7 @@ var MODAL_T = {
     submitLabel:'Invia richiesta',
     errService:'Seleziona un servizio', errName:'Campo obbligatorio',
     errPhone:'Campo obbligatorio', errEmail:"Inserisci un'email valida",
+    errFile:'File troppo grande! Il limite massimo è 10MB.',
     successTitle:'Richiesta inviata!', successMsg:'Ti risponderemo entro 24 ore.',
     submitError:"Si è verificato un errore nell'invio. Riprova più tardi.",
     sendingLabel:'Invio in corso…',
@@ -1524,6 +1526,7 @@ var MODAL_T = {
     submitLabel:'Send request',
     errService:'Please select a service', errName:'Required field',
     errPhone:'Required field', errEmail:'Please enter a valid email',
+    errFile:'File is too large! Maximum limit is 10MB.',
     successTitle:'Request sent!', successMsg:"We'll get back to you within 24 hours.",
     submitError:'Something went wrong while sending. Please try again later.',
     sendingLabel:'Sending…',
@@ -1589,6 +1592,7 @@ function updateModalLang() {
   setT('errName', t.errName);
   setT('errPhone', t.errPhone);
   setT('errEmail', t.errEmail);
+  setT('errFile', t.errFile);
   setT('opt1', t.opt1); setT('opt2', t.opt2); setT('opt3', t.opt3);
   var ph = document.getElementById('optPlaceholder'); if(ph) ph.textContent = t.optPlaceholder;
   setP('inputName', t.namePlaceholder);
@@ -1598,9 +1602,22 @@ function updateModalLang() {
 }
 
 var selectedFile = null;
+var FILE_MAX_BYTES = 10 * 1024 * 1024; // 10 MB
 
 function handleFile(input) {
-  selectedFile = input.files && input.files[0] ? input.files[0] : null;
+  var file = input.files && input.files[0] ? input.files[0] : null;
+  var errFile = document.getElementById('errFile');
+
+  if (file && file.size > FILE_MAX_BYTES) {
+    errFile.classList.add('show');
+    input.value = '';
+    selectedFile = null;
+    document.getElementById('fileName').textContent = '';
+    return;
+  }
+
+  errFile.classList.remove('show');
+  selectedFile = file;
   document.getElementById('fileName').textContent = selectedFile ? selectedFile.name : '';
 }
 
@@ -1621,7 +1638,7 @@ function clearModalErrors() {
   ['serviceSelect','inputName','inputPhone','inputEmail'].forEach(function(id) {
     var el = document.getElementById(id); if (el) el.classList.remove('error');
   });
-  ['errService','errName','errPhone','errEmail'].forEach(function(id) {
+  ['errService','errName','errPhone','errEmail','errFile'].forEach(function(id) {
     var el = document.getElementById(id); if (el) el.classList.remove('show');
   });
 }
@@ -1650,6 +1667,12 @@ function submitForm() {
   if (!phone.value.trim()) {
     phone.classList.add('error');
     document.getElementById('errPhone').classList.add('show');
+    valid = false;
+  }
+  var fileInputEl = document.getElementById('inputFile');
+  var currentFile = fileInputEl.files && fileInputEl.files[0] ? fileInputEl.files[0] : null;
+  if (currentFile && currentFile.size > FILE_MAX_BYTES) {
+    document.getElementById('errFile').classList.add('show');
     valid = false;
   }
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
