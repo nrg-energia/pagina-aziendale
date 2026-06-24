@@ -36,7 +36,7 @@ Il sito è composto da pagine HTML statiche, CSS inline e JavaScript vanilla, se
 | Font | Google Fonts — [Syne](https://fonts.google.com/specimen/Syne) (titoli) + [DM Sans](https://fonts.google.com/specimen/DM+Sans) (corpo) |
 | Media | [Cloudinary](https://cloudinary.com/) (cloud `dmegrbq5k`) per immagini e video con ottimizzazione automatica (`q_auto`, `f_auto`) |
 | Hosting | [GitHub Pages](https://pages.github.com/) — branch `main`, root del repository |
-| Contatto/Form | Modal di preventivo con logica JS inline |
+| Contatto/Form | Modal di preventivo con logica JS inline, invio via [Vercel Serverless Function](https://vercel.com/docs/functions) + [Resend](https://resend.com/) |
 | WhatsApp | Widget floating collegato a `wa.me/390542552010` |
 
 ---
@@ -71,7 +71,7 @@ python3 -m http.server 8080
 
 ### Variabili d'ambiente
 
-Non sono presenti variabili d'ambiente. Le uniche dipendenze esterne sono:
+Il sito statico non richiede variabili d'ambiente. La sola eccezione è la function serverless del form di contatto (vedi [sotto](#form-di-contatto--api-vercel)):
 
 | Risorsa | Configurazione |
 |---------|---------------|
@@ -79,12 +79,29 @@ Non sono presenti variabili d'ambiente. Le uniche dipendenze esterne sono:
 | Google Fonts | Caricati via `<link>` nell'`<head>` di ogni pagina |
 | WhatsApp | Numero `+39 0542 55201` hardcoded nei link `wa.me` |
 | Telefono | `+39 0542 552010` hardcoded nei link `tel:` |
+| `RESEND_API_KEY` | API key di [Resend](https://resend.com/), usata da `api/contact.js` e `api/send.js` — impostata come env var su Vercel |
+
+---
+
+## Form di contatto — API Vercel
+
+L'invio delle richieste di preventivo non avviene più via `mailto:`, ma tramite una **Vercel Serverless Function** che invia l'email attraverso **[Resend](https://resend.com/)**.
+
+| Endpoint | Usato da | Mittente | Destinatario |
+|----------|----------|----------|---------------|
+| `api/contact.js` | Modal di preventivo in `index.html` | `NRG Energia <noreply@mail.nrg-energia.it>` | `info@nrg-energia.it` |
+| `api/send.js` | Form in `coming-soon.html` | `NRG Energia <info@nrg-energia.it>` | `annarosa.castagnari@nrg-energia.it` |
+
+- Entrambe le function accettano solo `POST`, validano il payload e supportano un allegato opzionale (base64), inviato come attachment dell'email.
+- `api/contact.js` imposta il `reply-to` sull'indirizzo del richiedente e include il `tipo` di richiesta nell'oggetto (`Richiesta preventivo — {tipo}`).
+- Le dipendenze (`resend`) sono dichiarate in [package.json](package.json); Vercel le installa automaticamente al deploy, nessun build step richiesto per il resto del sito.
+- In locale, le function richiedono `vercel dev` (o un equivalente) con `RESEND_API_KEY` impostata nell'ambiente — non sono eseguibili direttamente in un server statico (`python3 -m http.server`) o aprendo l'HTML come file.
 
 ---
 
 ## Deployment
 
-Il sito viene pubblicato automaticamente su **GitHub Pages** ad ogni push sul branch `main`.
+Il sito statico viene pubblicato automaticamente su **GitHub Pages** ad ogni push sul branch `main`. Le function in `api/` vengono invece eseguite da **Vercel** come Serverless Functions, con `RESEND_API_KEY` configurata nelle impostazioni del progetto Vercel.
 
 **URL di produzione:** [https://lindsey-brock.github.io/nrg-energia/](https://lindsey-brock.github.io/nrg-energia/)
 
@@ -143,7 +160,11 @@ Il sito è ottimizzato per:
 
 ```
 nrg-energia/
+├── api/
+│   ├── contact.js                # Vercel Function — invio form preventivo (index.html) via Resend
+│   └── send.js                   # Vercel Function — invio form (coming-soon.html) via Resend
 ├── index.html                    # Home page (IT)
+├── coming-soon.html              # Landing "coming soon" con form di contatto legacy
 ├── portfolio.html                # Portfolio completo (IT)
 ├── services/
 │   ├── energie-rinnovabili.html  # Energie rinnovabili (IT)
@@ -157,6 +178,7 @@ nrg-energia/
 │       ├── electrical-systems.html # Electrical Systems (EN)
 │       └── portfolio.html        # Portfolio (EN)
 ├── cookieconsent-config.js       # Config GDPR cookie consent (bilingue IT/EN)
+├── package.json                  # Dipendenza `resend` per le function in api/
 └── README.md
 ```
 
