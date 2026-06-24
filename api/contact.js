@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const TO_EMAIL   = 'annarosa.castagnari@nrg-energia.it';
+const TO_EMAIL   = 'info@nrg-energia.it';
 const FROM_EMAIL = 'noreply@mail.nrg-energia.it';
 
 export default async function handler(req, res) {
@@ -11,9 +11,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { nome, email, telefono, messaggio, attachment } = req.body;
+    const { nome, email, telefono, messaggio, tipo, attachment } = req.body;
 
     const text = [
+      `Tipo di richiesta: ${tipo}`,
       `Nome: ${nome}`,
       `Email: ${email}`,
       `Telefono: ${telefono}`,
@@ -34,7 +35,7 @@ export default async function handler(req, res) {
       from:    `NRG Energia <${FROM_EMAIL}>`,
       to:      TO_EMAIL,
       replyTo: `${nome} <${email}>`,
-      subject: `Nuovo messaggio da ${nome}`,
+      subject: `Richiesta preventivo — ${tipo}`,
       text,
       attachments,
     });

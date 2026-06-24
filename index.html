@@ -1727,6 +1727,7 @@ function submitForm() {
   Promise.resolve(selectedFile ? fileToBase64(selectedFile) : null)
     .then(function(base64) {
       var payload = {
+        tipo:      service.options[service.selectedIndex].text,
         nome:      name.value.trim(),
         email:     email.value.trim(),
         telefono:  phone.value.trim(),
