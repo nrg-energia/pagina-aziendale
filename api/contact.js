@@ -3,7 +3,7 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const TO_EMAIL   = 'annarosa.castagnari@nrg-energia.it';
-const FROM_EMAIL = 'send.mail@nrg-energia.it';
+const FROM_EMAIL = 'noreply@mail.nrg-energia.it';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
