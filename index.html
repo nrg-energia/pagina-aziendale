@@ -395,6 +395,7 @@
     font-size: 13px; color: var(--text-light);
   }
   .form-file-label:hover { border-color: var(--green-mid); background: var(--green-pale); color: var(--green-dark); }
+  .form-file-label.drag-over { border-color: var(--green-mid); background: var(--green-pale); color: var(--green-dark); border-style: solid; }
   .form-file-label svg { flex-shrink: 0; }
   .form-file-input { display: none; }
   .file-name { font-size: 12px; color: var(--green-mid); margin-top: 5px; }
@@ -1475,7 +1476,7 @@ if (window.location.hash === '#quote') {
         <!-- File upload -->
         <div class="form-group">
           <label class="form-label" id="labelFile">Allegato <span style="color:var(--text-light);font-weight:400;text-transform:none;letter-spacing:0" id="labelOptional2">(opzionale)</span></label>
-          <label class="form-file-label" for="inputFile">
+          <label class="form-file-label" for="inputFile" id="fileDropZone" ondragover="handleFileDragOver(event)" ondragleave="handleFileDragLeave(event)" ondrop="handleFileDrop(event)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             <span id="fileLabel">Carica un file (PDF, JPG, PNG — max 10 MB)</span>
           </label>
@@ -1605,12 +1606,15 @@ var selectedFile = null;
 var FILE_MAX_BYTES = 10 * 1024 * 1024; // 10 MB
 
 function handleFile(input) {
-  var file = input.files && input.files[0] ? input.files[0] : null;
+  acceptFile(input.files && input.files[0] ? input.files[0] : null, input);
+}
+
+function acceptFile(file, input) {
   var errFile = document.getElementById('errFile');
 
   if (file && file.size > FILE_MAX_BYTES) {
     errFile.classList.add('show');
-    input.value = '';
+    if (input) input.value = '';
     selectedFile = null;
     document.getElementById('fileName').textContent = '';
     return;
@@ -1619,6 +1623,33 @@ function handleFile(input) {
   errFile.classList.remove('show');
   selectedFile = file;
   document.getElementById('fileName').textContent = selectedFile ? selectedFile.name : '';
+}
+
+function handleFileDragOver(e) {
+  e.preventDefault();
+  document.getElementById('fileDropZone').classList.add('drag-over');
+}
+
+function handleFileDragLeave(e) {
+  e.preventDefault();
+  document.getElementById('fileDropZone').classList.remove('drag-over');
+}
+
+function handleFileDrop(e) {
+  e.preventDefault();
+  document.getElementById('fileDropZone').classList.remove('drag-over');
+  var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0] ? e.dataTransfer.files[0] : null;
+  if (!file) return;
+
+  var inputFile = document.getElementById('inputFile');
+  try {
+    var dt = new DataTransfer();
+    dt.items.add(file);
+    inputFile.files = dt.files;
+  } catch (err) {
+    // DataTransfer construction unsupported; selectedFile is still set below
+  }
+  acceptFile(file, inputFile);
 }
 
 function fileToBase64(file) {
