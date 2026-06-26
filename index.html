@@ -947,11 +947,11 @@
     </div>
     <div class="footer-col">
       <h4>Servizi</h4>
-      <ul><li><a href="#">Energie rinnovabili</a></li><li><a href="#">Coperture</a></li><li><a href="#">Bonifica amianto</a></li></ul>
+      <ul><li><a href="services/energie-rinnovabili.html" id="footer-link-rinnovabili">Energie rinnovabili</a></li><li><a href="services/coperture.html" id="footer-link-coperture">Coperture</a></li><li><a href="services/bonifica-amianto.html" id="footer-link-amianto">Bonifica amianto</a></li></ul>
     </div>
     <div class="footer-col">
       <h4>Azienda</h4>
-      <ul><li><a href="./coming-soon.html">Chi siamo</a></li><li><a href="#">Portfolio</a></li><li><a href="./coming-soon.html">News & Blog</a></li><li><a href="#">Contatti</a></li></ul>
+      <ul><li><a href="./coming-soon.html">Chi siamo</a></li><li><a href="portfolio.html" id="footer-link-portfolio">Portfolio</a></li><li><a href="./coming-soon.html">News & Blog</a></li><li><a href="#contatti">Contatti</a></li></ul>
     </div>
     <div class="footer-col footer-contact">
       <h4>Contatti</h4>
@@ -1438,7 +1438,11 @@ if (window.location.hash === '#quote') {
     'link-coperture':   { it: 'services/coperture.html',           en: 'services/en/roofing.html' },
     'link-amianto':     { it: 'services/bonifica-amianto.html',    en: 'services/en/asbestos-removal.html' },
     'link-portfolio':        { it: 'portfolio.html', en: 'services/en/portfolio.html' },
-    'link-portfolio-mobile': { it: 'portfolio.html', en: 'services/en/portfolio.html' }
+    'link-portfolio-mobile': { it: 'portfolio.html', en: 'services/en/portfolio.html' },
+    'footer-link-rinnovabili': { it: 'services/energie-rinnovabili.html', en: 'services/en/renewable-energy.html' },
+    'footer-link-coperture':   { it: 'services/coperture.html',           en: 'services/en/roofing.html' },
+    'footer-link-amianto':     { it: 'services/bonifica-amianto.html',    en: 'services/en/asbestos-removal.html' },
+    'footer-link-portfolio':   { it: 'portfolio.html', en: 'services/en/portfolio.html' }
   };
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
