@@ -272,6 +272,7 @@
   .btn-outline-white:hover { background: rgba(255,255,255,0.08); }
 
   footer { background: #111a14; color: rgba(255,255,255,0.6); padding: 64px 5% 32px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
   .footer-brand p { font-size: 14px; line-height: 1.7; }
   .footer-brand .nav-logo { margin-bottom: 16px; }
@@ -289,7 +290,7 @@
   .footer-col ul li a:hover { color: var(--white); }
   .footer-contact p { font-size: 14px; line-height: 1.9; }
   .footer-contact a { color: var(--green-light); text-decoration: none; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
   .footer-legal { display: flex; gap: 20px; }
   .footer-legal a { color: rgba(255,255,255,0.75); text-decoration: none; }
   .footer-legal a:hover { color: #ffffff; }
@@ -926,6 +927,7 @@
 </div>
 
 <footer id="contatti">
+  <div class="footer-inner">
   <div class="footer-grid">
     <div class="footer-brand footer-col">
       <a href="#" class="nav-logo">
@@ -970,6 +972,7 @@
   <div class="footer-bottom">
     <span>© 2026 NRG Energia S.r.l.</span>
     <div class="footer-legal"><a href="#" onclick="openLegalModal('privacy');return false;">Privacy Policy</a><a href="#" onclick="openLegalModal('cookie');return false;">Cookie Policy</a><a href="#" onclick="openLegalModal('quality');return false;">Politica per la Qualità</a></div>
+  </div>
   </div>
 </footer>
 
