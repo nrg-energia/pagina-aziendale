@@ -214,6 +214,21 @@
     .footer-legal { display: flex; gap: 20px; }
     .footer-legal a { color: rgba(255,255,255,0.75); text-decoration: none; }
     .footer-legal a:hover { color: #ffffff; }
+/* === Footer Map Strip === */
+.footer-map-strip { display: flex; align-items: center; position: relative; height: 72px; overflow: hidden; text-decoration: none; border-top: 1px solid rgba(255,255,255,0.07); cursor: pointer; }
+.footer-map-strip__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.45) saturate(0.7); transition: filter 0.3s ease; }
+.footer-map-strip:hover .footer-map-strip__img { filter: brightness(0.55) saturate(0.85); }
+.footer-map-strip__overlay { position: relative; z-index: 1; display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.footer-map-strip__pin { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: rgba(76,175,110,0.15); border: 1.5px solid rgba(76,175,110,0.5); position: relative; }
+.footer-map-strip__pin::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; border-radius: 50%; background: #4caf6e; box-shadow: 0 0 8px rgba(76,175,110,0.6); }
+.footer-map-strip__address { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.5; transition: color 0.2s; }
+.footer-map-strip__address strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+.footer-map-strip:hover .footer-map-strip__address { color: rgba(255,255,255,0.8); }
+.footer-map-strip__cta { margin-left: auto; display: flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; color: #4caf6e; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; opacity: 0.65; transition: opacity 0.2s; }
+.footer-map-strip:hover .footer-map-strip__cta { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .footer-map-strip__img, .footer-map-strip__address, .footer-map-strip__cta { transition: none; } }
+@media (max-width: 640px) { .footer-map-strip__cta { display: none; } .footer-map-strip__overlay { gap: 0.75rem; } }
+
 
     @media (max-width: 900px) {
       .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr 1fr; }
@@ -528,7 +543,18 @@
         </p>
       </div>
     </div>
-    <div class="footer-bottom">
+    
+  <a href="https://maps.google.com/?q=Via+I+Maggio+70b,+40026+Imola+BO" target="_blank" rel="noopener noreferrer" class="footer-map-strip" title="Apri in Google Maps">
+    <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1782463485/map-imola_tfmxoo.webp" alt="Mappa: Via I Maggio 70/b, Imola" class="footer-map-strip__img" width="1200" height="120" loading="lazy" decoding="async">
+    <div class="footer-map-strip__overlay">
+      <div class="footer-map-strip__pin" aria-hidden="true"></div>
+      <div class="footer-map-strip__address"><strong>NRG Energia S.r.l.</strong><br>Via I Maggio 70/b, 40026 Imola (BO)</div>
+      <span class="footer-map-strip__cta">Apri in Maps
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1 10L10 1M10 1H3M10 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </div>
+  </a>
+  <div class="footer-bottom">
       <span>© 2026 NRG Energia S.r.l.</span>
       <div class="footer-legal">
         <a href="#" onclick="openLegalModal('privacy');return false;">Privacy Policy</a>
@@ -539,8 +565,8 @@
   </div>
 </footer>
 <div class="whatsapp-float">
-  <div class="whatsapp-tooltip"><strong>Ciao! Come possiamo aiutarti?</strong><a href="https://wa.me/390542552010" target="_blank">Scrivici su WhatsApp →</a></div>
-  <a href="https://wa.me/390542552010" target="_blank" class="whatsapp-btn">
+  <div class="whatsapp-tooltip"><strong>Ciao! Come possiamo aiutarti?</strong><a href="https://wa.me/393338145904" target="_blank">Scrivici su WhatsApp →</a></div>
+  <a href="https://wa.me/393338145904" target="_blank" class="whatsapp-btn">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
       <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.02L7.55 18.85L4.43 19.65L5.25 16.61L5.06 16.29C4.24 14.98 3.8 13.46 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67ZM8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8.01 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.37 17.04 14.27C16.97 14.17 16.81 14.1 16.56 13.98C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.48 13.06 14.31 13.31C14.15 13.56 13.67 14.1 13.53 14.27C13.38 14.44 13.24 14.46 12.99 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.47 11.14 9.61 11 9.73 10.88C9.84 10.77 9.98 10.59 10.1 10.44C10.22 10.29 10.26 10.18 10.34 10.01C10.42 9.84 10.38 9.69 10.32 9.57C10.26 9.46 9.77 8.23 9.56 7.73C9.36 7.24 9.16 7.31 9 7.3C8.86 7.29 8.69 7.29 8.53 7.29V7.33Z"/>
     </svg>
