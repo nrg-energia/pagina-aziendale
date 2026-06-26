@@ -306,8 +306,8 @@
 .footer-map-strip__address { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.5; transition: color 0.2s; }
 .footer-map-strip__address strong { color: rgba(255,255,255,0.85); font-weight: 500; }
 .footer-map-strip:hover .footer-map-strip__address { color: rgba(255,255,255,0.8); }
-.footer-map-strip__cta { margin-left: auto; display: flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; color: #4caf6e; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; opacity: 0.65; transition: opacity 0.2s; }
-.footer-map-strip:hover .footer-map-strip__cta { opacity: 1; }
+.footer-map-strip__cta { margin-left: auto; display: flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; color: #d8ffe6; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; background: rgba(8,20,13,0.6); border: 1px solid rgba(76,175,110,0.45); padding: 6px 14px; border-radius: 999px; opacity: 0.92; transition: opacity 0.2s, background 0.2s, border-color 0.2s; }
+.footer-map-strip:hover .footer-map-strip__cta { opacity: 1; background: rgba(8,20,13,0.8); border-color: rgba(76,175,110,0.7); }
 @media (prefers-reduced-motion: reduce) { .footer-map-strip__img, .footer-map-strip__address, .footer-map-strip__cta { transition: none; } .footer-map-strip__pin::before { animation: none; display: none; } }
 @media (max-width: 640px) { .footer-map-strip__cta { display: none; } .footer-map-strip__overlay { gap: 0.75rem; } }
 
@@ -961,12 +961,12 @@
     </div>
   </div>
   
-  <a href="https://maps.google.com/?q=Via+I+Maggio+70b,+40026+Imola+BO" target="_blank" rel="noopener noreferrer" class="footer-map-strip" title="Apri in Google Maps">
+  <a href="https://maps.google.com/?q=Via+I+Maggio+70b,+40026+Imola+BO&hl=it" target="_blank" rel="noopener noreferrer" class="footer-map-strip" title="Apri in Google Maps" id="footer-map-link">
     <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1782463485/map-imola_tfmxoo.webp" alt="Mappa: Via I Maggio 70/b, Imola" class="footer-map-strip__img" width="1200" height="120" loading="lazy" decoding="async">
     <div class="footer-map-strip__overlay">
       <div class="footer-map-strip__pin" aria-hidden="true"></div>
       <div class="footer-map-strip__address"><strong>NRG Energia S.r.l.</strong><br>Via I Maggio 70/b, 40026 Imola (BO)</div>
-      <span class="footer-map-strip__cta">Apri in Maps
+      <span class="footer-map-strip__cta"><span id="footer-map-cta-text">Apri in Maps</span>
         <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1 10L10 1M10 1H3M10 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </span>
     </div>
@@ -1165,6 +1165,7 @@ var T = {
     footer_hours: 'Lun–Ven: 8:30–12:30<br>Lun–Ven: 14:30–18:30',
     footer_copy: '© 2026 NRG Energia S.r.l.',
     footer_privacy: 'Privacy Policy', footer_cookie: 'Cookie Policy', footer_quality: 'Politica per la Qualità',
+    map_cta: 'Apri in Maps', map_title: 'Apri in Google Maps',
 
     wa_tooltip: 'Ciao! Come possiamo aiutarti?',
     wa_link: 'Scrivici su WhatsApp →',
@@ -1239,6 +1240,7 @@ var T = {
     footer_hours: 'Mon–Fri: 8:30–12:30<br>Mon–Fri: 14:30–18:30',
     footer_copy: '© 2026 NRG Energia S.r.l.',
     footer_privacy: 'Privacy Policy', footer_cookie: 'Cookie Policy', footer_quality: 'Quality Policy',
+    map_cta: 'Open in Maps', map_title: 'Open in Google Maps',
 
     wa_tooltip: 'Hi! How can we help you?',
     wa_link: 'Write to us on WhatsApp →',
@@ -1352,6 +1354,14 @@ function applyTranslations(lang) {
   if (legalLinks[0]) legalLinks[0].textContent = t.footer_privacy;
   if (legalLinks[1]) legalLinks[1].textContent = t.footer_cookie;
   if (legalLinks[2]) legalLinks[2].textContent = t.footer_quality;
+
+  // Footer map strip
+  var mapLink = document.getElementById('footer-map-link');
+  if (mapLink) {
+    mapLink.title = t.map_title;
+    mapLink.href = 'https://maps.google.com/?q=Via+I+Maggio+70b,+40026+Imola+BO&hl=' + lang;
+  }
+  setOneText('#footer-map-cta-text', 'map_cta');
 
   // WhatsApp tooltip
   setOneText('.whatsapp-tooltip strong', 'wa_tooltip');
