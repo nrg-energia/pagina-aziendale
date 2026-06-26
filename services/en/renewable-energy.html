@@ -266,13 +266,15 @@
 .footer-map-strip:hover .footer-map-strip__img { filter: brightness(0.55) saturate(0.85); }
 .footer-map-strip__overlay { position: relative; z-index: 1; display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 .footer-map-strip__pin { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: rgba(76,175,110,0.15); border: 1.5px solid rgba(76,175,110,0.5); position: relative; }
+.footer-map-strip__pin::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: rgba(76,175,110,0.45); animation: footerPinPulse 2.2s ease-out infinite; }
+@keyframes footerPinPulse { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(2.2); opacity: 0; } }
 .footer-map-strip__pin::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; border-radius: 50%; background: #4caf6e; box-shadow: 0 0 8px rgba(76,175,110,0.6); }
 .footer-map-strip__address { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.5; transition: color 0.2s; }
 .footer-map-strip__address strong { color: rgba(255,255,255,0.85); font-weight: 500; }
 .footer-map-strip:hover .footer-map-strip__address { color: rgba(255,255,255,0.8); }
 .footer-map-strip__cta { margin-left: auto; display: flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; color: #4caf6e; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; opacity: 0.65; transition: opacity 0.2s; }
 .footer-map-strip:hover .footer-map-strip__cta { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .footer-map-strip__img, .footer-map-strip__address, .footer-map-strip__cta { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .footer-map-strip__img, .footer-map-strip__address, .footer-map-strip__cta { transition: none; } .footer-map-strip__pin::before { animation: none; display: none; } }
 @media (max-width: 640px) { .footer-map-strip__cta { display: none; } .footer-map-strip__overlay { gap: 0.75rem; } }
 
     @media (max-width: 900px) { .services-grid, .process-grid, .certs-grid { grid-template-columns: 1fr 1fr; } .why-grid { grid-template-columns: 1fr; gap: 40px; } .footer-grid { grid-template-columns: 1fr 1fr; } }
